@@ -2,12 +2,12 @@
   "name": "ivano-store",
   "version": "0.0.0",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-"build": "ng build --configuration production",
-    "test": "ng test",
-    "supabase:start": "supabase start"
-  },
+  "ng": "ng",
+  "start": "ng serve",
+  "build": "ng build --configuration production",
+  "test": "ng test",
+  "supabase:start": "supabase start"
+},
   "private": true,
   "packageManager": "npm@11.9.0",
   "dependencies": {
