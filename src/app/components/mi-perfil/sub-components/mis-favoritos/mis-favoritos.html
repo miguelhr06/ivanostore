@@ -1,0 +1,45 @@
+<section class="fade-in ivano-favoritos-section">
+  <div class="section-header">
+    <h2>Mis Productos Favoritos</h2>
+    <p class="subtitle">Guarda los artículos que más te gustan para revisarlos cuando quieras.</p>
+  </div>
+
+  <div class="loading-box" *ngIf="loading">
+    <p>Cargando tus favoritos...</p>
+  </div>
+
+  <div class="products-grid" *ngIf="!loading && favoritos.length > 0">
+    <div class="product-card" *ngFor="let prod of favoritos">
+      
+      <div class="image-wrapper">
+        <img [src]="prod.imagen_principal_render" [alt]="prod.nombre_zapatilla || prod.nombre">
+        <button class="btn-heart-active" (click)="removerFavorito(prod.id)">
+          ❤️
+        </button>
+      </div>
+
+      <div class="product-info">
+        <span class="prod-category">{{ prod.categoria || 'Colección' }}</span>
+        <h3>{{ prod.nombre_zapatilla || prod.nombre }}</h3>
+        <p class="prod-price">S/ {{ prod.precio }}</p>
+        
+        <button class="btn-add-cart" 
+                [routerLink]="prod.tamano?.toUpperCase() === 'ACCESORIO'
+                  ? ['/ACCESORIO', (prod.genero?.toUpperCase() === 'HOMBRE' ? 'caballero' : 'dama'), prod.categoria?.toLowerCase(), prod.modelo, generarSlug(prod.nombre_zapatilla)]
+                  : ['/' + (prod.genero?.toUpperCase() === 'HOMBRE' ? 'caballero' : 'dama'), prod.tamano?.toLowerCase(), prod.modelo, generarSlug(prod.nombre_zapatilla)]">
+          Ver Producto
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="empty-favorites" *ngIf="!loading && favoritos.length === 0">
+    <div class="heart-icon-container">
+      <div class="heart-icon-bg">💖</div>
+    </div>
+    <h3>Aún no tienes favoritos</h3>
+    <p>Explora nuestras categorías y dale click al corazón para guardar lo que te encante.</p>
+    <button class="btn-explore" routerLink="/catalogo">EXPLORAR NOVEDADES</button>
+  </div>
+</section>

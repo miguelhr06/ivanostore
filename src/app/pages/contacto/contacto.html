@@ -1,0 +1,78 @@
+<div class="contacto-page">
+  <section class="contacto-hero">
+    <div class="overlay-dark">
+      <span class="tagline">ATENCIÓN PERSONALIZADA</span>
+      <h1>ESTAMOS PARA EQUIPARTE</h1>
+      <p>Consultas sobre el Modelo 120, pedidos por mayor o soporte técnico.</p>
+    </div>
+  </section>
+
+  <div class="container-premium main-grid">
+    
+    <aside class="contact-info">
+      <div class="info-card">
+        <h3>UBICACIÓN TÉCNICA</h3>
+        <p>Planta de Producción Ivano - Ate, Lima</p>
+        <p class="subtext">Referencia: Zona industrial cerca a la UTP.</p>
+      </div>
+
+      <div class="social-grid">
+        <h3>NUESTRAS REDES</h3>
+
+        <a href="https://www.instagram.com/ivano.oficial" target="_blank" rel="noopener noreferrer" class="social-item">
+          <span class="icon">IG</span>
+          <div class="social-text"><strong>Instagram</strong><span>@ivano.oficial</span></div>
+        </a>
+
+        <a href="https://wa.me/51959554211?text=Hola%20Ivano%20Store,%20necesito%20información%20sobre%20el%20Modelo%20120" target="_blank" rel="noopener noreferrer" class="social-item">
+          <span class="icon">WA</span>
+          <div class="social-text"><strong>WhatsApp</strong><span>+51 959 554 211</span></div>
+        </a>
+
+         <a href="https://www.facebook.com/ivanofootwear" target="_blank" rel="noopener noreferrer" class="social-item">
+          <span class="icon">FB</span>
+          <div class="social-text"><strong>Facebook</strong><span>@ivanofootwear</span></div>
+        </a>
+
+        <a href="https://www.tiktok.com/@ivanooficial" target="_blank" rel="noopener noreferrer" class="social-item">
+          <span class="icon">TK</span>
+          <div class="social-text"><strong>TikTok</strong><span>@ivanooficial</span></div>
+        </a>
+      </div>
+    </aside>
+
+    <main class="form-wrapper">
+      <form class="ivano-form" (submit)="$event.preventDefault(); enviarFormulario()">
+        <div class="field">
+          <label>NOMBRE COMPLETO</label>
+          <input #txtNombre type="text" placeholder="Ej. Miguel Angel" required>
+        </div>
+
+        <div class="field">
+          <label>CORREO ELECTRÓNICO</label>
+          <input #txtEmail type="email" placeholder="migue@ejemplo.com" required>
+        </div>
+
+        <div class="field">
+          <label>TIPO DE CONSULTA</label>
+          <select #txtConsulta>
+            <option value="Compra Detalle">Compra Detalle (Modelo 120)</option>
+            <option value="Ventas por Mayor">Ventas por Mayor (+12 pares)</option>
+            <option value="Estado Pedido">Estado de mi Pedido</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>DETALLES DEL REQUERIMIENTO</label>
+          <textarea #txtMensaje rows="4" placeholder="Escribe tu mensaje aquí..."></textarea>
+        </div>
+
+        <button type="submit" class="btn-submit">
+          ENVIAR SOLICITUD
+          <span class="arrow">→</span>
+        </button>
+      </form>
+    </main>
+
+  </div>
+</div>

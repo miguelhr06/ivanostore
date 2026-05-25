@@ -1,0 +1,785 @@
+/* ==========================================================================
+   VARIABLES DE SISTEMA (Propiedades personalizadas de Senior)
+   ========================================================================== */
+:host {
+    --primary-black: #0a0a0a;
+    --accent-blue: #2563eb;
+    --glass-bg: rgba(255, 255, 255, 0.85);
+    --border-color: rgba(0, 0, 0, 0.08);
+    --radius-lg: 32px;
+    --radius-md: 18px;
+    --transition-smooth: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    --shadow-premium: 0 40px 100px -20px rgba(0, 0, 0, 0.35);
+}
+
+/* ==========================================================================
+   CONTENEDOR MAESTRO (Overlay con Blur Pro)
+   ========================================================================== */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.9) 100%);
+    backdrop-filter: blur(18px) saturate(180%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
+    padding: 24px;
+    animation: fadeInBg 0.6s ease;
+}
+
+/* ==========================================================================
+   CARD DE AUTENTICACIÓN (The Core)
+   ========================================================================== */
+.auth-card {
+    background: var(--glass-bg);
+    width: 100%;
+    max-width: 500px;
+    padding: 60px 45px;
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: var(--shadow-premium);
+    position: relative;
+    overflow: hidden;
+    transform-origin: center;
+    animation: cardEntrance 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/* ==========================================================================
+   STEPPER DE ALTA FIDELIDAD
+   ========================================================================== */
+.stepper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 45px;
+    gap: 12px;
+}
+
+.step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.step-num {
+    width: 36px;
+    height: 36px;
+    background: #e5e7eb;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 13px;
+    color: #6b7280;
+    transition: var(--transition-smooth);
+    border: 2px solid transparent;
+}
+
+.step.active .step-num {
+    background: var(--primary-black);
+    color: white;
+    transform: scale(1.15);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.step.completed .step-num {
+    background: #10b981; /* Verde esmeralda para éxito */
+    color: white;
+}
+
+.step-line {
+    width: 50px;
+    height: 3px;
+    background: #e5e7eb;
+    margin-top: -18px;
+    border-radius: 2px;
+}
+
+/* ==========================================================================
+   CAMPOS DE ENTRADA (Input Engineering)
+   ========================================================================== */
+.input-pro {
+    margin-bottom: 24px;
+    text-align: left;
+}
+
+.input-pro label {
+    display: block;
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: #4b5563;
+    margin-bottom: 10px;
+    padding-left: 5px;
+}
+
+.input-pro input {
+    width: 100%;
+    padding: 18px 24px;
+    background: rgba(255, 255, 255, 0.8);
+    border: 2px solid #f3f4f6;
+    border-radius: var(--radius-md);
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--primary-black);
+    transition: var(--transition-smooth);
+}
+
+.input-pro input:focus {
+    background: white;
+    border-color: var(--primary-black);
+    box-shadow: 0 15px 30px -10px rgba(0,0,0,0.1);
+    outline: none;
+    transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   CAJA DE TELÉFONO (Custom UI)
+   ========================================================================== */
+.phone-box {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.8);
+    border: 2px solid #f3f4f6;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    transition: var(--transition-smooth);
+}
+
+.phone-box:focus-within {
+    border-color: var(--primary-black);
+    transform: translateY(-2px);
+}
+
+.prefix {
+    padding: 0 20px;
+    font-weight: 800;
+    color: #111;
+    background: #f9fafb;
+    border-right: 1px solid #e5e7eb;
+}
+
+.phone-box input {
+    border: none;
+    background: transparent;
+}
+
+/* ==========================================================================
+   BOTONES PREMIUM
+   ========================================================================== */
+.btn-primary {
+    width: 100%;
+    padding: 20px;
+    background: var(--primary-black);
+    color: white;
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    transition: var(--transition-smooth);
+    margin-top: 10px;
+}
+
+.btn-primary:hover {
+    background: #222;
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+}
+
+.btn-primary:active {
+    transform: translateY(-1px);
+}
+
+.close-btn {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    background: white;
+    border: 1px solid var(--border-color);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-smooth);
+    color: #666;
+}
+
+.close-btn:hover {
+    background: var(--primary-black);
+    color: white;
+    transform: rotate(90deg);
+}
+
+/* ==========================================================================
+   ANIMACIONES (Motion Design)
+   ========================================================================== */
+@keyframes cardEntrance {
+    from { 
+        opacity: 0; 
+        transform: scale(0.8) translateY(100px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: scale(1) translateY(0); 
+    }
+}
+
+@keyframes fadeInBg {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.fade-in {
+    animation: contentFade 0.5s ease-out;
+}
+
+@keyframes contentFade {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* ==========================================================================
+   OPT & VERIFICACIÓN (Efectos de Selección)
+   ========================================================================== */
+.v-option {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 24px;
+    border: 2px solid #f3f4f6;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    background: white;
+}
+
+.v-option:hover {
+    border-color: var(--primary-black);
+    background: #fafafa;
+    transform: scale(1.03);
+}
+
+.icon-circle {
+    width: 54px;
+    height: 54px;
+    background: #f3f4f6;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    transition: var(--transition-smooth);
+}
+
+.v-option:hover .icon-circle {
+    background: var(--primary-black);
+    color: white;
+}
+
+/* Contenedores de Verificación (Paso 2) */
+.v-option {
+    background: #ffffff;
+    border: 2px solid #f0f0f0;
+    padding: 25px;
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Efecto rebote */
+}
+
+.v-option:hover {
+    border-color: #000;
+    transform: scale(1.05) translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+.icon-circle {
+    width: 60px;
+    height: 60px;
+    background: #f8f9fa;
+    color: #000;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    transition: 0.3s;
+}
+
+.v-option:hover .icon-circle {
+    background: #000;
+    color: #fff;
+}
+
+/* Input OTP (Paso 3) */
+.otp-wrapper {
+    margin: 30px 0;
+    perspective: 1000px;
+}
+
+.otp-input {
+    width: 100%;
+    max-width: 280px;
+    letter-spacing: 15px;
+    font-size: 36px !important;
+    font-weight: 900;
+    padding: 20px !important;
+    border-radius: 20px !important;
+    border: 3px solid #eee !important;
+    text-align: center;
+    background: #fdfdfd;
+    transition: all 0.3s ease;
+}
+
+.otp-input:focus {
+    border-color: #000 !important;
+    box-shadow: 0 0 0 5px rgba(0,0,0,0.05);
+    transform: translateZ(20px);
+}
+
+/* Botón Reenviar como Link Pro */
+.resend-msg a {
+    color: #2563eb;
+    font-weight: 700;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 10px;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.resend-msg a:hover {
+    background: rgba(37, 99, 235, 0.1);
+}
+
+/* Forzamos a que el contenedor de SweetAlert sea la capa más alta */
+.swal2-container {
+    z-index: 99999 !important;
+}
+
+/* Forzamos a SweetAlert a estar por encima de cualquier modal */
+::ng-deep .swal2-container {
+    z-index: 999999 !important;
+}
+
+.view-content.fade-in {
+  display: block !important;
+  animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Agrega esto al final de tu registro.css */
+[hidden] {
+  display: none !important;
+}
+
+/* Contenedor principal que cubre toda la pantalla */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7); /* Oscurecemos más el fondo para resaltar la card */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px; /* Margen de seguridad para móviles */
+}
+
+/* La tarjeta del modal */
+.auth-card {
+  background: #ffffff;
+  width: 100%;
+  max-width: 500px;
+  max-height: 90vh; /* Evita que se salga de la pantalla verticalmente */
+  border-radius: 24px; /* Bordes más redondeados y modernos */
+  position: relative;
+  padding: 40px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+  overflow-y: auto; /* Si el contenido crece, aparece scroll interno */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Botón de cerrar */
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: #f5f5f5;
+  border: none;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s;
+}
+
+.close-btn:hover {
+  background: #e0e0e0;
+  transform: rotate(90deg);
+}
+
+/* Stepper más estilizado */
+.stepper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding: 0 10px;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0.4;
+  transition: 0.3s;
+}
+
+.step.active { opacity: 1; }
+
+.step-num {
+  width: 30px;
+  height: 30px;
+  background: #000;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.step-line {
+  flex: 1;
+  height: 2px;
+  background: #eee;
+  margin: 0 15px;
+  margin-bottom: 25px; /* Alineación con los números */
+}
+
+/* Inputs Pro */
+.input-pro {
+  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.input-pro label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #444;
+  letter-spacing: 0.5px;
+}
+
+.input-pro input {
+  width: 100%;
+  padding: 14px 18px;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 12px;
+  font-size: 15px;
+  transition: 0.3s;
+  background: #fff;
+}
+
+.input-pro input:focus {
+  border-color: #000;
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(0,0,0,0.05);
+}
+
+/* Estilo para el input readonly (Nombre) */
+.input-pro input[readonly] {
+  background-color: #f8f9fa;
+  border-style: dashed;
+  color: #777;
+}
+
+/* Botón principal */
+.btn-primary {
+  width: 100%;
+  background: #000;
+  color: #fff;
+  padding: 16px;
+  border: none;
+  border-radius: 14px;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: 0.3s;
+}
+
+.btn-primary:hover {
+  background: #333;
+  transform: translateY(-2px);
+}
+
+/* Animación de entrada */
+.fade-in {
+  animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Scrollbar personalizado para que no se vea feo */
+.auth-card::-webkit-scrollbar {
+  width: 6px;
+}
+.auth-card::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 10px;
+}
+
+/* Contenedor unificado */
+.phone-box {
+  display: flex;
+  align-items: center;
+  border: 1.5px solid #e0e0e0; /* Un solo borde para todo el conjunto */
+  border-radius: 12px;
+  overflow: hidden; /* Corta los bordes rectos de adentro para que sigan la curva */
+  transition: 0.3s;
+  background: #fff;
+}
+
+/* Foco del contenedor completo */
+.phone-box:focus-within {
+  border-color: #000;
+  box-shadow: 0 0 0 4px rgba(0,0,0,0.05);
+}
+
+/* Prefijo +51 */
+.prefix {
+  padding: 0 15px;
+  background: #f8f9fa; /* Un fondo sutil para diferenciarlo */
+  color: #555;
+  font-weight: 600;
+  font-size: 14px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  border-right: 1.5px solid #e0e0e0; /* Línea divisoria suave */
+  user-select: none;
+}
+
+/* El input de texto */
+.phone-box input {
+  border: none !important; /* Quitamos el borde que te está dando problemas */
+  padding: 14px 15px;
+  flex: 1;
+  font-size: 15px;
+  background: transparent;
+}
+
+.phone-box input:focus {
+  outline: none;
+  box-shadow: none !important; /* Evitamos que el input interno cree sombras propias */
+}
+
+/* --- CONTENEDORES PRINCIPALES --- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.auth-card {
+  background: #ffffff;
+  width: 100%;
+  max-width: 500px;
+  max-height: 90vh;
+  border-radius: 24px;
+  position: relative;
+  padding: 40px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- TEXTOS DE CABECERA --- */
+.header-text {
+  margin-bottom: 25px;
+}
+
+.header-text h2 {
+  font-size: 24px;
+  font-weight: 800;
+  margin-bottom: 8px;
+  color: #000;
+}
+
+.header-text p {
+  color: #666;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* --- ESTILOS PASO 2: OPCIONES DE VERIFICACIÓN --- */
+.verify-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.v-option {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 20px;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.v-option:hover {
+  border-color: #000;
+  background: #f9f9f9;
+  transform: translateY(-2px);
+}
+
+.icon-circle {
+  width: 45px;
+  height: 45px;
+  background: #f0f0f0;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: #000;
+}
+
+.v-text strong {
+  display: block;
+  font-size: 15px;
+  margin-bottom: 2px;
+}
+
+.v-text span {
+  font-size: 13px;
+  color: #777;
+}
+
+/* --- ESTILOS PASO 3: OTP --- */
+.otp-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 30px 0;
+}
+
+.otp-input {
+  width: 100%;
+  max-width: 320px;
+  height: 60px;
+  border: 2px solid #e0e0e0;
+  border-radius: 16px;
+  font-size: 32px;
+  font-weight: 800;
+  text-align: center;
+  letter-spacing: 12px;
+  padding-left: 12px;
+  background: #f8f9fa;
+  transition: 0.3s;
+}
+
+.otp-input:focus {
+  border-color: #000;
+  background: #fff;
+  outline: none;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+}
+
+/* --- BOTONES Y COMPONENTES COMUNES --- */
+.btn-primary {
+  width: 100%;
+  background: #000;
+  color: #fff;
+  padding: 16px;
+  border: none;
+  border-radius: 14px;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: 0.3s;
+}
+
+.btn-primary:hover { background: #333; }
+
+.btn-ghost {
+  background: transparent;
+  border: 1px solid #ddd;
+  color: #666;
+  padding: 12px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 15px;
+  transition: 0.3s;
+}
+
+.btn-ghost:hover {
+  background: #f5f5f5;
+  color: #000;
+  border-color: #000;
+}
+
+/* Reutilizando tu lógica de inputs del Paso 1 */
+.input-pro { margin-bottom: 18px; }
+.input-pro label { font-size: 12px; font-weight: 700; text-transform: uppercase; margin-bottom: 6px; display: block; }
+.input-pro input { width: 100%; padding: 14px; border: 1.5px solid #e0e0e0; border-radius: 12px; }
+
+.fade-in { animation: fadeIn 0.4s ease-out; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; } }

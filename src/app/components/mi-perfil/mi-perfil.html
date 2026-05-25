@@ -1,0 +1,74 @@
+<div class="perfil-container" [class.dark-mode]="isDarkMode">
+ <aside class="perfil-sidebar">
+    <div class="user-card-mini" *ngIf="usuario">
+      <div class="avatar-circle">{{ usuario.nombre?.charAt(0) || 'M' }}</div>
+      <div class="user-text">
+        <p class="welcome">Bienvenido,</p>
+        <p class="name">{{ usuario.nombre || 'Miguel' }}</p>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <button routerLink="/mi-perfil/compras" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <i class="icon">📦</i> Mis Compras
+      </button>
+      
+      <button routerLink="/mi-perfil/favoritos" routerLinkActive="active">
+        <i class="icon">❤️</i> Mis Favoritos
+      </button>
+      
+      <button routerLink="/mi-perfil/direcciones" routerLinkActive="active">
+        <i class="icon">📍</i> Mis Direcciones
+      </button>
+      
+      <button routerLink="/mi-perfil/beneficios" routerLinkActive="active">
+        <i class="icon">🎫</i> Mis Beneficios
+      </button>
+      
+      <button routerLink="/mi-perfil/datos" routerLinkActive="active">
+        <i class="icon">👤</i> Mis Datos
+      </button>
+       
+
+      <button routerLink="/mi-perfil/mensajes" routerLinkActive="active">
+      <i class="icon">📧</i> Mensajes
+      </button>
+
+   <button routerLink="/mi-perfil/ajustes" routerLinkActive="active">    
+    <i class="icon">⚙️</i> Ajustes
+  </button>
+  
+  <button class="btn-logout-mobile" (click)="cerrarSesion()">
+    <i class="icon">🚪</i> Cerrar Sesión
+  </button>
+    </nav> </aside>
+
+  <main class="perfil-main-content">
+    <div *ngIf="loading" class="skeleton-loader-container">
+      <div class="skeleton-card"></div>
+    </div>
+
+    <div *ngIf="!loading">
+      @switch (seccionActual) {
+        @case ('compras') { <app-mis-compras [usuario]="usuario"></app-mis-compras> }
+        @case ('favoritos') { <app-mis-favoritos [usuario]="usuario"></app-mis-favoritos> }
+        @case ('direcciones') { <app-mis-direcciones [usuario]="usuario"></app-mis-direcciones> }
+        @case ('beneficios') { <app-mis-beneficios [usuario]="usuario"></app-mis-beneficios> }
+        @case ('datos') { <app-mis-datos [usuario]="usuario"></app-mis-datos> }
+        @case ('mensajes') { <app-mis-mensajes [usuario]="usuario"></app-mis-mensajes> }
+        @case ('ajustes') {
+          <section class="fade-in">
+            <div class="section-header"><h2>Configuración</h2></div>
+            <div class="ajustes-card">
+              <div class="ajustes-info"><h3>Modo Oscuro</h3><p>Reduce la fatiga visual.</p></div>
+              <label class="switch">
+                <input type="checkbox" [checked]="isDarkMode" (change)="toggleDarkMode()">
+                <span class="slider round"></span>
+              </label>
+            </div>
+          </section>
+        }
+      }
+    </div>
+  </main>
+</div>

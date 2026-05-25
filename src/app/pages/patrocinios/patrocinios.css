@@ -1,0 +1,121 @@
+.partners-section {
+  background: #050505; /* Un negro más profundo */
+  padding: 100px 0;
+  color: white;
+  overflow: hidden;
+}
+
+.section-title {
+  font-size: 5rem;
+  font-weight: 900;
+  text-align: center;
+  margin-bottom: 80px;
+  background: linear-gradient(180deg, #ffffff 40%, #555555 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-transform: uppercase;
+  letter-spacing: 8px;
+}
+
+/* El contenedor del Grid */
+.partners-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Tarjetas más anchas */
+  gap: 50px;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* La tarjeta con efecto Glassmorphism */
+.partner-card {
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 24px;
+  padding: 60px 30px; /* Más espacio interno */
+  text-align: center;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+/* Efecto de Brillo (Glow) al pasar el mouse */
+.partner-card::after {
+  content: "";
+  position: absolute;
+  top: -50%; left: -50%; width: 200%; height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+  transform: scale(0);
+  transition: transform 0.6s ease;
+}
+
+.partner-card:hover {
+  transform: translateY(-20px) scale(1.02);
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+}
+
+.partner-card:hover::after {
+  transform: scale(1);
+}
+
+/* --- LOGO: Aquí está el cambio que pediste --- */
+.logo-wrapper {
+  height: 180px; /* Aumentado de 100px a 180px */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+  background: rgba(0,0,0,0.2); /* Fondo sutil para el logo */
+  border-radius: 15px;
+}
+
+.partner-logo {
+  max-width: 220px; /* Logo mucho más GrandeComponent */
+  max-height: 140px;
+  filter: brightness(0.9); /* Ya no es gris total, se ve más vivo */
+  transition: all 0.5s ease;
+  object-fit: contain;
+}
+
+.partner-card:hover .partner-logo {
+  filter: brightness(1.2) drop-shadow(0 0 15px rgba(255,255,255,0.3));
+  transform: scale(1.15);
+}
+
+/* Info del socio */
+.partner-info h3 {
+  font-size: 1.8rem; /* Nombre más GrandeComponent */
+  font-weight: 700;
+  margin: 15px 0;
+  color: #fff;
+  letter-spacing: 2px;
+}
+
+.badge {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #ffffff;
+  background: linear-gradient(90deg, #444, #111);
+  border: 1px solid #333;
+  padding: 6px 20px;
+  border-radius: 4px; /* Estilo más cuadrado/industrial */
+  letter-spacing: 3px;
+  display: inline-block;
+  transition: 0.3s;
+}
+
+.partner-card:hover .badge {
+  border-color: #fff;
+  background: #fff;
+  color: #000;
+}
+
+.partner-card-link {
+  text-decoration: none;
+  display: block;
+}

@@ -1,0 +1,771 @@
+/* ==========================================================================
+   RESET & BASE 
+   ========================================================================== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5%;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  height: 90px;
+}
+
+/* ==========================================================================
+   LOGO IVANO STORE (INTOCABLE)
+   ========================================================================== */
+.nav-logo a { text-decoration: none; display: block; }
+
+.logo-animation-wrapper {
+  display: flex;
+  align-items: center;
+  font-family: 'Arial Black', sans-serif;
+  font-size: 2.2rem;
+  font-weight: 900;
+  position: relative;
+  cursor: pointer;
+  letter-spacing: -2.5px;
+  overflow: hidden;
+  padding-right: 10px;
+}
+
+.part-ivano {
+  color: #000;
+  z-index: 10;
+  background: #fff;
+  padding-right: 5px;
+  transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+  will-change: transform;
+}
+
+.part-store {
+  color: #007bff;
+  transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.8s ease-in;
+  will-change: transform, opacity;
+  display: inline-block;
+  transform-origin: right center; 
+}
+
+.logo-animation-wrapper:hover .part-ivano { transform: translateX(10%); }
+.logo-animation-wrapper:hover .part-store { transform: translateX(-100%); opacity: 0; }
+
+/* ==========================================================================
+   NAVIGATION LINKS
+   ========================================================================== */
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 30px;
+  align-items: center;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: #222;
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  position: relative;
+  padding: 10px 0;
+}
+
+.nav-links li a.active { color: #ff3e3e; }
+.nav-links li a.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%; height: 2px;
+  background-color: #ff3e3e;
+}
+
+.nav-links li a:hover { color: #ff3e3e; }
+
+/* ==========================================================================
+   NAV ACTIONS (SEARCH, LOGIN, CART)
+   ========================================================================== */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* SEARCH - ESTILO MINIMALISTA EXPANDIBLE */
+.search-box {
+  display: flex;
+  background: #f8f9fa;
+  border: 1.5px solid transparent;
+  border-radius: 8px;
+  padding: 6px 14px;
+  transition: all 0.4s ease;
+  width: 200px;
+}
+
+.search-box:focus-within {
+  background: #fff;
+  width: 260px;
+  border-color: #007bff;
+  box-shadow: 0 8px 20px rgba(0, 123, 255, 0.1);
+}
+
+.search-box input {
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 0.85rem;
+  width: 100%;
+}
+
+/* LOGIN - ESTILO BOUTIQUE INDUSTRIAL */
+.btn-login {
+  background: #fff;
+  border: 2px solid #000;
+  color: #000;
+  padding: 8px 20px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-login:hover {
+  background: #000;
+  color: #fff;
+}
+
+/* CARRITO - DISEÑO "CYBER TECH" (EL NUEVO) */
+.cart-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  height: 44px;
+  width: 44px; /* Forma cuadrada pro */
+  border-radius: 10px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.cart-container:hover {
+  transform: scale(1.1) rotate(5deg);
+  background: #111;
+  border-color: #007bff; /* Brillo azul al hover */
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.cart-icon {
+  font-size: 1.2rem;
+  filter: invert(1); /* Icono blanco */
+}
+
+/* BADGE FLOTANTE NIVEL SENIOR */
+.cart-count {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #ff3e3e;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 900;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px; /* Badge cuadrado redondeado, muy moderno */
+  border: 2px solid #fff;
+  box-shadow: 0 4px 10px rgba(255, 62, 62, 0.4);
+}
+
+/* ==========================================================================
+   ACCIONES REFACTORIZADAS (SEARCH, LOGIN, CARRITO)
+   ========================================================================== */
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding-left: 10px;
+}
+
+/* --- BUSCADOR: Minimalista y Limpio --- */
+.search-box {
+  display: flex;
+  align-items: center;
+  background: #f5f5f7;
+  border-radius: 8px;
+  padding: 6px 12px;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.search-box:focus-within {
+  background: #fff;
+  border-color: #007bff;
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.08);
+}
+
+.search-box input {
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 13px;
+  width: 150px;
+  color: #333;
+}
+
+.search-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 0 4px;
+}
+
+/* --- BOTÓN INGRESAR: El "Azulito" Senior --- */
+.btn-login {
+  background: transparent;
+  border: 2px solid #000;
+  color: #000;
+  padding: 8px 20px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-login:hover {
+  border-color: #007bff;
+  color: #007bff; /* El azulito que pediste al pasar el cursor */
+  background: rgba(0, 123, 255, 0.05); /* Un toque sutil de fondo */
+  transform: translateY(-1px);
+}
+
+/* --- CARRITO: Adiós al Negro, Hola al Look Premium --- */
+.cart-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f5f7; /* Color claro para integrarse al header */
+  height: 40px;
+  width: 40px;
+  border-radius: 10px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+  border: 1px solid #eee;
+}
+
+.cart-container:hover {
+  background: #fff;
+  border-color: #007bff;
+  transform: scale(1.05);
+}
+
+.cart-icon {
+  font-size: 18px;
+  color: #333; /* Icono oscuro sobre fondo claro */
+  transition: color 0.3s ease;
+}
+
+.cart-container:hover .cart-icon {
+  color: #007bff;
+}
+
+/* Badge del Contador */
+.cart-count {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: #ff3e3e;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 900;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 5px rgba(255, 62, 62, 0.3);
+}
+
+.cart-count {
+  position: absolute;
+  top: -5px;
+  right: -8px;
+  background-color: #ff4d00; /* Naranja Ivano */
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 11px;
+  font-weight: bold;
+  border: 2px solid white;
+}
+
+.user-menu-container {
+  position: relative;
+  display: inline-block;
+}
+
+.user-dropdown {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: #fff;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
+  z-index: 1000;
+  border-radius: 4px;
+  padding: 10px 0;
+}
+
+.user-dropdown a {
+  color: black;
+  padding: 10px 15px;
+  text-decoration: none;
+  display: block;
+  font-size: 14px;
+}
+
+.user-dropdown a:hover {
+  background-color: #f1f1f1;
+}
+
+.user-menu-container:hover .user-dropdown {
+  display: block;
+}
+
+.btn-user-profile {
+  background: black;
+  color: white;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* NAVBAR PRINCIPAL */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8rem 4%;
+  background: #ffffff;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* LOGO CON ANIMACIÓN */
+.nav-logo a {
+  text-decoration: none;
+}
+
+.logo-animation-wrapper {
+  font-size: 1.5rem;
+  font-weight: 900;
+  letter-spacing: -1px;
+}
+
+.part-ivano { color: #000; }
+.part-store { 
+  color: #0066ff; /* El azul característico de IVANO STORE */
+  margin-left: 4px;
+}
+
+/* ENLACES CENTRALES */
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #444;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover, .nav-links a.active {
+  color: #0066ff;
+}
+
+/* ACCIONES (DERECHA) */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* CAJA DE BÚSQUEDA */
+.search-box {
+  display: flex;
+  align-items: center;
+  background: #f1f3f5;
+  padding: 6px 12px;
+  border-radius: 20px;
+  border: 1px solid transparent;
+  transition: all 0.3s;
+}
+
+.search-box:focus-within {
+  background: #fff;
+  border-color: #0066ff;
+  box-shadow: 0 0 0 3px rgba(0,102,255,0.1);
+}
+
+.search-box input {
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 0.85rem;
+  width: 180px;
+}
+
+.search-btn {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  opacity: 0.6;
+}
+
+/* SECCIÓN USUARIO LOGUEADO (El arreglo para image_57cedd.png) */
+.user-authenticated-menu {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  border-left: 1px solid #eee;
+  padding-left: 1.2rem;
+}
+
+.nav-user-item {
+  text-decoration: none;
+  color: #333;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  transition: opacity 0.2s;
+}
+
+.nav-user-item:hover {
+  opacity: 0.7;
+}
+
+/* BOTONES (LOGIN / LOGOUT) */
+.btn-login, .btn-logout-nav {
+  padding: 8px 18px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: all 0.3s;
+}
+
+.btn-login {
+  background: #0066ff;
+  color: #fff;
+  border: none;
+}
+
+.btn-login:hover {
+  background: #0052cc;
+}
+
+.btn-logout-nav {
+  background: transparent;
+  color: #ff4d4f;
+  border: 1px solid #ff4d4f;
+}
+
+.btn-logout-nav:hover {
+  background: #ff4d4f;
+  color: #fff;
+}
+
+/* CARRITO */
+.cart-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.cart-icon {
+  font-size: 1.4rem;
+}
+
+.cart-count {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  background: #ff4d4f;
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 10px;
+  min-width: 18px;
+  text-align: center;
+}
+
+/* 1. Agranda el Logo */
+.logo-animation-wrapper {
+  font-size: 1.8rem; /* Estaba en 1.5rem */
+}
+
+/* 2. Agranda el menú central y dales más espacio entre ellos */
+.nav-links {
+  gap: 2.5rem; /* Más separación para que no se amontonen */
+}
+
+.nav-links a {
+  font-size: 1rem; /* Estaba en 0.85rem */
+  font-weight: 700; /* Para que resalten más */
+}
+
+/* 3. Agranda los textos de Perfil y Panel */
+.nav-user-item {
+  font-size: 0.9rem; /* Estaba en 0.75rem */
+}
+
+/* 4. Agranda el texto de los botones (Login/Logout) */
+.btn-login, .btn-logout-nav {
+  font-size: 0.9rem; /* Estaba en 0.8rem */
+  padding: 10px 22px; /* Un poco más de cuerpo al botón */
+}
+
+/* 5. Agranda el texto dentro del buscador */
+.search-box input {
+  font-size: 0.95rem; 
+}
+
+/* Agranda el contenedor del logo */
+.logo-animation-wrapper {
+  font-size: 2.2rem !important; /* Aumentado significativamente */
+  display: flex;
+  align-items: center;
+  transition: transform 0.3s ease;
+}
+
+/* Efecto opcional: un ligero crecimiento al pasar el mouse */
+.logo-animation-wrapper:hover {
+  transform: scale(1.05);
+}
+
+/* Si usas una imagen de logo en lugar de texto, usa esto: */
+.nav-logo img {
+  height: 60px !important; /* Ajusta este valor según necesites */
+  width: auto;
+}
+
+/* IMPORTANTE: El contenedor padre debe ser relativo */
+.search-box {
+  position: relative; 
+}
+
+/* Panel de resultados */
+/* Pantalla completa para buscar */
+.search-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.98);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  padding: 50px 10%;
+  overflow-y: auto;
+}
+
+.search-header {
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid #000;
+  margin-bottom: 30px;
+}
+
+.search-header input {
+  flex: 1;
+  border: none;
+  font-size: 2.5rem; /* Input gigante */
+  outline: none;
+  background: transparent;
+  padding: 10px;
+}
+
+.close-search {
+  font-size: 2rem;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+/* Los resultados en rejilla */
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 30px;
+}
+
+.card-item {
+  border: 1px solid #f0f0f0;
+  padding: 15px;
+  text-align: center;
+  transition: 0.3s;
+}
+
+.card-item:hover {
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.card-item img {
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+}
+
+/* Contenedor principal de la búsqueda */
+.search-results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 2rem;
+  padding: 2rem;
+  background-color: #f9f9f9;
+}
+
+/* La tarjeta del producto */
+.product-card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid #eee;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+/* Contenedor de la imagen para que todas midan lo mismo */
+.image-container {
+  width: 100%;
+  height: 300px; /* Ajusta según prefieras */
+  overflow: hidden;
+  background-color: #f0f0f0;
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Esto evita que la imagen se estire feo */
+  transition: scale 0.5s ease;
+}
+
+.product-card:hover img {
+  scale: 1.05;
+}
+
+/* Detalles del texto */
+.product-info {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.product-title {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  color: #1a1a1a;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.product-category {
+  font-size: 0.75rem;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.product-price {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #000;
+  margin-top: 0.5rem;
+}
+
+/* Botón de acción (opcional) */
+.btn-view {
+  margin-top: 1rem;
+  padding: 0.8rem;
+  background: #000;
+  color: #fff;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-radius: 4px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.product-card:hover .btn-view {
+  opacity: 1;
+}
+
+/* Ajuste para que las imágenes no se desborden y se vean profesionales */
+.img-wrapper {
+  width: 100%;
+  aspect-ratio: 1 / 1; /* Mantiene un formato cuadrado perfecto */
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f7f7f7;
+  border-radius: 8px;
+}
+
+.img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Cambia a 'cover' si prefieres que llenen todo el recuadro sin bordes */
+  transition: transform 0.3s ease;
+}
+
+/* Efecto opcional para que al pasar el mouse se note la interacción */
+.product-card:hover .img-wrapper img {
+  transform: scale(1.05);
+}

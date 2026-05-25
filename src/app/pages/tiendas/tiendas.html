@@ -1,0 +1,69 @@
+<section class="tiendas-container">
+  <div class="header-tiendas">
+    <h1 class="title-glow">Nuestras Sucursales</h1>
+    <p class="subtitle">Encuentra la tienda Ivano más cercana a ti</p>
+    
+    <div class="search-box">
+      <i class="fas fa-search"></i>
+      <input type="text" placeholder="Buscar por distrito o ciudad..." (input)="filtrarTiendas($event)">
+    </div>
+  </div>
+
+  <div class="map-view-container animate__animated animate__fadeIn" *ngIf="mapaSeguro">
+    <div class="map-wrapper">
+      <div class="map-header">
+        <span><i class="fas fa-location-dot"></i> Ubicación Seleccionada</span>
+        <button (click)="cerrarMapa()" class="btn-close">×</button>
+      </div>
+      <iframe 
+        [src]="mapaSeguro" 
+        width="100%" 
+        height="400" 
+        style="border:0; filter: invert(90%) hue-rotate(180deg) brightness(0.9);" 
+        allowfullscreen="" 
+        loading="lazy">
+      </iframe>
+    </div>
+  </div>
+
+  <div class="content-wrapper">
+    <div class="tiendas-grid" *ngIf="tiendasFiltradas.length > 0; else cargando">
+      
+      <div *ngFor="let tienda of tiendasFiltradas" 
+           class="tienda-card" 
+           (click)="seleccionarTienda(tienda)"
+           data-tooltip="¡Haz clic para ver cómo llegar!"> 
+           
+        <div class="tienda-image">
+          <img [src]="tienda.imagen_url || 'assets/img/store-placeholder.jpg'" alt="Fachada Tienda">
+          <span class="status-badge" [class.open]="estaAbierto(tienda.horario)">
+            {{ estaAbierto(tienda.horario) ? 'Abierto ahora' : 'Cerrado' }}
+          </span>
+        </div>
+        
+        <div class="tienda-info">
+          <h3>{{ tienda.nombre }}</h3>
+          
+          <p class="direccion">
+            <i class="fas fa-map-marker-alt"></i> {{ tienda.direccion }}
+          </p>
+          
+          <div class="referencia-tag" *ngIf="tienda.referencia">
+            <i class="fas fa-info-circle"></i>
+            <span>{{ tienda.referencia }}</span>
+          </div>
+
+          <p class="horario"><i class="far fa-clock"></i> {{ tienda.horario }}</p>
+        </div>
+      </div>
+
+    </div>
+
+    <ng-template #cargando>
+      <div class="no-data">
+        <div class="spinner"></div>
+        <p>Sincronizando con la central de Ivano Store...</p>
+      </div>
+    </ng-template>
+  </div>
+</section>

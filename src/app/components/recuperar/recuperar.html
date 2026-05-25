@@ -1,0 +1,85 @@
+<div class="modal-overlay" (click)="cerrar()">
+  <div class="auth-card" (click)="$event.stopPropagation()">
+    
+    <button class="close-btn" (click)="cerrar()">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+
+    <!-- STEPPER PROGRESIVO -->
+    <div class="stepper">
+      <div class="step" [class.active]="paso >= 1" [class.completed]="paso > 1">
+        <span class="step-num">1</span>
+        <span class="step-label">Correo</span>
+      </div>
+      <div class="step-line"></div>
+      <div class="step" [class.active]="paso >= 2" [class.completed]="paso > 2">
+        <span class="step-num">2</span>
+        <span class="step-label">Validar</span>
+      </div>
+      <div class="step-line"></div>
+      <div class="step" [class.active]="paso === 3">
+        <span class="step-num">3</span>
+        <span class="step-label">Listo</span>
+      </div>
+    </div>
+
+    <!-- CONTENIDO SEGÚN EL PASO -->
+    <div class="view-container">
+      
+      <!-- PASO 1 -->
+      <div *ngIf="paso === 1" class="fade-in">
+        <div class="header-text">
+          <h2>Recuperar Cuenta</h2>
+          <p>Introduce tu correo para buscar tu perfil en <strong>IVANO</strong></p>
+        </div>
+        <div class="input-pro">
+          <label>Correo Electrónico</label>
+          <input type="email" [(ngModel)]="email" placeholder="correo@ejemplo.com" [disabled]="loading">
+        </div>
+        <button class="btn-primary" (click)="enviarCodigoRecuperacion()" [disabled]="loading">
+          <span *ngIf="!loading">Obtener Código <i class="fa-solid fa-arrow-right"></i></span>
+          <span *ngIf="loading"><i class="fa-solid fa-spinner fa-spin"></i> Buscando...</span>
+        </button>
+      </div>
+
+      <!-- PASO 2 -->
+      <div *ngIf="paso === 2" class="fade-in text-center">
+        <div class="header-text">
+          <h2>Código de Seguridad</h2>
+          <p>Hemos enviado un código a <strong>{{email}}</strong></p>
+        </div>
+        <div class="otp-wrapper">
+          <input type="text" [(ngModel)]="codigoOTP" maxlength="6" 
+                 class="otp-input" placeholder="000000" (keypress)="soloNumeros($event)">
+        </div>
+        <button class="btn-primary" (click)="validarCodigo()">
+          Verificar Código <i class="fa-solid fa-check"></i>
+        </button>
+        <button class="btn-ghost" (click)="paso = 1">Cambiar correo</button>
+      </div>
+
+      <!-- PASO 3 -->
+      <div *ngIf="paso === 3" class="fade-in">
+        <div class="header-text">
+          <h2>Nueva Contraseña</h2>
+          <p>Crea una clave segura para tu cuenta.</p>
+        </div>
+        <div class="input-pro">
+          <label>Nueva Contraseña</label>
+          <div class="password-wrapper" style="position: relative;">
+            <input [type]="verPass ? 'text' : 'password'" [(ngModel)]="nuevaPassword" placeholder="••••••••">
+            <span (click)="togglePass()" style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer;">
+              <i [class]="verPass ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye'"></i>
+            </span>
+          </div>
+        </div>
+        <div class="input-pro">
+          <label>Confirmar Contraseña</label>
+          <input [type]="verPass ? 'text' : 'password'" [(ngModel)]="confirmarPassword" placeholder="••••••••">
+        </div>
+        <button class="btn-primary" (click)="cambiarPassword()">Actualizar Contraseña</button>
+      </div>
+
+    </div>
+  </div>
+</div>

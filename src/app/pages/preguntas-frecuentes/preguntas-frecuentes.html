@@ -1,0 +1,81 @@
+<section class="faq-container">
+  <div class="faq-banner">
+    <div class="zebra-stripe left"></div>
+    <div class="banner-title">
+      <h1>PREGUNTAS FRECUENTES</h1>
+    </div>
+    <div class="zebra-stripe right"></div>
+  </div>
+
+  <div class="faq-content">
+    <div class="accordion">
+      
+      <div class="accordion-item" [class.active]="activeIndex === 0">
+        <div class="accordion-header" (click)="toggle(0)">
+          <span>¿CUÁNDO PUEDO SOLICITAR UN CAMBIO O DEVOLUCIÓN?</span>
+          <div class="plus-minus"></div>
+        </div>
+        <div class="accordion-body">
+          <div class="body-content">
+            <p>Toda solicitud será evaluada en los siguientes casos:</p>
+            <ul>
+              <li>El producto no cumple con las especificaciones (tallas, colores).</li>
+              <li>Defectos de origen o fabricación.</li>
+              <li>El producto no resulta idóneo para el uso destinado.</li>
+              <li>No existe stock del producto solicitado.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item" [class.active]="activeIndex === 1">
+        <div class="accordion-header" (click)="toggle(1)">
+          <span>¿QUÉ PASA SI EL PRODUCTO LLEGÓ DAÑADO O DEFECTUOSO?</span>
+          <div class="plus-minus"></div>
+        </div>
+        <div class="accordion-body">
+          <div class="body-content">
+            <p>Deberás reportarlo en un plazo máximo de 48 horas tras recibirlo, enviando fotos al WhatsApp de Post-Venta Ivano. Nosotros cubriremos todos los gastos de logística para el cambio inmediato.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item" [class.active]="activeIndex === 2">
+        <div class="accordion-header" (click)="toggle(2)">
+          <span>¿CÓMO FUNCIONA EL PROCESO DE REEMBOLSO?</span>
+          <div class="plus-minus"></div>
+        </div>
+        <div class="accordion-body">
+          <div class="body-content">
+            <p>Una vez aprobado el retorno del producto, el reembolso se procesará en un plazo de 7 a 15 días hábiles, dependiendo de tu entidad bancaria.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item" [class.active]="activeIndex === 3">
+        <div class="accordion-header" (click)="toggle(3)">
+          <span>¿CUÁLES SON LAS CONDICIONES PARA PRODUCTOS EN OFERTA?</span>
+          <div class="plus-minus"></div>
+        </div>
+        <div class="accordion-body">
+          <div class="body-content">
+            <p>Los productos adquiridos en liquidación o con descuentos mayores al 50% no están sujetos a cambios ni devoluciones, salvo por falla de fábrica evidente.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item" [class.active]="activeIndex === 4">
+        <div class="accordion-header" (click)="toggle(4)">
+          <span>¿QUÉ SUCEDE SI NO ESTOY EN CASA PARA RECIBIR MI PEDIDO?</span>
+          <div class="plus-minus"></div>
+        </div>
+        <div class="accordion-body">
+          <div class="body-content">
+            <p>Olva Courier realizará hasta dos visitas. Si en la segunda tampoco se logra la entrega, el pedido retornará a nuestra sede y deberás coordinar un nuevo envío pagando la tarifa correspondiente.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

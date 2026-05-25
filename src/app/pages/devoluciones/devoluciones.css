@@ -1,0 +1,186 @@
+/* Contenedor Principal */
+.info-container {
+  padding: 60px 20px;
+  background: #000; /* Fondo negro profundo */
+  color: #fff;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Cabecera */
+.header-info {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.title-glow {
+  font-size: 2.5rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow: 0 0 15px rgba(255, 153, 0, 0.4);
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  color: #888;
+  font-size: 1.1rem;
+}
+
+/* Tarjeta de Contenido */
+.info-card {
+  background: #0a0a0a; /* Un gris casi negro para resaltar del fondo */
+  border: 1px solid #222;
+  border-radius: 20px;
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Secciones Internas */
+.section {
+  margin-bottom: 35px;
+  border-bottom: 1px solid #1a1a1a;
+  padding-bottom: 20px;
+}
+
+.section:last-of-type {
+  border-bottom: none;
+}
+
+.section h3 {
+  color: #ff9900; /* El naranja corporativo de Ivano */
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.3rem;
+  margin-bottom: 18px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.section p, .section li {
+  color: #ccc;
+  line-height: 1.7;
+  font-size: 1rem;
+}
+
+.section ul {
+  list-style: none;
+  padding-left: 5px;
+}
+
+.section li {
+  margin-bottom: 10px;
+  position: relative;
+  padding-left: 20px;
+}
+
+.section li::before {
+  content: '•';
+  color: #ff9900;
+  position: absolute;
+  left: 0;
+  font-weight: bold;
+}
+
+/* Alerta de Nota Importante */
+.info-alert {
+  background: rgba(255, 153, 0, 0.05);
+  border: 1px dashed #ff9900;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.info-alert i {
+  color: #ff9900;
+  font-size: 1.5rem;
+}
+
+.info-alert span {
+  color: #eee;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* Contenedor de Acción (WhatsApp) */
+.action-container {
+  text-align: center;
+  margin-top: 50px;
+  padding-top: 30px;
+}
+
+.action-container p {
+  color: #888;
+  margin-bottom: 20px;
+}
+
+.btn-whatsapp {
+  background: #25d366;
+  color: #fff;
+  border: none;
+  padding: 15px 35px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.btn-whatsapp:hover {
+  background: #128c7e;
+  transform: scale(1.08);
+  box-shadow: 0 10px 20px rgba(37, 211, 102, 0.2);
+}
+
+/* Responsividad para móviles (Ate - UTP Style) */
+@media (max-width: 768px) {
+  .info-card {
+    padding: 25px;
+  }
+  
+  .title-glow {
+    font-size: 1.8rem;
+  }
+  
+  .section h3 {
+    font-size: 1.1rem;
+  }
+}
+
+/* Agrégalo a tu envios.css */
+.btn-whatsapp {
+  background-color: #25d366; /* Verde oficial de WhatsApp */
+  color: white;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 50px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: 0.3s ease;
+  margin: 20px auto;
+}
+
+.btn-whatsapp:hover {
+  background-color: #128c7e; /* Verde más oscuro al pasar el mouse */
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
+}
+
+.action-container {
+  text-align: center;
+  margin-top: 40px;
+  padding: 20px;
+  border-top: 1px dashed #333;
+}

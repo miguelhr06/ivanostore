@@ -1,0 +1,32 @@
+<div class="chat-wrapper">
+  <div class="chat-header">
+    <div class="avatar-admin">A</div>
+    <div class="chat-info">
+      <h4>Asesor Ivano Store</h4>
+      <span><i class="online-dot"></i> En línea</span>
+    </div>
+  </div>
+
+  <div class="chat-messages" #scrollMe>
+    <div *ngFor="let m of mensajes" [ngClass]="['message-bubble', m.remitente]">
+      <div class="bubble-content">
+        <p>{{ m.contenido }}</p>
+        <span class="timestamp">{{ m.created_at | date:'shortTime' }}</span>
+      </div>
+    </div>
+    
+    <div *ngIf="mensajes.length === 0" class="empty-state">
+      <p>¡Hola! ¿En qué podemos ayudarte hoy? Envíanos tu consulta.</p>
+    </div>
+  </div>
+
+  <div class="chat-input-area">
+    <input [(ngModel)]="nuevoMensaje" 
+           (keyup.enter)="enviarMensaje()" 
+           placeholder="Escribe tu consulta aquí..." 
+           type="text">
+    <button class="send-btn" (click)="enviarMensaje()" [disabled]="!nuevoMensaje.trim()">
+      <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path></svg>
+    </button>
+  </div>
+</div>

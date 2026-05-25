@@ -1,0 +1,159 @@
+<section class="ivano-catalog">
+  <div class="header-container">
+    <span class="eyebrow">IVANO - PREMIUM ACCESSORIES</span>
+    <h1 class="main-title">COLECCIÓN <span class="outline">ACCESORIOS</span></h1>
+
+    <div class="filter-group">
+      <button type="button" class="chip-main" [class.active]="estaActivo('todos')" (click)="toggleFiltro('todos')">Todo</button>
+      <button type="button" class="chip-sub" *ngFor="let cat of ['MORRALES', 'MOCHILAS', 'BILLETERAS', 'CANGUROS', 'NECESER', 'PORTAFOLIOS', 'BOLSOS_PECHO', 'MALETINES', 'CORREAS', 'CARTERAS', 'BOLSOS', 'MONEDEROS', 'TARJETEROS']"
+              [class.active]="estaActivo(cat)" (click)="toggleFiltro(cat)">
+        {{ cat.replace('_', ' ') }}
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="!loading; else loader">
+    <div class="product-grid">
+      <div class="product-card" *ngFor="let item of productosPaginados" 
+           (mouseenter)="cambiarFoto(item, true)" (mouseleave)="cambiarFoto(item, false)"
+           style="position: relative !important;">
+        
+        <div class="image-box">
+          <div class="top-badges">
+            <span class="badge badge-sigla-rojo">{{ item.sigla }}</span>
+            <span class="badge category">{{ item.categoria.replace('_', ' ') }}</span>
+          </div>
+
+          <button type="button" 
+                  class="btn-card-heart-v2" 
+                  [class.active]="item.esFavorito" 
+                  (click)="toggleFavorito(item, $event)">
+            <span class="heart-icon-v2">{{ item.esFavorito ? '❤️' : '🤍' }}</span>
+          </button>
+
+          <img [src]="item.imagen_principal_render" class="main-img">
+          
+          <div class="card-overlay">
+            <button class="btn-action" (click)="abrirDetalles(item)">DETALLES</button>
+          </div>
+        </div>
+
+        <div class="product-info">
+          <div class="main-details">
+            <h3 class="product-name">{{ item.nombre_zapatilla }}</h3>
+            <span class="product-price">S/ {{ item.precio }}</span>
+          </div>
+          <p class="product-subtext">{{ item.modelo }} | {{ item.color }}</p>
+
+          <div class="tallas-wrapper">
+            <p class="tallas-label-clean">TALLAS DISPONIBLES:</p>            
+            
+            <div class="tallas-list">
+              <ng-container *ngIf="item.tallas_disponibles.length > 0; else tallaUnicaBtn">
+                <button class="talla-box" 
+                        *ngFor="let talla of item.tallas_disponibles"
+                        [class.active]="tallaSeleccionada[item.id] === talla"
+                        (click)="seleccionarTalla(item.id, talla)">
+                  {{ talla }}
+                </button>
+              </ng-container>
+              
+              <ng-template #tallaUnicaBtn>
+                <button class="talla-box"
+                        [class.active]="tallaSeleccionada[item.id] === 'U'"
+                        (click)="seleccionarTalla(item.id, 'U')">
+                  ÚNICA
+                </button>
+              </ng-template>
+            </div>
+          </div>
+
+          <hr class="card-divider">
+          <div class="gender-status">
+            <span class="red-dot"></span>
+            <span class="gender-text" style="text-transform: uppercase;">{{ item.genero.replace('_', ' ') }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pagination-wrapper" *ngIf="totalPaginas > 1">
+      <div class="pagination-controls">
+        <button class="nav-btn" [disabled]="paginaActual === 1" (click)="cambiarPagina(paginaActual - 1)">ANTERIOR</button>
+        <span class="page-indicator">PÁGINA {{ paginaActual }} DE {{ totalPaginas }}</span>
+        <button class="nav-btn" [disabled]="paginaActual === totalPaginas" (click)="cambiarPagina(paginaActual + 1)">SIGUIENTE</button>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #loader>
+    <div class="loading-state">
+      <div class="spinner"></div>
+      <p>ESTABLECIENDO CONEXIÓN IVANO...</p>
+    </div>
+  </ng-template>
+</section>
+
+<div class="modal-overlay" *ngIf="modalAbierto && productoSeleccionado" (click)="cerrarModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <button class="btn-close" (click)="cerrarModal()">&times;</button>
+    <div class="modal-body">
+      
+      <div class="gallery-container">
+        <div class="main-photo-view zoom-container" 
+             style="overflow: hidden; cursor: zoom-in; position: relative; height: 450px; width: 100%; display: flex; align-items: center; justify-content: center; background-color: #f4f4f4;" 
+             (mousemove)="onMouseMove($event)" 
+             (mouseleave)="onMouseLeave($event)">
+          <img [src]="fotoGaleriaActual" 
+               style="transition: transform 0.1s ease-out; width: 100%; height: 100%; object-fit: contain;">
+        </div>
+
+        <div class="thumbnails-grid" style="display: flex; gap: 10px; margin-top: 15px; justify-content: center;">
+          <img *ngFor="let foto of productoSeleccionado.fotos_reales" 
+               [src]="construirRutaImagen(productoSeleccionado, foto)" 
+               (click)="seleccionarFotoMiniatura(foto)" 
+               class="thumb" 
+               [class.active]="fotoGaleriaActual === construirRutaImagen(productoSeleccionado, foto)"
+               style="width: 60px; height: 60px; object-fit: cover; cursor: pointer; border: 2px solid transparent; transition: 0.3s;"
+               [style.border-color]="fotoGaleriaActual === construirRutaImagen(productoSeleccionado, foto) ? '#e62117' : 'transparent'">
+        </div>
+      </div>
+
+      <div class="info-container">
+        <span class="modal-sigla-only" style="color: #e62117; font-weight: bold; font-size: 1.2rem;">
+          {{ productoSeleccionado.sigla }}
+        </span>
+        <h2 class="modal-title">{{ productoSeleccionado.nombre_zapatilla }}</h2>
+        <p class="modal-sku-text">{{ productoSeleccionado.modelo }} | {{ productoSeleccionado.color }}</p>
+        <div class="modal-price">S/ {{ productoSeleccionado.precio }}</div>
+        
+        <div class="modal-description">
+          <h4>DESCRIPCIÓN TÉCNICA</h4>
+          <p>{{ productoSeleccionado.descripcion }}</p>
+        </div>
+
+        <div class="modal-tallas-block">
+          <h4 class="tallas-label-clean">TALLAS:</h4>
+          <div class="tallas-btn-grid">
+            <span class="talla-btn" 
+                  *ngFor="let talla of productoSeleccionado.tallas_disponibles" 
+                  [class.active]="tallaSeleccionada[productoSeleccionado.id] === talla" 
+                  (click)="seleccionarTalla(productoSeleccionado.id, talla)">
+              {{ talla }}
+            </span>
+          </div>
+          
+          <div class="actions-container" style="margin-top: 25px;">
+            <button class="btn-order" 
+                    style="width: 100%;"
+                    [disabled]="!tallaSeleccionada[productoSeleccionado.id]"
+                    (click)="agregarAlCarrito(productoSeleccionado)">
+              AGREGAR AL CARRITO 🛒
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

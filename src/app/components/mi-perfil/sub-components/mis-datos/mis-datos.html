@@ -1,0 +1,108 @@
+<section class="fade-in">
+  <div class="section-header">
+    <h2>Mis Datos Personales</h2>
+    <p class="subtitle">Gestiona tu información con seguridad de doble factor.</p>
+  </div>
+
+  <!-- Stepper -->
+  <div class="stepper" *ngIf="paso > 1">
+    <div class="step" [class.active]="paso >= 1" [class.completed]="paso > 1">
+      <span class="step-num">1</span>
+      <span class="step-label">Solicitud</span>
+    </div>
+    <div class="step-line"></div>
+    <div class="step" [class.active]="paso >= 2" [class.completed]="paso > 2">
+      <span class="step-num">2</span>
+      <span class="step-label">Validar</span>
+    </div>
+    <div class="step-line"></div>
+    <div class="step" [class.active]="paso === 3">
+      <span class="step-num">3</span>
+      <span class="step-label">Actualizar</span>
+    </div>
+  </div>
+
+  <div class="datos-layout">
+    <div class="view-container">
+      
+      <!-- PASO 1: Formulario Principal -->
+      <form [hidden]="paso !== 1" class="datos-form" [formGroup]="datosForm">
+        <div class="form-group">
+          <label>Nombre Completo</label>
+          <input type="text" formControlName="nombre">
+        </div>
+
+        <div class="form-group">
+          <label>DNI</label>
+          <input type="text" formControlName="dni">
+        </div>
+
+        <div class="form-group">
+          <label>Correo Electrónico</label>
+          <div class="input-with-btn">
+            <input type="email" formControlName="email" [value]="datosForm.get('email')?.value">
+            <button type="button" (click)="iniciarProceso('email')" id="btn-cambiar-email" class="btn-accion" [disabled]="loading">
+              {{ loading ? '...' : 'CAMBIAR' }}
+            </button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Celular / WhatsApp</label>
+          <div class="input-with-btn">
+            <input type="text" formControlName="celular" [value]="datosForm.get('celular')?.value">
+            <button type="button" (click)="iniciarProceso('celular')" class="btn-accion" [disabled]="loading">
+                {{ loading ? '...' : 'ACTUALIZAR' }}
+            </button>
+          </div>
+        </div>
+      </form>
+
+      <!-- PASO 2: Verificación OTP -->
+      <div *ngIf="paso === 2" class="fade-in text-center">
+        <div class="header-text">
+          <h3>Verificación de Identidad</h3>
+          <p>Ingresa el código para autorizar el cambio de <strong>{{campoEnEdicion}}</strong>.</p>
+        </div>
+        <div class="otp-wrapper">
+          <input type="text" [(ngModel)]="codigoOTP" maxlength="6" class="otp-input" placeholder="000000" (keypress)="soloNumeros($event)">
+        </div>
+        <button class="btn-primary" (click)="verificarCodigo()" [disabled]="loading || codigoOTP.length < 6">
+          <span *ngIf="!loading">VALIDAR CÓDIGO <i class="fa-solid fa-shield-check"></i></span>
+          <span *ngIf="loading">COMPROBANDO...</span>
+        </button>
+        <button class="btn-ghost" (click)="cancelarEdicion()">Volver atrás</button>
+      </div>
+
+      <!-- PASO 3: Ingreso del Nuevo Dato -->
+      <div *ngIf="paso === 3" class="fade-in">
+        <div class="header-text">
+          <h3>Ingresar Nuevo {{ campoEnEdicion === 'email' ? 'Correo' : 'Celular' }}</h3>
+          <p>Esta información será validada en tu próximo inicio de sesión.</p>
+        </div>
+        
+        <div class="form-group">
+          <label>Nuevo {{ campoEnEdicion }}</label>
+          <input [type]="campoEnEdicion === 'email' ? 'email' : 'text'" 
+                 [(ngModel)]="nuevoValorTemporal"
+                 class="form-control-custom"
+                 [placeholder]="campoEnEdicion === 'email' ? 'ejemplo@correo.com' : '999888777'">
+        </div>
+
+        <button class="btn-primary" (click)="guardarCambio()" [disabled]="loading || !nuevoValorTemporal">
+          <span *ngIf="!loading">GUARDAR CAMBIOS DEFINITIVOS</span>
+          <span *ngIf="loading">PROCESANDO...</span>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Info Card Lateral -->
+    <div class="info-card-side" *ngIf="paso === 1">
+      <div class="security-icon">🛡️</div>
+      <h4>Seguridad Ivano</h4>
+      <p>Para proteger tu cuenta, los cambios críticos requieren validación por el método alternativo.</p>
+      <div class="security-badge">Verificación Cruzada Activa ✅</div>
+    </div>
+  </div>
+</section>

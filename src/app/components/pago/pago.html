@@ -1,0 +1,110 @@
+<div class="pago-container">
+  <div class="pago-main-card">
+    
+    <div class="pago-sidebar">
+      <div class="metodo-item" [class.active]="metodoSeleccionado === 'culqi'" (click)="seleccionarMetodo('culqi')">
+        <i class="fas fa-credit-card"></i>
+        <span>Tarjeta / Cuotéalo</span>
+      </div>
+      <div class="metodo-item" [class.active]="metodoSeleccionado === 'billeteras'" (click)="seleccionarMetodo('billeteras')">
+        <i class="fas fa-mobile-alt"></i>
+        <span>Yape / Plin</span>
+      </div>
+      <div class="metodo-item" [class.active]="metodoSeleccionado === 'pagoefectivo'" (click)="seleccionarMetodo('pagoefectivo')">
+        <i class="fas fa-barcode"></i>
+        <span>PagoEfectivo (CIP)</span>
+      </div>
+      <div class="metodo-item" [class.active]="metodoSeleccionado === 'transferencia'" (click)="seleccionarMetodo('transferencia')">
+        <i class="fas fa-university"></i>
+        <span>Transferencia</span>
+      </div>
+    </div>
+
+    <div class="pago-detail">
+      <div [ngSwitch]="metodoSeleccionado">
+        
+        <div *ngSwitchCase="'culqi'" class="view-center">
+          <img src="assets/culqi-full.png" class="logo-pasarela" alt="Culqi">
+          
+          <div class="custom-card-form">
+            <input type="text" id="card-number" class="pago-input" placeholder="Número de tarjeta">
+            <div class="input-row">
+              <input type="text" id="card-expiry" class="pago-input" placeholder="MM/YY">
+              <input type="text" id="card-cvv" class="pago-input" placeholder="CVV">
+            </div>
+            <input type="email" id="card-email" class="pago-input" placeholder="Correo para tu recibo">
+          </div>
+
+          <div class="cards-icons">
+            <i class="fab fa-cc-visa"></i> 
+            <i class="fab fa-cc-mastercard"></i> 
+            <i class="fab fa-cc-amex"></i>
+          </div>
+        </div>
+
+        <div *ngSwitchCase="'billeteras'" class="view-center">
+          <h3>Pago con Billeteras</h3>
+          <div id="qr-dinamico-container" style="display: none;">
+              <div id="culqi-qr-image"></div>
+              <p class="timer-text">Expira en: <span id="timer">05:00</span></p>
+          </div>
+          
+          <div id="billeteras-info">
+            <p>Usaremos <strong>Yape</strong> o <strong>Plin</strong> con QR dinámico para tu seguridad.</p>
+            <div class="billeteras-logos">
+               <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Icono_de_la_aplicaci%C3%B3n_Yape.png" alt="Yape"> 
+               <img src="https://images.seeklogo.com/logo-png/38/1/plin-logo-png_seeklogo-386806.png" alt="Plin"> 
+            </div>
+          </div>
+        </div>
+
+        <div *ngSwitchCase="'pagoefectivo'" class="view-center">
+          <img src="assets/pagoefectivo-logo.png" class="logo-pasarela" alt="PagoEfectivo">
+          <p>Generaremos un código CIP único para IvanoStore.</p>
+          <div class="info-badge"><i class="fas fa-clock"></i> Válido por 24h</div>
+        </div>
+
+        <div *ngSwitchCase="'transferencia'">
+          <h3>Depósito Directo</h3>
+          <div class="banco-list">
+            <div class="banco-row" *ngFor="let c of cuentasBancarias">
+              <div class="banco-header">
+                <strong>{{ c.banco }}</strong>
+                <span class="copy-link" (click)="copiarTexto(c.nro)">Copiar <i class="far fa-copy"></i></span>
+              </div>
+              <div class="banco-body">
+                <p>Nro: {{ c.nro }}</p>
+                <p class="titular">Titular: {{ c.titular }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <aside class="pago-summary">
+    <div class="summary-box">
+      <h3>Resumen de Orden</h3>
+      <hr>
+      <div class="total-line">
+        <span>Total a pagar:</span>
+        <strong>S/ {{ totalFinal | number:'1.2-2' }}</strong>
+      </div>
+      
+      <div class="terminos-area">
+        <label class="custom-check">
+          <input type="checkbox" [(ngModel)]="aceptaTerminos" name="terminos">
+          <span class="checkmark"></span>
+          <span class="text">Acepto los <a href="#">Términos</a></span>
+        </label>
+      </div>
+
+      <button class="btn-checkout" [disabled]="!aceptaTerminos" (click)="procesarPedido()" [ngClass]="{'btn-active': aceptaTerminos}">
+        <span>{{ metodoSeleccionado === 'transferencia' ? 'CONFIRMAR PEDIDO' : 'PAGAR AHORA' }}</span>
+        <i class="fas fa-lock"></i>
+      </button>
+    </div>
+  </aside>
+</div>

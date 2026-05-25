@@ -1,0 +1,23 @@
+<section class="fade-in">
+  <div class="section-header"><h2>Mis Beneficios 🎫</h2></div>
+  
+  <div class="points-container">
+    <div class="points-info">
+      <span class="points-label">Ivano Points Acumulados</span>
+      <h3 class="points-value">{{ usuario?.puntos_ivano || 0 }} <small>pts</small></h3>
+    </div>
+    <button class="btn-primary-white">Canjear por descuentos</button>
+  </div>
+
+  <div class="coupons-list">
+    <h3>Cupones Disponibles</h3>
+    <div class="coupon-item" *ngFor="let cupon of cuponesDisponibles">
+      <div class="coupon-main">
+        <span class="coupon-amount">S/ {{ cupon.descuento }} OFF</span>
+        <p>{{ cupon.condicion }}</p>
+        <span class="coupon-code">{{ cupon.codigo }}</span>
+      </div>
+      <button class="btn-copy" (click)="copiarCupon(cupon.codigo)">Copiar</button>
+    </div>
+  </div>
+</section>

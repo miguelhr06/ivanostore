@@ -1,0 +1,123 @@
+.contacto-page {
+  background-color: #000;
+  color: #fff;
+  min-height: 100vh;
+  padding-bottom: 100px;
+}
+
+.contacto-hero {
+  height: 45vh;
+  background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+              url('/assets/modelos/modelo1.jpg') center/cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.overlay-dark h1 {
+  font-family: 'Arial Black', sans-serif;
+  font-size: clamp(2rem, 5vw, 4rem);
+  margin: 10px 0;
+}
+
+.tagline {
+  color: #d4ff31;
+  letter-spacing: 4px;
+  font-weight: 800;
+  font-size: 0.8rem;
+}
+
+.main-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 40px;
+  max-width: 1200px;
+  margin: -60px auto 0; /* Elevación sobre el hero */
+  padding: 0 20px;
+}
+
+.info-card {
+  background: #111;
+  padding: 25px;
+  border-left: 4px solid #d4ff31;
+  margin-bottom: 25px;
+}
+
+.social-item {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  background: #080808;
+  border: 1px solid #1a1a1a;
+  margin-bottom: 10px;
+  text-decoration: none;
+  color: #fff;
+  transition: 0.3s ease;
+}
+
+.social-item:hover {
+  background: #d4ff31;
+  color: #000;
+  transform: translateX(8px);
+}
+
+.social-text strong { display: block; font-size: 0.9rem; }
+.social-text span { font-size: 0.75rem; opacity: 0.7; }
+
+.icon {
+  font-weight: 900;
+  margin-right: 15px;
+  background: #222;
+  padding: 8px;
+  border-radius: 4px;
+  min-width: 40px;
+  text-align: center;
+}
+
+.form-wrapper {
+  background: #0a0a0a;
+  padding: 40px;
+  border: 1px solid #1a1a1a;
+}
+
+.field { margin-bottom: 20px; }
+.field label {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.field input, .field select, .field textarea {
+  width: 100%;
+  padding: 12px;
+  background: #000;
+  border: 1px solid #333;
+  color: #fff;
+  border-radius: 0;
+}
+
+.btn-submit {
+  width: 100%;
+  padding: 18px;
+  background: #d4ff31;
+  color: #000;
+  border: none;
+  font-weight: 900;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-submit:hover { background: #fff; }
+
+@media (max-width: 900px) {
+  .main-grid { grid-template-columns: 1fr; margin-top: 20px; }
+}
+
+/* Para que las alertas de Ivano Store tengan el borde neón */
+.swal2-popup {
+  border: 1px solid #d4ff31 !important;
+  border-radius: 0 !important; /* Estilo cuadrado como tu diseño */
+}

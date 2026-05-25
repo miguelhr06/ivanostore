@@ -1,0 +1,44 @@
+<section class="fade-in">
+  <div class="section-header">
+    <div class="title-group">
+      <h2>Historial de Pedidos</h2>
+      <p class="subtitle">Gestiona y revisa tus adquisiciones en Ivano Store.</p>
+    </div>
+    <span class="badge" *ngIf="compras.length > 0">{{ compras.length }} pedidos</span>
+  </div>
+
+  <div *ngIf="loading" class="skeleton-loader-container">
+    <div class="skeleton-card"></div>
+    <div class="skeleton-card"></div>
+  </div>
+
+  <div class="orders-list" *ngIf="!loading && compras.length > 0">
+    <div class="order-item-pro" *ngFor="let compra of compras">
+      <div class="order-img">
+        <img [src]="compra.imagen_url" alt="producto" onerror="this.src='assets/img/placeholder.png'">
+      </div>
+      <div class="order-info">
+        <div class="top-row">
+          <span class="order-tag">Orden #{{ compra.id }}</span>
+          <span class="status-dot" [attr.data-status]="compra.estado_pedido">
+            {{ compra.estado_pedido }}
+          </span>
+        </div>
+        <h3>{{ compra.nombre_mostrar }}</h3>
+        <p class="date">📅 {{ compra.fecha_compra | date:'mediumDate' }}</p>
+        <p class="total">Monto: <strong>S/ {{ compra.monto_total }}</strong></p>
+      </div>
+      <div class="order-actions">
+        <button class="btn-secondary">Ver Detalle</button>
+        <button class="btn-help-whatsapp">Soporte</button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!loading && compras.length === 0" class="empty-state-pro">
+    <div class="empty-icon-circle">🛒</div>
+    <h3>¿Aún sin pedidos?</h3>
+    <p>Tus compras aparecerán aquí una vez que realices tu primer pedido.</p>
+    <button routerLink="/" class="btn-primary-black">Explorar Catálogo</button>
+  </div>
+</section>

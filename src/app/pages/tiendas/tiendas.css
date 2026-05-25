@@ -1,0 +1,435 @@
+.tiendas-container {
+  background: #050505;
+  min-height: 100vh;
+  padding: 60px 20px;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+}
+
+.header-tiendas {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.title-glow {
+  font-size: 3.5rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  background: linear-gradient(to right, #fff, #666);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 10px;
+}
+
+/* Buscador Estilo Google */
+.search-box {
+  max-width: 500px;
+  margin: 30px auto;
+  position: relative;
+  background: #1a1a1a;
+  border-radius: 50px;
+  padding: 15px 25px;
+  border: 1px solid #333;
+  transition: 0.3s;
+}
+
+.search-box:focus-within {
+  border-color: #ff9900;
+  box-shadow: 0 0 20px rgba(255, 153, 0, 0.2);
+}
+
+.search-box input {
+  background: transparent;
+  border: none;
+  color: white;
+  width: 90%;
+  outline: none;
+  font-size: 1rem;
+}
+
+/* Grid de Tiendas */
+.tiendas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Tarjeta de Tienda */
+.tienda-card {
+  background: #111;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid #222;
+  transition: all 0.4s ease;
+}
+
+.tienda-card:hover {
+  transform: translateY(-10px);
+  border-color: #444;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+}
+
+.tienda-image {
+  height: 200px;
+  position: relative;
+}
+
+.tienda-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.status-badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: #ff3333;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: bold;
+}
+
+.status-badge.open {
+  background: #00ff88;
+  color: #000;
+}
+
+.tienda-info {
+  padding: 25px;
+}
+
+.tienda-info h3 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: #ff9900;
+}
+
+.tienda-info p {
+  font-size: 0.9rem;
+  color: #aaa;
+  margin-bottom: 10px;
+}
+
+.tienda-info i {
+  margin-right: 10px;
+  color: #ff9900;
+}
+
+/* Botones */
+.tienda-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.btn-maps {
+  flex: 1;
+  background: white;
+  color: black;
+  text-decoration: none;
+  padding: 12px;
+  border-radius: 10px;
+  font-weight: bold;
+  text-align: center;
+  transition: 0.3s;
+}
+
+.btn-maps:hover {
+  background: #ff9900;
+  color: white;
+}
+
+.btn-call {
+  width: 45px;
+  background: #222;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  text-decoration: none;
+  border: 1px solid #333;
+}
+
+/* Animación de Carga */
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #222;
+  border-top-color: #ff9900;
+  border-radius: 50%;
+  animation: spin 1s infinite linear;
+  margin: 0 auto 20px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.map-view-container {
+  max-width: 1200px;
+  margin: 0 auto 40px;
+  padding: 0 20px;
+}
+
+/* El truco del "Dark Mode" para el iframe de Google */
+iframe {
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  border: 1px solid #333 !important;
+}
+
+.map-caption {
+  text-align: center;
+  color: #ff9900;
+  font-size: 0.9rem;
+  margin-top: 10px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+/* Animación de entrada */
+.animate__fadeIn {
+  animation: fadeIn 0.8s;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.tiendas-container {
+  background: #050505;
+  min-height: 100vh;
+  padding: 60px 20px;
+  color: white;
+}
+
+/* Estilo del Mapa Flotante */
+.map-view-container {
+  max-width: 1100px;
+  margin: 0 auto 40px;
+}
+
+.map-wrapper {
+  background: #111;
+  border-radius: 20px;
+  border: 1px solid #ff9900;
+  overflow: hidden;
+  box-shadow: 0 15px 40px rgba(255, 153, 0, 0.15);
+}
+
+.map-header {
+  padding: 15px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #1a1a1a;
+  color: #ff9900;
+  font-weight: bold;
+}
+
+.btn-close {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* Grid y Tarjetas */
+.tiendas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.tienda-card {
+  background: #111;
+  border-radius: 18px;
+  border: 1px solid #222;
+  transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer;
+}
+
+.tienda-card:hover {
+  transform: translateY(-10px);
+  border-color: #ff9900;
+}
+
+.tienda-image {
+  height: 200px;
+  position: relative;
+}
+
+.tienda-image img {
+  width: 100%; height: 100%; object-fit: cover;
+  border-top-left-radius: 18px; border-top-right-radius: 18px;
+}
+
+.btn-maps {
+  flex: 1;
+  background: #ff9900;
+  color: #000;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Título con Glow */
+.title-glow {
+  text-align: center;
+  font-size: 3.5rem;
+  font-weight: 900;
+  background: linear-gradient(180deg, #fff 0%, #444 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.referencia-interna {
+  background: rgba(255, 153, 0, 0.1);
+  padding: 8px 12px;
+  border-radius: 6px;
+  border-left: 3px solid #ff9900;
+  margin: 10px 0;
+  font-size: 0.9rem;
+  color: #ff9900;
+}
+
+.referencia-box {
+  background: rgba(255, 153, 0, 0.08); /* Fondo naranja muy suave */
+  border-left: 4px solid #ff9900;       /* Barra lateral naranja */
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin: 12px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.85rem;
+  color: #ff9900;
+  transition: 0.3s;
+}
+
+.tienda-card:hover .referencia-box {
+  background: rgba(255, 153, 0, 0.15);
+}
+
+.referencia-box i {
+  font-size: 1.1rem;
+}
+
+.referencia-box strong {
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  margin-right: 5px;
+}
+
+.referencia-tag {
+  background: rgba(255, 153, 0, 0.1); /* Un toque naranja transparente */
+  color: #ff9900;                    /* Letras naranja Ivano */
+  padding: 8px 12px;
+  border-radius: 6px;
+  margin: 10px 0;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-left: 3px solid #ff9900;
+}
+
+.referencia-tag i {
+  font-size: 1rem;
+}
+
+.btn-maps {
+  background: #ff9900;
+  color: #000;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-maps:hover {
+  background: #e68a00;
+  transform: scale(1.05);
+}
+
+.tienda-card {
+  cursor: pointer; /* Cambia la flecha por la manito al pasar el mouse */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tienda-card:hover {
+  transform: translateY(-5px); /* Se eleva un poquito al pasar el mouse */
+  box-shadow: 0 10px 20px rgba(255, 153, 0, 0.2); /* Brillo naranja sutil */
+}
+/* Contenedor principal para el tooltip */
+.tienda-card {
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* El cuadro del mensaje */
+.tienda-card::after {
+  content: attr(data-tooltip); /* Jala el texto del HTML */
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background: #ff9900;
+  color: #000;
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 10;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* La flechita del mensaje */
+.tienda-card::before {
+  content: '';
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  border-width: 8px 8px 0 8px;
+  border-style: solid;
+  border-color: #ff9900 transparent transparent transparent;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+/* Al pasar el cursor: mostramos el mensaje y elevamos la tarjeta */
+.tienda-card:hover {
+  transform: translateY(-8px);
+  border-color: #ff9900;
+}
+
+.tienda-card:hover::after, 
+.tienda-card:hover::before {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+

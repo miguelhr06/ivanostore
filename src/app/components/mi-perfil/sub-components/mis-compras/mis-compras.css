@@ -1,0 +1,36 @@
+.order-item-pro {
+  display: grid;
+  grid-template-columns: 100px 1fr auto;
+  gap: 1.5rem;
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  border: 1px solid #f0f0f0;
+  align-items: center;
+}
+
+.order-img img {
+  width: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.status-dot {
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: #e3f2fd;
+  color: #1976d2;
+}
+
+.status-dot[data-status="Entregado"] {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.order-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}

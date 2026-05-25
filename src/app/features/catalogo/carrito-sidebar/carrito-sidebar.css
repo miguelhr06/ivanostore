@@ -1,0 +1,919 @@
+:host {
+    --primary-color: #ff4d00; /* Naranja Ivano */
+    --dark-color: #1a1a1a;
+    --light-gray: #f4f4f4;
+    --text-muted: #888;
+    --transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cart-container {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    visibility: hidden;
+    pointer-events: none;
+    transition: var(--transition);
+}
+
+.cart-container.active {
+    visibility: visible;
+    pointer-events: auto;
+}
+
+/* Fondo difuminado */
+.cart-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.cart-container.active .cart-overlay {
+    opacity: 1;
+}
+
+/* Sidebar */
+.cart-sidebar {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    max-width: 420px;
+    height: 100%;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    transform: translateX(100%);
+    transition: var(--transition);
+    box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+}
+
+.cart-container.active .cart-sidebar {
+    transform: translateX(0);
+}
+
+/* Header */
+.cart-header {
+    padding: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    background: white;
+}
+
+.header-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    font-size: 1.2rem;
+}
+
+.item-count {
+    background: var(--primary-color);
+    color: white;
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    border-radius: 20px;
+}
+
+.close-btn {
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 5px;
+    transition: transform 0.2s;
+}
+
+.close-btn:hover { transform: rotate(90deg); }
+
+/* Body - Lista de productos */
+.cart-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.cart-item-card {
+    display: flex;
+    gap: 15px;
+    padding: 15px 0;
+    border-bottom: 1px solid #f0f0f0;
+    animation: fadeIn 0.4s ease forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.item-image {
+    width: 90px;
+    height: 90px;
+    background: var(--light-gray);
+    border-radius: 8px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.item-info { flex: 1; }
+
+.info-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.item-name {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.btn-remove {
+    background: none;
+    border: none;
+    cursor: pointer;
+    fill: #ccc;
+    transition: fill 0.2s;
+}
+
+.btn-remove:hover { fill: #ff0000; }
+
+.item-sku {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin: 4px 0;
+}
+
+.info-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.item-talla { font-size: 0.85rem; }
+.item-price { font-weight: 800; color: var(--dark-color); }
+
+/* Footer */
+.cart-footer {
+    padding: 25px;
+    background: #fafafa;
+    border-top: 1px solid #eee;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.summary-total {
+    display: flex;
+    justify-content: space-between;
+    margin: 15px 0;
+    font-weight: 900;
+    font-size: 1.3rem;
+    color: var(--dark-color);
+}
+
+.free-shipping { color: #2ecc71; font-weight: bold; }
+
+.btn-whatsapp-checkout {
+    width: 100%;
+    background: #25D366;
+    color: white;
+    border: none;
+    padding: 18px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+    transition: transform 0.2s;
+}
+
+.btn-whatsapp-checkout:hover {
+    transform: translateY(-2px);
+    background: #20ba5a;
+}
+
+.footer-note {
+    text-align: center;
+    font-size: 0.7rem;
+    color: #999;
+    margin-top: 15px;
+}
+
+/* El contenedor base debe estar fuera de la pantalla */
+.cart-container {
+  position: fixed;
+  top: 0;
+  right: -100%; /* Oculto a la derecha */
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro */
+  transition: all 0.3s ease;
+  z-index: 9999; /* Super importante para que no quede debajo */
+}
+
+/* ESTA ES LA CLASE QUE ACTIVA TU CLIC */
+.cart-container.active {
+  right: 0; /* Lo trae al frente */
+}
+
+.cart-sidebar {
+  position: absolute;
+  right: 0;
+  width: 400px;
+  height: 100%;
+  background: white;
+}
+
+.cart-container {
+  position: fixed;
+  top: 0;
+  right: -100%; /* Oculto */
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 99999 !important; /* Por encima de los productos */
+  transition: right 0.3s ease;
+  display: block !important;
+}
+
+.cart-container.active {
+  right: 0 !important; /* Se muestra al recibir la clase active */
+}
+
+/* Contenedor Principal con desenfoque de fondo para mayor profundidad */
+.cart-container {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px); /* Efecto premium de desenfoque */
+    z-index: 10000;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    display: block;
+}
+
+.cart-container.active {
+    right: 0;
+}
+
+/* Sidebar Refinado */
+.cart-sidebar {
+    position: absolute;
+    right: 0;
+    width: 420px;
+    height: 100%;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Header del Carrito */
+.cart-header {
+    padding: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.cart-header h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0;
+    color: #1a1a1a;
+}
+
+.btn-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #999;
+    transition: color 0.2s;
+}
+
+.btn-close:hover {
+    color: #000;
+}
+
+/* Listado de Items con Scroll Suave */
+.cart-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 24px;
+}
+
+/* Card de Producto Estilo Minimalista */
+.cart-item-card {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #f8f8f8;
+    animation: slideIn 0.3s ease-out forwards;
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.item-img {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.item-info {
+    flex: 1;
+}
+
+.item-info h4 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin: 0 0 4px 0;
+    color: #1a1a1a;
+    line-height: 1.4;
+}
+
+.item-details {
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.item-details span {
+    display: block;
+    margin-bottom: 2px;
+}
+
+.info-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.item-price {
+    font-weight: 700;
+    color: #1a1a1a;
+    font-size: 1rem;
+}
+
+/* Botón Eliminar Estilizado */
+.btn-remove {
+    background: #fdf2f2;
+    color: #e53e3e;
+    border: none;
+    padding: 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-remove:hover {
+    background: #e53e3e;
+    color: #fff;
+}
+
+/* Footer (Manteniendo tu estructura pero con espaciado pro) */
+.cart-footer {
+    padding: 24px;
+    background-color: #fff;
+    border-top: 1px solid #f0f0f0;
+    box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.03);
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    font-size: 0.95rem;
+}
+
+.summary-total {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 16px;
+    margin-bottom: 24px;
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #000;
+}
+
+/* Botón WhatsApp de Alto Impacto */
+.btn-whatsapp {
+    width: 100%;
+    padding: 16px;
+    background-color: #25D366;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-whatsapp:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.3);
+    background-color: #20ba5a;
+}
+
+.btn-whatsapp:active {
+    transform: translateY(0);
+}
+
+/* Scrollbar Personalizado */
+.cart-body::-webkit-scrollbar {
+    width: 5px;
+}
+
+.cart-body::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.cart-body::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 10px;
+}
+
+/* 1. Contenedor de la Card de Producto */
+.cart-item-card {
+    display: flex;
+    gap: 15px;
+    padding: 15px;
+    background: #ffffff;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: 1px solid #f0f0f0;
+}
+
+.cart-item-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* 2. Estilo de la Imagen */
+.item-image {
+    width: 80px;
+    height: 80px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #f9f9f9;
+}
+
+.item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 3. Información del Producto */
+.item-info {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.info-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.item-info h4 {
+    margin: 0;
+    font-size: 0.95rem;
+    color: #1a1a1a;
+    font-weight: 600;
+    line-height: 1.2;
+    max-width: 85%;
+}
+
+.item-specs {
+    font-size: 0.85rem;
+    color: #718096;
+    margin: 4px 0;
+}
+
+/* 4. BOTÓN TACHITO POTENTE 🗑️ */
+.btn-remove {
+    background: #f7fafc;
+    color: #a0aec0;
+    border: none;
+    border-radius: 8px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-remove:hover {
+    background: #fff5f5;
+    color: #e53e3e;
+    transform: rotate(8deg) scale(1.1);
+    box-shadow: 0 2px 5px rgba(229, 62, 62, 0.2);
+}
+
+.btn-remove svg {
+    transition: transform 0.2s;
+}
+
+.btn-remove:active {
+    transform: scale(0.9);
+}
+
+/* 5. Precios y Totales */
+.info-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 8px;
+}
+
+.item-price {
+    font-size: 0.85rem;
+    color: #4a5568;
+    background: #edf2f7;
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+.item-subtotal {
+    font-weight: 700;
+    color: #2d3748;
+    font-size: 1rem;
+}
+
+/* 6. Estado Vacío Mejorado */
+.empty-cart {
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.empty-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    opacity: 0.5;
+}
+
+/* Contenedor principal del estado vacío */
+.empty-cart {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 30px;
+    background: linear-gradient(to bottom, #ffffff, #fcfcfc);
+}
+
+.empty-cart-content {
+    text-align: center;
+    max-width: 280px;
+}
+
+/* Animación del Icono */
+.icon-container {
+    position: relative;
+    font-size: 4.5rem;
+    color: #e2e8f0;
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: center;
+}
+
+.icon-container i {
+    z-index: 2;
+    filter: drop-shadow(0 10px 15px rgba(0,0,0,0.03));
+}
+
+.pulse-ring {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: #edf2f7;
+    border-radius: 50%;
+    z-index: 1;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(0.95); opacity: 0.8; }
+    70% { transform: scale(1.1); opacity: 0; }
+    100% { transform: scale(0.95); opacity: 0; }
+}
+
+/* Tipografía Profesional */
+.empty-cart-content h3 {
+    font-size: 1.4rem;
+    color: #1a202c;
+    font-weight: 700;
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
+}
+
+.empty-cart-content p {
+    font-size: 0.95rem;
+    color: #718096;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+/* Botón de Acción Potente */
+.btn-continue-shopping {
+    width: 100%;
+    padding: 16px 24px;
+    background: #1a202c; /* Negro premium */
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.btn-continue-shopping:hover {
+    background: #000000;
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+.btn-continue-shopping i {
+    font-size: 0.8rem;
+    transition: transform 0.3s ease;
+}
+
+.btn-continue-shopping:hover i {
+    transform: translateX(5px);
+}
+
+.checkout-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+/* Botón de Pago Formal - Negro Elegante */
+.btn-checkout-formal {
+    background-color: #000;
+    color: #fff;
+    border: 2px solid #000;
+    padding: 16px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    letter-spacing: 1px;
+}
+
+.btn-checkout-formal:hover {
+    background-color: #fff;
+    color: #000;
+}
+
+/* Botón de WhatsApp - Más discreto pero accesible */
+.btn-whatsapp-direct {
+    background-color: #f0fdf4;
+    color: #16a34a;
+    border: 1px solid #bbf7d0;
+    padding: 12px;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+}
+
+.btn-whatsapp-direct:hover {
+    background-color: #25d366;
+    color: white;
+}
+
+/* Contenedor para que respire */
+.vaciar-container {
+    display: flex;
+    justify-content: flex-start; /* Alineado a la izquierda como en tu captura */
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+/* El Botón de Vaciar Versión Elite */
+.btn-vaciar-clear {
+    all: unset;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    
+    /* Estética: Minimalismo Puro */
+    background-color: #ffffff;
+    color: #000000;
+    border: 1px solid #000000; /* Borde negro para hacer match con el otro botón */
+    
+    padding: 8px 16px;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    
+    /* MISMO redondeado que tu botón de pago */
+    border-radius: 12px; 
+    
+    transition: all 0.3s ease;
+}
+
+/* Icono sutil */
+.btn-vaciar-clear i {
+    font-size: 12px;
+    color: #e62117; /* El toque de rojo de Ivano Store */
+}
+
+/* HOVER: Inversión elegante */
+.btn-vaciar-clear:hover {
+    background-color: #000000;
+    color: #ffffff;
+}
+/* ============================================================
+   1. CONTENEDOR Y BOTÓN VACIAR (ESTILO IVANO HEAVY DUTY)
+   ============================================================ */
+.vaciar-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+    width: 100%;
+}
+
+.btn-vaciar-clear {
+    all: unset;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    background-color: #000000;
+    color: #ffffff;
+    width: 85%; 
+    padding: 16px 0;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border-radius: 12px; 
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn-vaciar-clear i {
+    font-size: 16px;
+    color: #e62117;
+    transition: all 0.3s ease;
+}
+
+.btn-vaciar-clear:hover {
+    background-color: #000000;
+    color: #e62117;
+    box-shadow: 0 0 20px rgba(230, 33, 23, 0.4);
+    transform: scale(1.02);
+}
+
+.btn-vaciar-clear:hover i {
+    transform: rotate(90deg);
+    color: #ffffff;
+}
+
+/* ============================================================
+   2. CONFIGURACIÓN DEL MODAL (PARA QUE SALGA ENCIMA)
+   ============================================================ */
+
+/* Este es el que manda para que no se vaya al fondo de la web */
+.swal-overlay-fix {
+    position: absolute !important; /* IMPORTANTE: Se queda dentro del sidebar */
+    z-index: 100000 !important;   /* Por encima de cualquier cosa del sidebar */
+    width: 100% !important;
+    height: 100% !important;
+    top: 0 !important;
+    left: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: rgba(0, 0, 0, 0.7) !important; /* Oscurece el interior del carrito */
+    backdrop-filter: blur(4px); /* Efecto pro */
+}
+
+.swal-popup-fix {
+    width: 85% !important;
+    max-width: 320px !important;
+    background: #fff !important;
+    border-radius: 20px !important;
+    padding: 20px !important;
+    font-family: 'Inter', sans-serif !important;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.5) !important;
+}
+
+/* Botones del Modal */
+.swal2-styled.swal2-confirm {
+    background-color: #000 !important;
+    border-radius: 10px !important;
+    padding: 12px 30px !important;
+    font-weight: 700 !important;
+}
+
+.swal2-styled.swal2-cancel {
+    background-color: #efefef !important;
+    color: #666 !important;
+    border-radius: 10px !important;
+    padding: 12px 30px !important;
+    font-weight: 700 !important;
+}
+
+/* Este overlay cubrirá TODO el cart-container cuando se active */
+.swal-overlay-fix {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 999999 !important; /* Por encima del sidebar */
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important; /* Lo empujamos a la derecha donde está el sidebar */
+    background: rgba(0, 0, 0, 0.4) !important;
+    backdrop-filter: blur(2px);
+}
+
+/* El modal centrado específicamente dentro del área del sidebar */
+.swal-popup-fix {
+    margin-right: 20px !important; /* Separación del borde derecho */
+    width: 90% !important;
+    max-width: 340px !important;
+    border-radius: 15px !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important;
+    font-family: 'Inter', sans-serif !important;
+}

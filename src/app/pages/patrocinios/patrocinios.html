@@ -1,0 +1,32 @@
+<section class="partners-section">
+  <h2 class="section-title">Nuestros Colaboradores</h2>
+  
+  <div class="partners-grid" *ngIf="lista && lista.length > 0; else noHayDatos">
+    
+    <a *ngFor="let p of lista" 
+       [href]="p.enlace_web || '#'" 
+       target="_blank" 
+       rel="noopener noreferrer" 
+       class="partner-card-link">
+       
+      <div class="partner-card">
+        <div class="logo-wrapper">
+          <img [src]="p.logo_url" [alt]="p.nombre" class="partner-logo">
+        </div>
+        
+        <div class="partner-info">
+          <h3>{{ p.nombre }}</h3>
+          <span class="badge">OFFICIAL PARTNER</span>
+        </div>
+      </div>
+
+    </a>
+
+  </div>
+
+  <ng-template #noHayDatos>
+    <div style="color: white; text-align: center; padding: 50px;">
+      <p>No se encontraron colaboradores en la base de datos.</p>
+    </div>
+  </ng-template>
+</section>

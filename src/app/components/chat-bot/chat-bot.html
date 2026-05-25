@@ -1,0 +1,29 @@
+<div class="chat-fab" (click)="toggleChat()">💬</div>
+
+<div class="chat-window" *ngIf="isOpen" cdkDrag cdkDragRootElement=".chat-window">
+  <div class="chat-header" cdkDragHandle>
+    <span class="bot-name">IvanoBot</span>
+    <button class="close-btn" (click)="toggleChat()">×</button>
+  </div>
+  
+  <div class="chat-body" #scrollMe>
+    <div *ngFor="let m of mensajes" [class]="'msg ' + m.remitente">
+      <p style="white-space: pre-line; margin: 0;">{{ m.contenido }}</p>
+    </div>
+    <div class="msg bot typing" *ngIf="isTyping"><div class="dot"></div></div>
+  </div>
+
+  <div class="actions" *ngIf="step === 'start' && !isTyping">
+    <button (click)="handleOption({id: 1, label: 'Estado de Pedido'})">📦 Pedido</button>
+    <button (click)="handleOption({id: 2, label: 'Horarios'})">⏰ Tiendas</button>
+    <button (click)="handleOption({id: 3, label: 'Hablar con humano'})">👤 Asesor</button>
+    <button (click)="handleOption({id: 4, label: 'Guía de Tallas'})">📏 Tallas</button>
+    <button (click)="handleOption({id: 5, label: 'Promociones'})">🔥 Ofertas</button>
+    <button (click)="handleOption({id: 6, label: 'Recomendaciones'})">✨ Recomendados</button>
+  </div>
+
+  <div class="input-area" *ngIf="(step === 'awaiting_order' || step === 'recommendation') && !isTyping">
+    <input [(ngModel)]="userInput" (keyup.enter)="sendText()" placeholder="Escribe aquí...">
+    <button (click)="sendText()">➤</button>
+  </div>
+</div>

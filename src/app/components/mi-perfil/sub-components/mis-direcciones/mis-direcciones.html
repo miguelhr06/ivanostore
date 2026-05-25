@@ -1,0 +1,112 @@
+<section class="fade-in ivano-perfil-section">
+  <div class="section-header">
+    <h2>Direcciones de Entrega</h2>
+    <p class="subtitle">Gestiona tus lugares de entrega para un pago más rápido.</p>
+  </div>
+  
+  <div class="address-grid">
+    <div class="address-card" *ngFor="let dir of direcciones">
+      <div class="card-top">
+        <span class="tag" [ngClass]="dir.etiqueta.toLowerCase()">{{ dir.etiqueta }}</span>
+        <span class="status-badge" *ngIf="dir.es_principal">Principal</span>
+      </div>
+      
+      <div class="address-content">
+        <h3>{{ dir.direccion }}</h3>
+        <p class="ubigeo-text">{{ dir.distrito }}, {{ dir.provincia }} - {{ dir.departamento }}</p>
+        <p class="ref-text" *ngIf="dir.referencia">
+          <span class="ref-label">Ref:</span> {{ dir.referencia }}
+        </p>
+      </div>
+
+      <div class="address-actions">
+        <button class="btn-text delete" (click)="eliminarDireccion(dir.id)">
+          <i class="icon-trash"></i> Eliminar Dirección
+        </button>
+      </div>
+    </div>
+
+    <div class="address-card add-new" (click)="abrirModal()">
+      <div class="add-icon">+</div>
+      <p>Agregar nueva dirección</p>
+    </div>
+  </div>
+</section>
+
+<div class="nueva-direccion-modal-overlay" *ngIf="mostrarModalDir">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>📍 Nueva Dirección</h2>
+      <button (click)="cerrarModal()" class="close-btn">×</button>
+    </div>
+    
+    <form [formGroup]="direccionForm">
+      <div class="form-group">
+        <label>Etiqueta de Destino</label>
+        <select formControlName="etiqueta">
+          <option value="CASA">🏠 CASA</option>
+          <option value="TRABAJO">💼 TRABAJO</option>
+          <option value="OTRO">📍 OTRO</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Dirección Exacta</label>
+        <input type="text" 
+               formControlName="direccion" 
+               placeholder="Ej: Av. Las Begonias 450">
+      </div>
+
+      <div class="ubigeo-grid">
+        <div class="form-group">
+          <label>Departamento</label>
+          <select formControlName="departamento" (change)="onDepartamentoChange()">
+            <option value="">Seleccione...</option>
+            <option *ngFor="let dep of departamentos" [value]="dep">{{ dep }}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Provincia</label>
+          <select formControlName="provincia" (change)="onProvinciaChange()">
+            <option value="">Seleccione...</option>
+            <option *ngFor="let prov of provincias" [value]="prov">{{ prov }}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Distrito</label>
+          <select formControlName="distrito">
+            <option value="">Seleccione...</option>
+            <option *ngFor="let dist of distritos" [value]="dist">{{ dist }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Referencias de Ubicación</label>
+        <input type="text" 
+               formControlName="referencia" 
+               placeholder="Ej: Frente al parque, portón marrón">
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" (click)="cerrarModal()" class="btn-cancelar">Cancelar</button>
+        <button type="button" 
+                (click)="guardarDireccion()" 
+                [disabled]="loading" 
+                class="btn-guardar">
+          {{ loading ? 'GUARDANDO...' : 'GUARDAR DIRECCIÓN' }}
+        </button>
+      </div>
+    </form>
+  </div>
+  <div class="ivano-toast" [class.show]="mostrarToast">
+  <div class="toast-content">
+    <span class="toast-icon">✨</span>
+    <div class="toast-message">
+      <h4>Excelente</h4>
+      <p>{{ mensajeToast }}</p>
+    </div>
+  </div>
+</div>
+</div>
+

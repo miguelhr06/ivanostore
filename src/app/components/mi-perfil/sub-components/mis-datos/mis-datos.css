@@ -1,0 +1,453 @@
+/* --- VARIABLES DE DISEÑO (Ivano Store Palette) --- */
+:root {
+  --primary-black: #000000;
+  --accent-blue: #007bff;
+  --success-green: #2ecc71;
+  --bg-light: #f8f9fa;
+  --border-color: #e5e7eb;
+  --text-muted: #666666;
+  --glass-bg: rgba(255, 255, 255, 0.8);
+}
+
+/* --- LAYOUT PRINCIPAL --- */
+.datos-layout {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 2.5rem;
+  margin-top: 2rem;
+  align-items: start;
+}
+
+/* --- CONTENEDOR DEL FORMULARIO --- */
+.datos-form {
+  background: #fff;
+  padding: 2.5rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  border: 1px solid var(--border-color);
+  position: relative;
+  overflow: hidden;
+}
+
+.datos-form::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--primary-black);
+}
+
+/* --- GRUPOS DE INPUTS --- */
+.form-group {
+  margin-bottom: 1.8rem;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+  font-size: 0.75rem;
+  color: var(--primary-black);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 14px 18px;
+  border: 1.5px solid var(--border-color);
+  border-radius: 12px;
+  background: var(--bg-light);
+  font-size: 0.95rem;
+  color: #333;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.form-group input:focus {
+  border-color: var(--primary-black);
+  background: #fff;
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.05);
+}
+
+.form-group input:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  background: #f1f1f1;
+  border-style: dashed;
+}
+
+/* --- BOTONES DE ACCIÓN (CAMBIAR / ACTUALIZAR) --- */
+.btn-accion {
+  margin-top: 10px;
+  padding: 8px 18px;
+  background-color: transparent;
+  border: 1.5px solid var(--primary-black);
+  border-radius: 8px;
+  color: var(--primary-black);
+  font-weight: 700;
+  font-size: 11px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-accion:hover {
+  background-color: var(--primary-black);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* --- TARJETA LATERAL DE SEGURIDAD --- */
+.info-card-side {
+  background: linear-gradient(145deg, #f0f7ff, #ffffff);
+  padding: 2rem;
+  border-radius: 24px;
+  border: 1px solid #d0e4ff;
+  text-align: center;
+  position: sticky;
+  top: 20px;
+  box-shadow: 0 15px 35px rgba(0, 123, 255, 0.05);
+}
+
+.info-card-side .icon-shield {
+  font-size: 2.5rem;
+  color: var(--accent-blue);
+  margin-bottom: 1rem;
+}
+
+.verificacion-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #e6fffa;
+  color: #28a745;
+  padding: 6px 14px;
+  border-radius: 30px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  border: 1px solid #b2f5ea;
+  margin-top: 1rem;
+}
+
+/* --- MODALES (GLASSMORPHISM) --- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  padding: 20px;
+}
+
+.auth-card {
+  background: #fff;
+  width: 100%;
+  max-width: 450px;
+  border-radius: 28px;
+  padding: 40px;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+  animation: modalSlideUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes modalSlideUp {
+  from { opacity: 0; transform: translateY(40px) scale(0.9); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* --- INPUT OTP PROFESIONAL --- */
+.otp-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 30px 0;
+}
+
+.otp-input {
+  width: 100%;
+  max-width: 240px;
+  height: 60px;
+  border: 2px solid var(--border-color);
+  border-radius: 16px;
+  font-size: 2rem;
+  font-weight: 800;
+  text-align: center;
+  letter-spacing: 10px;
+  padding-left: 10px;
+  transition: 0.3s;
+  background: #f9fafb;
+}
+
+.otp-input:focus {
+  border-color: var(--primary-black);
+  background: #fff;
+  transform: scale(1.05);
+}
+
+/* --- STEPPER (PASOS) --- */
+.stepper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.step-num {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.8rem;
+  transition: 0.4s;
+}
+
+.step.active .step-num {
+  background: var(--primary-black);
+  color: #fff;
+  box-shadow: 0 0 0 5px rgba(0,0,0,0.1);
+}
+
+.step.completed .step-num {
+  background: var(--success-green);
+  color: #fff;
+}
+
+/* --- BOTONES PRIMARIOS --- */
+.btn-primary {
+  width: 100%;
+  padding: 16px;
+  background: var(--primary-black);
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+}
+
+.btn-primary:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 850px) {
+  .datos-layout {
+    grid-template-columns: 1fr;
+  }
+  .info-card-side {
+    position: static;
+    order: -1;
+  }
+}
+
+/* --- CONTENEDOR PRINCIPAL DE DATOS --- */
+.perfil-main-content {
+  padding: 2.5rem;
+  background-color: #ffffff;
+  border-radius: 16px;
+}
+
+.perfil-main-content h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #111111;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.5px;
+}
+
+.perfil-main-content p {
+  color: #666666;
+  font-size: 0.95rem;
+  margin-bottom: 2.5rem;
+}
+
+/* --- FLUJO DE PASOS (STEPPER) --- */
+.stepper-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 500px;
+  margin: 0 auto 3rem auto;
+  position: relative;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 2;
+}
+
+.step-number {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #f3f4f6;
+  color: #9ca3af;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border: 2px solid #e5e7eb;
+  transition: all 0.3s ease;
+}
+
+.step.active .step-number {
+  background-color: #111111;
+  color: #ffffff;
+  border-color: #111111;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.step-label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #9ca3af;
+  margin-top: 0.5rem;
+}
+
+.step.active .step-label {
+  color: #111111;
+  font-weight: 600;
+}
+
+/* --- FORMULARIOS E INPUTS --- */
+.form-container-datos {
+  max-width: 480px;
+  margin: 0 auto;
+  animation: fadeIn 0.4s ease-out;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #111111;
+  margin-bottom: 0.6rem;
+  letter-spacing: 0.5px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  color: #111111;
+  background-color: #fafafa;
+  transition: all 0.2s ease;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #111111;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.05);
+}
+
+/* --- DISEÑO EXCLUSIVO PARA LOS RECUADROS DEL CÓDIGO (2FA) --- */
+.codigo-2fa-container {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 2rem 0;
+}
+
+.input-codigo-otp {
+  width: 50px;
+  height: 60px;
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-align: center;
+  border: 2px solid #e5e7eb;
+  border-radius: 10px;
+  background-color: #ffffff;
+  color: #111111;
+  transition: all 0.2s ease;
+}
+
+.input-codigo-otp:focus {
+  border-color: #111111;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  outline: none;
+}
+
+/* --- BOTONES PREMIUM DE ACCIÓN --- */
+.btn-primary-ivano {
+  width: 100%;
+  padding: 16px;
+  background-color: #111111;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 1rem;
+}
+
+.btn-primary-ivano:hover {
+  background-color: #2a2a2a;
+  transform: translateY(-1px);
+}
+
+.btn-primary-ivano:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-back-link {
+  display: block;
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 0.85rem;
+  color: #666666;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.btn-back-link:hover {
+  color: #111111;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}

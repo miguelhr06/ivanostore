@@ -1,0 +1,98 @@
+<section class="ivano-catalog">
+  <div class="header-container">
+    <span class="eyebrow">IVANO - ACCESORIOS DE CUERO</span>
+    <h1 class="main-title">CATÁLOGO <span class="outline">BOLSOS</span></h1>
+  </div>
+
+  <div class="product-grid" *ngIf="!loading && productos.length > 0; else loader">
+    <div class="product-card" 
+         *ngFor="let item of productos" 
+         (mouseenter)="cambiarFoto(item, true)" 
+         (mouseleave)="cambiarFoto(item, false)">
+      
+      <div class="image-box">
+        <div class="top-badges">
+          <span class="badge sigla">{{ item.sigla }}</span>
+          <span class="badge category">{{ item.categoria }}</span>
+        </div>
+        <img [src]="item.imagen_principal_render" [alt]="item.nombre_zapatilla" class="main-img">
+        <div class="card-overlay">
+          <button class="btn-action" (click)="abrirDetalles(item)">VER DETALLES</button>
+        </div>
+      </div>
+
+      <div class="product-info">
+        <div class="main-details">
+          <h3 class="product-name">{{ item.nombre_zapatilla }}</h3>
+          <span class="product-price">S/ {{ item.precio }}</span>
+        </div>
+        <p class="product-subtext">{{ item.modelo }} | {{ item.color }}</p>
+
+        <div class="tallas-wrapper">
+          <p class="tallas-label">Talla:</p>
+          <div class="tallas-list">
+            <span class="talla-box">ÚNICA</span>
+          </div>
+        </div>
+
+        <div class="gender-tag">
+          <i class="icon-gender"></i> {{ item.genero }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #loader>
+    <div class="loading-state">
+      <div class="spinner"></div>
+      <p>CARGANDO COLECCIÓN DE BOLSOS...</p>
+    </div>
+  </ng-template>
+</section>
+
+<div class="modal-overlay" *ngIf="modalAbierto && productoSeleccionado" (click)="cerrarModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <button class="btn-close" (click)="cerrarModal()">&times;</button>
+    <div class="modal-body">
+      <div class="gallery-container">
+        <div class="main-photo-view">
+          <img [src]="fotoGaleriaActual" [alt]="productoSeleccionado.nombre_zapatilla">
+        </div>
+        <div class="thumbnails-grid">
+          <img [src]="construirRutaImagen(productoSeleccionado, productoSeleccionado.imagen_url)" 
+               (click)="seleccionarFotoMiniatura(productoSeleccionado.imagen_url)" class="thumb">
+          
+          <img *ngIf="productoSeleccionado.imagen_url_2" 
+               [src]="construirRutaImagen(productoSeleccionado, productoSeleccionado.imagen_url_2)" 
+               (click)="seleccionarFotoMiniatura(productoSeleccionado.imagen_url_2)" class="thumb">
+          
+          <img *ngIf="productoSeleccionado.imagen_url_3" 
+               [src]="construirRutaImagen(productoSeleccionado, productoSeleccionado.imagen_url_3)" 
+               (click)="seleccionarFotoMiniatura(productoSeleccionado.imagen_url_3)" class="thumb">
+
+               <img *ngIf="productoSeleccionado.imagen_url_4" 
+               [src]="construirRutaImagen(productoSeleccionado, productoSeleccionado.imagen_url_4)" 
+               (click)="seleccionarFotoMiniatura(productoSeleccionado.imagen_url_4)" class="thumb">
+
+               <img *ngIf="productoSeleccionado.imagen_url_5" 
+               [src]="construirRutaImagen(productoSeleccionado, productoSeleccionado.imagen_url_5)" 
+               (click)="seleccionarFotoMiniatura(productoSeleccionado.imagen_url_5)" class="thumb">
+        </div>
+      </div>
+
+      <div class="info-container">
+        <span class="modal-sigla">SKU: {{ productoSeleccionado.modelo }}-{{ productoSeleccionado.sigla }}</span>
+        <h2 class="modal-title">{{ productoSeleccionado.nombre_zapatilla }}</h2>
+        <p class="modal-model-text">{{ productoSeleccionado.color }} | Cuero Legítimo</p>
+        <div class="modal-price">S/ {{ productoSeleccionado.precio }}</div>
+        
+        <div class="modal-description">
+          <h4>Especificaciones</h4>
+          <p>{{ productoSeleccionado.descripcion }}</p>
+        </div>
+        
+        <button class="btn-order">SOLICITAR POR WHATSAPP</button>
+      </div>
+    </div>
+  </div>
+</div>

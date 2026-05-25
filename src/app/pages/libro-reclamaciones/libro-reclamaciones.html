@@ -1,0 +1,136 @@
+<section class="reclamos-container">
+  <div class="header-section">
+    <span class="brand-tag">ATENCIÓN AL CLIENTE</span>
+    <h1>LIBRO DE RECLAMACIONES</h1>
+  </div>
+
+  <form #reclamoForm="ngForm" (submit)="enviarReclamo()" class="form-card" novalidate>
+    
+    <div class="field full">
+      <div class="checkbox-wrapper">
+        <input type="checkbox" id="noDni" [(ngModel)]="noRecuerdaDni" name="noDni" (change)="toggleDniManual()">
+        <label for="noDni">No recuerdo mi número de DNI (Ingreso Manual)</label>
+      </div>
+    </div>
+
+    <div class="grid-row">
+      <div class="field">
+        <label>DNI / CE (8 dígitos)</label>
+        <div class="input-wrapper">
+          <input type="text" 
+                 [(ngModel)]="formData.dni" 
+                 name="dni" 
+                 maxlength="8"
+                 (keypress)="soloNumeros($event)"
+                 (keyup)="buscarDni()" 
+                 (blur)="validarCampo('dni')"
+                 [disabled]="noRecuerdaDni"
+                 [class.error-field]="errores['dni']"
+                 [placeholder]="noRecuerdaDni ? 'BLOQUEADO' : '60770065'">
+          <small *ngIf="loadingDni" class="loader-text">Buscando...</small>
+          <small class="error-msg" *ngIf="errores['dni']">{{errores['dni']}}</small>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Nombre Completo</label>
+        <input type="text" 
+               [(ngModel)]="formData.nombre" 
+               name="nombre" 
+               (keypress)="soloLetras($event)"
+               (blur)="validarCampo('nombre')"
+               [readonly]="!noRecuerdaDni"
+               [class.manual-active]="noRecuerdaDni"
+               [class.error-field]="errores['nombre']"
+               [placeholder]="noRecuerdaDni ? 'Escriba su nombre' : 'Se completará automáticamente'">
+        <small class="error-msg" *ngIf="errores['nombre']">{{errores['nombre']}}</small>
+      </div>
+    </div>
+
+    <div class="grid-row">
+      <div class="field">
+        <label>Celular</label>
+        <input type="text" 
+               [(ngModel)]="formData.celular" 
+               name="celular"
+               maxlength="9"
+               (keypress)="soloNumeros($event)"
+               (blur)="validarCampo('celular')"
+               [class.error-field]="errores['celular']"
+               placeholder="999999999">
+        <small class="error-msg" *ngIf="errores['celular']">{{errores['celular']}}</small>
+      </div>
+
+      <div class="field">
+        <label>Correo Electrónico</label>
+        <input type="email" 
+               [(ngModel)]="formData.correo" 
+               name="correo" 
+               (blur)="validarCampo('correo')"
+               [class.error-field]="errores['correo']"
+               placeholder="correo@ejemplo.com">
+        <small class="error-msg" *ngIf="errores['correo']">{{errores['correo']}}</small>
+      </div>
+    </div>
+
+    <div class="field full">
+      <label>Dirección Actual</label>
+      <input type="text" [(ngModel)]="formData.direccion" name="direccion" 
+             (blur)="validarCampo('direccion')"
+             [class.error-field]="errores['direccion']"
+             placeholder="Av. Los Ingenieros, Ate">
+      <small class="error-msg" *ngIf="errores['direccion']">{{errores['direccion']}}</small>
+    </div>
+
+    <div class="field full">
+      <label>Producto o Servicio (Modelo de Zapatilla)</label>
+      <input type="text" [(ngModel)]="formData.producto" name="producto" 
+             (blur)="validarCampo('producto')"
+             [class.error-field]="errores['producto']"
+             placeholder="Ej. Modelo 120 - Talla 42">
+      <small class="error-msg" *ngIf="errores['producto']">{{errores['producto']}}</small>
+    </div>
+
+    <div class="field full">
+      <label>Detalle del Reclamo / Queja</label>
+      <textarea [(ngModel)]="formData.detalle" name="detalle" rows="4" 
+                (blur)="validarCampo('detalle')"
+                [class.error-field]="errores['detalle']"
+                placeholder="Describe brevemente lo ocurrido..."></textarea>
+      <small class="error-msg" *ngIf="errores['detalle']">{{errores['detalle']}}</small>
+    </div>
+
+    <div class="upload-area">
+      <label class="upload-label">EVIDENCIA DEL ESTADO (MÁX 4 FOTOS)</label>
+      
+      <div class="drop-zone" (click)="fileInput.click()">
+        <div class="drop-zone-content">
+          <i class="fas fa-cloud-upload-alt"></i>
+          <span>ARRASTRA O HAZ CLIC PARA SUBIR</span>
+        </div>
+        <input type="file" #fileInput (change)="onFilesSelected($event)" multiple accept="image/*" hidden>
+      </div>
+
+      <div class="file-list-modern" *ngIf="selectedFiles.length > 0">
+        <div class="file-card" *ngFor="let file of selectedFiles; let i = index">
+          <div class="file-card-info">
+            <span class="file-status-dot"></span>
+            <p>{{ file.name }}</p>
+          </div>
+          <button type="button" class="btn-del" (click)="removeFile(i)">×</button>
+        </div>
+        
+        <div class="progress-bar-container">
+            <div class="progress-fill" [style.width]="(selectedFiles.length * 25) + '%'"></div>
+        </div>
+        <p class="count-text">{{selectedFiles.length}} / 4 FOTOS LISTAS</p>
+      </div>
+    </div>
+
+    <button type="submit" 
+            class="btn-submit" 
+            [disabled]="loading">
+      {{ loading ? 'ENVIANDO...' : 'REGISTRAR RECLAMO' }}
+    </button>
+  </form>
+</section>

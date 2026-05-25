@@ -1,0 +1,184 @@
+<div class="checkout-container">
+  <div class="checkout-form">
+    <h2>DATOS DE ENVÍO</h2>
+
+    <div class="entrega-selector">
+      <div class="entrega-card" [class.active]="tipoEnvio === 'delivery'" (click)="cambiarTipoEnvio('delivery')">
+        <i class="fas fa-truck"></i>
+        <span>Envío a Domicilio / Shalom</span>
+      </div>
+      <div class="entrega-card" [class.active]="tipoEnvio === 'recojo'" (click)="cambiarTipoEnvio('recojo')">
+        <i class="fas fa-store"></i>
+        <span>Recojo en Tienda (Gratis)</span>
+      </div>
+    </div>
+
+    <div class="info-recojo" *ngIf="tipoEnvio === 'recojo'">
+      <p><i class="fas fa-map-marker-alt"></i> <strong>Punto de Recojo:</strong> Mall Plaza Santa Anita - Segundo Piso.</p>
+      <small>Atención: Lunes a Domingo de 10am a 10pm.</small>
+    </div>
+    
+    <div class="manual-toggle-container">
+      <label class="checkbox-custom">
+        <input type="checkbox" [(ngModel)]="noRecuerdaDni" (change)="toggleDniManual()">
+        <span class="checkmark"></span>
+        <span class="label-text">NO RECUERDO MI DNI (INGRESO MANUAL)</span>
+      </label>
+    </div>
+
+    <form class="form-grid">
+      <div class="form-group">
+        <label>DNI ({{ noRecuerdaDni ? 'BLOQUEADO' : 'Obligatorio' }})</label>
+        <div class="input-with-action">
+          <input type="text" 
+                 #dniInput 
+                 maxlength="8" 
+                 placeholder="8 dígitos" 
+                 [(ngModel)]="formData.dni"
+                 name="dni"
+                 [disabled]="noRecuerdaDni"
+                 (keypress)="soloNumeros($event)"
+                 (input)="onDniChange(dniInput.value)"
+                 [class.input-error]="errores['dni']"
+                 [class.input-disabled]="noRecuerdaDni">
+          
+          <i class="fas fa-spinner fa-spin search-icon" *ngIf="loadingDni"></i>
+          <i class="fas fa-check-circle search-icon success" *ngIf="formData.nombre && !loadingDni && !noRecuerdaDni"></i>
+        </div>
+        <small class="text-error" *ngIf="errores['dni'] && !noRecuerdaDni">{{ errores['dni'] }}</small>
+      </div>
+
+      <div class="form-group">
+        <label>Nombre Completo</label>
+        <input type="text" 
+               [(ngModel)]="formData.nombre" 
+               name="nombre"
+               [placeholder]="noRecuerdaDni ? 'Escribe tu nombre y apellidos' : 'Se llenará con el DNI'" 
+               [readonly]="!noRecuerdaDni" 
+               class="name-input"
+               [class.readonly-input]="!noRecuerdaDni"
+               [class.input-error]="errores['nombre']">
+        <small class="text-error" *ngIf="errores['nombre']">{{ errores['nombre'] }}</small>
+      </div>
+      
+      <div class="form-group">
+        <label>WhatsApp / Celular</label>
+        <input type="tel" 
+               [(ngModel)]="formData.celular" 
+               name="celular"
+               maxlength="9"
+               (keypress)="soloNumeros($event)"
+               placeholder="Ej. 987654321">
+      </div>
+
+      <ng-container *ngIf="tipoEnvio === 'delivery'">
+        <div class="ubigeo-grid">
+          <div class="form-group">
+            <label>Departamento</label>
+            <select [(ngModel)]="ubicacionSeleccionada.departamento" name="dep" (change)="onDepartamentoChange()">
+              <option value="">Seleccionar...</option>
+              <option *ngFor="let d of departamentos" [value]="d.departamento">{{d.departamento}}</option>
+            </select>
+          </div>
+
+          <div class="form-group" *ngIf="ubicacionSeleccionada.departamento">
+            <label>Provincia</label>
+            <select [(ngModel)]="ubicacionSeleccionada.provincia" name="prov" (change)="onProvinciaChange()">
+              <option value="">Seleccionar...</option>
+              <option *ngFor="let p of provincias" [value]="p.nombre">{{p.nombre}}</option>
+            </select>
+          </div>
+
+          <div class="form-group" *ngIf="ubicacionSeleccionada.provincia">
+            <label>Distrito</label>
+            <select [(ngModel)]="ubicacionSeleccionada.distrito" name="dist">
+              <option value="">Seleccionar...</option>
+              <option *ngFor="let dist of distritos" [value]="dist">{{dist}}</option>
+            </select>
+          </div>
+        </div>
+
+        <ng-container *ngIf="ubicacionSeleccionada.distrito">
+          <div class="form-group full">
+            <label>
+              {{ ubicacionSeleccionada.departamento === 'LIMA' ? 'Dirección Exacta (Calle, Nro, Dpto)' : 'Dirección / Agencia de envío' }}
+            </label>
+            <input type="text" 
+                   [(ngModel)]="formData.direccion" 
+                   name="direccion"
+                   [placeholder]="ubicacionSeleccionada.departamento === 'LIMA' ? 'Ej: Av. Los Incas 456, Int 302' : 'Ej: Shalom - Av. Sol 123 (Cusco)'">
+          </div>
+
+          <div class="form-group full">
+            <label>Referencia adicional (Opcional)</label>
+            <input type="text" 
+                   [(ngModel)]="formData.referencia" 
+                   name="referencia"
+                   placeholder="Ej: Frente al parque, puerta color azul, o indicaciones para Shalom">
+          </div>
+        </ng-container>
+      </ng-container>
+    </form>
+  </div>
+
+  <aside class="checkout-summary">
+    <div class="summary-header">
+        <h3>RESUMEN DE TU ORDEN</h3>
+        <a routerLink="/tienda" class="edit-cart">Editar pedido</a>
+    </div>
+
+    <div class="summary-items">
+      <div class="item-mini" *ngFor="let item of items">
+        <img [src]="item.imagen_principal_render" [alt]="item.nombre_zapatilla">
+        <div class="mini-details">
+          <p>{{ item.nombre_zapatilla }}</p>
+          <span>Talla: {{ item.tallaElegida }} | Cantidad: {{ item.cantidad }}</span>
+        </div>
+        <span class="mini-price">S/ {{ (item.precio * item.cantidad) | number:'1.2-2' }}</span>
+      </div>
+    </div>
+
+    <div class="cupon-area">
+      <label>¿TIENES UN CUPÓN?</label>
+      <div class="cupon-input-group">
+        <input type="text" [(ngModel)]="codigoCupon" placeholder="XXXX-XXXX-XXXX-XXXX" maxlength="19">
+        <button (click)="aplicarCupon()" [disabled]="isValidatingCupon">
+          {{ isValidatingCupon ? '...' : 'VALIDAR' }}
+        </button>
+      </div>
+    </div>
+
+    <div class="final-totals">
+      <div class="total-row">
+          <span>Subtotal</span>
+          <span>S/ {{ subtotal | number:'1.2-2' }}</span>
+      </div>
+      <div class="total-row">
+        <span>Envío</span>
+        <span [class.shipping-cost]="envio > 0">
+            {{ envio > 0 ? 'S/ ' + (envio | number:'1.2-2') : (tipoEnvio === 'recojo' ? 'GRATIS' : '¡Selecciona destino!') }}
+        </span>
+      </div>
+
+      <div class="total-row descuento" *ngIf="cuponAplicado">
+        <span>Descuento ({{ cuponAplicado.codigo }})</span>
+        <span class="text-success">- S/ {{ cuponAplicado.descuento | number:'1.2-2' }}</span>
+      </div>
+
+      <div class="total-main">
+        <span>TOTAL A PAGAR</span>
+        <span>S/ {{ totalFinal | number:'1.2-2' }}</span>
+      </div>
+    </div>
+
+    <div class="resumen-acciones">
+      <button class="btn-confirm-order" (click)="irAPagar()">
+          CONTINUAR AL PAGO
+      </button>
+    </div>
+    
+    <p class="security-note">
+        <i class="fas fa-lock"></i> Pago 100% seguro y garantizado
+    </p>
+  </aside>
+</div>

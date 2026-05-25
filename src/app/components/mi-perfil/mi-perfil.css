@@ -1,0 +1,1577 @@
+:host {
+  --primary-black: #000000;
+  --accent-lime: #d4ff00;
+  --soft-gray: #f8f9fa;
+  --border-color: #eaeaea;
+  --text-muted: #6c757d;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 1. EL CONTENEDOR MAESTRO - Usamos Grid para control total */
+.perfil-container {
+  display: grid;
+  grid-template-columns: 320px 1fr; /* Sidebar ancha y contenido flexible */
+  gap: 50px;
+  max-width: 1400px;
+  margin: 60px auto;
+  padding: 0 40px;
+  align-items: start;
+}
+
+/* 2. SIDEBAR - Estilo Sticky para que te siga al bajar */
+.perfil-sidebar {
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  padding: 40px 25px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.03);
+  position: sticky;
+  top: 120px; /* Ajusta según el alto de tu Navbar */
+}
+
+.user-card-mini {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-bottom: 2px solid var(--soft-gray);
+  margin-bottom: 30px;
+  padding-bottom: 30px;
+}
+
+.avatar-circle {
+  width: 90px;
+  height: 90px;
+  background: var(--primary-black);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  margin-bottom: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  border: 4px solid #fff;
+}
+
+.user-text .welcome { font-size: 0.8rem; color: var(--text-muted); margin: 0; }
+.user-text .name { font-size: 1.3rem; font-weight: 800; margin: 0; text-transform: uppercase; }
+
+/* 3. NAVEGACIÓN */
+.sidebar-nav button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 18px 20px;
+  margin-bottom: 10px;
+  border: none;
+  background: transparent;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  border-left: 5px solid transparent;
+}
+
+.sidebar-nav button.active {
+  background: var(--primary-black);
+  color: #fff;
+  border-left-color: var(--accent-lime);
+  transform: translateX(8px);
+}
+
+.sidebar-nav button:hover:not(.active) {
+  background: var(--soft-gray);
+  transform: translateX(5px);
+}
+
+/* 4. CONTENIDO PRINCIPAL - Aquí es donde estaba el fallo */
+.perfil-main-content {
+  min-height: 70vh;
+  display: block; /* Aseguramos que sea un bloque visible */
+  width: 100%;
+}
+
+.section-header {
+  margin-bottom: 45px;
+  border-bottom: 2px solid var(--soft-gray);
+  padding-bottom: 25px;
+}
+
+.section-header h2 {
+  font-size: 2.5rem;
+  font-weight: 900;
+  letter-spacing: -1px;
+  margin: 0;
+}
+
+/* 5. TARJETAS DE ÓRDENES (Estilo Hypebeast) */
+.order-item-pro {
+  display: grid;
+  grid-template-columns: 140px 1fr auto;
+  gap: 30px;
+  background: #fff;
+  border: 1px solid var(--border-color);
+  padding: 25px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  transition: var(--transition);
+  align-items: center;
+}
+
+.order-item-pro:hover {
+  transform: scale(1.01);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+  border-color: var(--primary-black);
+}
+
+.order-img {
+  background: var(--soft-gray);
+  border-radius: 15px;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.order-img img {
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: contain;
+}
+
+/* 6. FORMULARIO DE DATOS */
+.datos-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 12px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: var(--primary-black);
+}
+
+.form-group input {
+  width: 100%;
+  padding: 18px;
+  border: 2px solid var(--soft-gray);
+  border-radius: 15px;
+  background: var(--soft-gray);
+  transition: var(--transition);
+}
+
+.form-group input:focus {
+  background: #fff;
+  border-color: var(--primary-black);
+  outline: none;
+}
+
+/* Animación fluida */
+.fade-in {
+  animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- AGREGAR AL FINAL DEL ARCHIVO --- */
+
+/* Forzamos el layout de dos columnas en el contenedor principal */
+div.perfil-container {
+  display: grid !important;
+  grid-template-columns: 320px 1fr !important;
+  gap: 40px !important;
+  align-items: start !important;
+  padding: 40px !important;
+  background-color: #ffffff !important;
+}
+
+/* Mejora de la Sidebar (Panel Izquierdo) */
+aside.perfil-sidebar, 
+.perfil-sidebar {
+  background: #ffffff !important;
+  border: 1px solid #eeeeee !important;
+  border-radius: 20px !important;
+  padding: 30px !important;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.04) !important;
+}
+
+/* Estilo para la sección de "Mis Datos" (image_e6b0f6.png) */
+.datos-form, 
+div[style*="display: flex"] { /* Selector de respaldo si usaste inline styles */
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+  gap: 20px !important;
+  margin-top: 25px !important;
+}
+
+/* Forzar que los inputs se vean modernos */
+.form-group input, 
+input[type="text"], 
+input[type="email"] {
+  width: 100% !important;
+  padding: 14px 18px !important;
+  border: 1px solid #e0e0e0 !important;
+  border-radius: 12px !important;
+  background-color: #f9f9f9 !important;
+  font-family: inherit !important;
+  transition: all 0.2s ease !important;
+}
+
+.form-group input:focus {
+  background-color: #ffffff !important;
+  border-color: #000000 !important;
+  box-shadow: 0 0 0 4px rgba(0,0,0,0.05) !important;
+  outline: none !important;
+}
+
+/* Etiquetas de los inputs */
+.form-group label {
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+  font-size: 11px !important;
+  letter-spacing: 0.5px !important;
+  margin-bottom: 8px !important;
+  display: block !important;
+  color: #444 !important;
+}
+
+/* Botón de actualizar (image_e6b0f6.png) */
+button.btn-actualizar, 
+button[type="submit"] {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  padding: 15px 35px !important;
+  border-radius: 10px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  border: none !important;
+  cursor: pointer !important;
+  transition: transform 0.2s !important;
+}
+
+button.btn-actualizar:hover {
+  transform: translateY(-2px) !important;
+  background-color: #222 !important;
+}
+
+/* Contenedor de mensajes vacíos (image_e6b117.png) */
+.empty-message, 
+section > div:has(h3) {
+  background-color: #f8f8f8 !important;
+  border-radius: 15px !important;
+  padding: 30px !important;
+  border-left: 5px solid #000 !important;
+}
+
+/* Títulos de sección */
+.perfil-main-content h2 {
+  font-size: 32px !important;
+  font-weight: 900 !important;
+  letter-spacing: -1px !important;
+  border-bottom: 3px solid #000 !important;
+  display: inline-block !important;
+  margin-bottom: 20px !important;
+  padding-bottom: 5px !important;
+}
+
+/* --- AGREGAR AL FINAL PARA PULIR DETALLES --- */
+
+/* 1. Contenedor de "Estado Vacío" (Compras y Favoritos) */
+/* Basado en image_e6b117.png e image_e6b0fc.png */
+.perfil-main-content section > div {
+    background: #fdfdfd !important;
+    border: 1px solid #f0f0f0 !important;
+    border-radius: 16px !important;
+    padding: 40px !important;
+    margin-top: 20px !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.02) !important;
+    border-left: 4px solid #000 !important; /* Toque elegante */
+}
+
+/* 2. Inputs de "Mis Datos" (image_e6b0f6.png) */
+/* Quitamos ese borde gris genérico y le damos amplitud */
+.perfil-main-content input[type="text"],
+.perfil-main-content input[type="email"],
+.perfil-main-content input {
+    background-color: #f8f9fa !important;
+    border: 1px solid #e9ecef !important;
+    border-radius: 8px !important;
+    padding: 12px 16px !important;
+    font-size: 15px !important;
+    color: #333 !important;
+    width: 100% !important;
+    margin-top: 5px !important;
+    transition: all 0.3s ease !important;
+}
+
+.perfil-main-content input:focus {
+    background-color: #fff !important;
+    border-color: #000 !important;
+    box-shadow: 0 0 0 3px rgba(0,0,0,0.1) !important;
+    outline: none !important;
+}
+
+/* 3. Botones (Explorar Catálogo / Actualizar Información) */
+.perfil-main-content button {
+    background-color: #000 !important;
+    color: #fff !important;
+    border: none !important;
+    padding: 12px 28px !important;
+    border-radius: 8px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    cursor: pointer !important;
+    transition: transform 0.2s, background 0.2s !important;
+    margin-top: 15px !important;
+}
+
+.perfil-main-content button:hover {
+    background-color: #333 !important;
+    transform: translateY(-2px) !important;
+}
+
+/* Estilo específico para el botón de 'Ver novedades' o secundarios */
+.perfil-main-content button[style*="background-color: white"],
+.perfil-main-content button:not([type="submit"]) {
+    background-color: transparent !important;
+    color: #000 !important;
+    border: 2px solid #000 !important;
+}
+
+/* 4. Títulos y Textos */
+.perfil-main-content h2 {
+    font-family: 'serif', 'Times New Roman' !important; /* Para ese look de revista de moda */
+    font-size: 36px !important;
+    font-weight: 900 !important;
+    margin-bottom: 5px !important;
+}
+
+.perfil-main-content h3 {
+    font-weight: 800 !important;
+    font-size: 18px !important;
+    margin-bottom: 10px !important;
+}
+
+.perfil-main-content p {
+    color: #666 !important;
+    line-height: 1.6 !important;
+}
+
+/* 5. Ajuste de espaciado para que no esté pegado al borde */
+.perfil-main-content {
+    padding-left: 40px !important;
+    padding-right: 40px !important;
+}
+
+/* --- REFINAMIENTO FINAL PARA IVANO STORE --- */
+
+/* 1. Ajuste de los títulos (Look de Marca) */
+.perfil-main-content h2 {
+    letter-spacing: -1.5px !important;
+    color: #000 !important;
+    position: relative;
+    padding-bottom: 10px !important;
+    border-bottom: none !important; /* Quitamos la línea simple */
+}
+
+/* Agregamos una barrita negra más estética debajo del título */
+.perfil-main-content h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: #000;
+}
+
+/* 2. Suavizar los textos descriptivos */
+.perfil-main-content p {
+    font-size: 15px !important;
+    color: #666 !important;
+    margin-top: 15px !important;
+    max-width: 600px; /* Evita que el texto sea demasiado largo y canse la vista */
+}
+
+/* 3. El cuadro blanco de fondo (Card del contenido) */
+/* En image_e6a5f6.png se ve que los bordes son muy rectos */
+section > div {
+    border: 1px solid #f0f0f0 !important;
+    border-radius: 20px !important; /* Bordes más circulares para un look moderno */
+    padding: 50px !important; /* Más aire interno para que respire el diseño */
+    background: #ffffff !important;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.03) !important;
+}
+
+/* 4. Efecto Hover en los Inputs (Feedback visual) */
+.form-group input:hover {
+    border-color: #bbb !important;
+}
+
+/* 5. Estilo de "Privacidad y Seguridad" (image_e6a5b6.png) */
+.perfil-main-content h4, 
+.perfil-main-content strong,
+.perfil-main-content b {
+    display: block;
+    margin-top: 30px !important;
+    font-size: 14px !important;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #000;
+}
+
+/* 6. Animación sutil al cambiar de pestaña */
+.perfil-main-content {
+    animation: fadeInContent 0.4s ease-out;
+}
+
+@keyframes fadeInContent {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* 7. Arreglo del Badge SSL (El check verde) */
+span[style*="color: green"], 
+.success-text {
+    background: #e6fffa;
+    color: #234e52 !important;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+/* --- ARREGLO CRÍTICO DE ALINEACIÓN DE INPUTS --- */
+
+/* Forzamos que el contenedor de los inputs use Grid real */
+/* Ajustamos para que en pantallas grandes sean 3 columnas y en pequeñas 1 */
+.perfil-main-content .datos-form,
+.perfil-main-content div:has(> .form-group) {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important; /* Forzamos las 3 columnas de tu imagen */
+    gap: 25px !important; /* El espacio que falta en tu captura */
+    align-items: end !important;
+    margin-bottom: 30px !important;
+    width: 100% !important;
+}
+
+/* Arreglo individual de cada grupo (Label + Input) */
+.form-group {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    width: 100% !important;
+}
+
+/* Forzamos que el input no se salga de su celda */
+.form-group input {
+    box-sizing: border-box !important; /* Evita que el padding lo ensanche de más */
+    width: 100% !important;
+    margin: 0 !important;
+    border: 1.5px solid #e0e0e0 !important; /* Borde más definido */
+    background: #ffffff !important; /* Fondo blanco para que destaque */
+    height: 48px !important; /* Altura estándar profesional */
+}
+
+/* Estilo para los labels que se ven amontonados */
+.form-group label {
+    white-space: nowrap !important; /* Evita que el texto del label se rompa en dos líneas */
+    font-size: 11px !important;
+    letter-spacing: 0.5px !important;
+    color: #555 !important;
+}
+
+/* Responsivo: Si la pantalla es pequeña, que se pongan uno abajo de otro */
+@media (max-width: 900px) {
+    .perfil-main-content .datos-form,
+    .perfil-main-content div:has(> .form-group) {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+.address-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.address-card {
+    border: 2px solid #eee;
+    border-radius: 12px;
+    padding: 20px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.address-card:hover {
+    border-color: #000;
+    background: #fafafa;
+}
+
+.address-card .tag {
+    background: #000;
+    color: #fff;
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.address-card p {
+    font-size: 14px;
+    margin: 10px 0 0 0 !important;
+    color: #333;
+}
+
+/* ============================================================
+   SISTEMA DE DISEÑO IVANO STORE - MODO CLARO/OSCURO
+   ============================================================ */
+
+/* 1. VARIABLES DINÁMICAS (Core de la Web) */
+:root {
+  /* Modo Claro (Default) */
+  --bg-page: #f4f7f6;
+  --bg-card: #ffffff;
+  --bg-sidebar: #ffffff;
+  --text-main: #1a1a1a;
+  --text-muted: #666666;
+  --border-color: #eeeeee;
+  --accent-color: #000000;
+  --accent-soft: #f0f0f0;
+  --shadow: 0 10px 30px rgba(0,0,0,0.05);
+  --input-bg: #ffffff;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 2. OVERRIDE PARA MODO OSCURO (Miguel's Vision) */
+body.dark-mode {
+  --bg-page: #0d0d0d;
+  --bg-card: #1a1a1a;
+  --bg-sidebar: #151515;
+  --text-main: #f5f5f5;
+  --text-muted: #a0a0a0;
+  --border-color: #2a2a2a;
+  --accent-color: #ffffff;
+  --accent-soft: #252525;
+  --shadow: 0 10px 40px rgba(0,0,0,0.4);
+  --input-bg: #222222;
+}
+
+/* 3. APLICACIÓN GLOBAL (Afecta a toda la web) */
+body {
+  background-color: var(--bg-page) !important;
+  color: var(--text-main) !important;
+  transition: var(--transition) !important;
+}
+
+.perfil-container {
+  background-color: var(--bg-page) !important;
+}
+
+/* 4. SIDEBAR Y NAVEGACIÓN */
+.perfil-sidebar {
+  background-color: var(--bg-sidebar) !important;
+  border-right: 1px solid var(--border-color) !important;
+  transition: var(--transition) !important;
+}
+
+.sidebar-nav button {
+  color: var(--text-muted) !important;
+  transition: var(--transition) !important;
+}
+
+.sidebar-nav button:hover, .sidebar-nav button.active {
+  background-color: var(--accent-soft) !important;
+  color: var(--text-main) !important;
+}
+
+/* 5. TARJETAS (Compras, Direcciones, Ajustes) */
+.order-item-pro, .address-card, .ajustes-card, .info-card-side {
+  background-color: var(--bg-card) !important;
+  border: 1px solid var(--border-color) !important;
+  box-shadow: var(--shadow) !important;
+  transition: var(--transition) !important;
+}
+
+.order-item-pro h3, .address-card h3, .ajustes-info h3 {
+  color: var(--text-main) !important;
+}
+
+.subtitle, .date, .ajustes-info p {
+  color: var(--text-muted) !important;
+}
+
+/* 6. COMPONENTES DE AJUSTES (Switches) */
+.ajustes-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 26px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+input:checked + .slider {
+  background-color: #2ecc71; /* Un verde vibrante para indicar ON */
+}
+
+body.dark-mode input:checked + .slider {
+  background-color: #ffffff; /* Blanco puro en modo oscuro para contraste total */
+}
+
+body.dark-mode input:checked + .slider:before {
+  background-color: #000000;
+}
+
+input:checked + .slider:before {
+  transform: translateX(24px);
+}
+
+/* 7. FORMULARIOS Y INPUTS */
+input[type="text"], input[type="email"] {
+  background-color: var(--input-bg) !important;
+  color: var(--text-main) !important;
+  border: 1px solid var(--border-color) !important;
+  padding: 12px !important;
+  border-radius: 8px !important;
+}
+
+.disabled-input {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* 8. SECCIÓN BENEFICIOS (Ivano Points Especial) */
+.points-container {
+  background: var(--accent-color) !important;
+  color: var(--bg-page) !important; /* Invertido para que resalte */
+}
+
+body.dark-mode .points-container {
+  background: #222 !important;
+  border: 1px solid #333 !important;
+}
+
+.btn-primary-white {
+  background: var(--bg-page) !important;
+  color: var(--accent-color) !important;
+}
+
+/* 4. SIDEBAR Y NAVEGACIÓN */
+.perfil-sidebar {
+  background-color: var(--bg-sidebar) !important;
+  border-right: 1px solid var(--border-color) !important;
+  transition: var(--transition) !important;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  min-height: 100vh;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sidebar-nav button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 15px;
+  border: none;
+  background: transparent;
+  color: var(--text-muted) !important;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 500;
+  text-align: left;
+  transition: var(--transition) !important;
+}
+
+.sidebar-nav button:hover, 
+.sidebar-nav button.active {
+  background-color: var(--accent-soft) !important;
+  color: var(--text-main) !important;
+}
+
+.sidebar-nav button .icon {
+  font-size: 1.2rem;
+}
+
+/* 5. TARJETAS (Compras, Direcciones, Ajustes) */
+.order-item-pro, 
+.address-card, 
+.ajustes-card, 
+.info-card-side,
+.coupon-item {
+  background-color: var(--bg-card) !important;
+  border: 1px solid var(--border-color) !important;
+  box-shadow: var(--shadow) !important;
+  padding: 20px;
+  border-radius: 16px;
+  transition: var(--transition) !important;
+}
+
+.order-item-pro h3, 
+.address-card h3, 
+.ajustes-info h3 {
+  color: var(--text-main) !important;
+  margin: 0 0 5px 0;
+}
+
+.subtitle, 
+.date, 
+.ajustes-info p {
+  color: var(--text-muted) !important;
+  font-size: 0.9rem;
+}
+
+/* 6. COMPONENTES DE AJUSTES (Switches) */
+.ajustes-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.ajustes-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 26px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Color cuando está ON */
+input:checked + .slider {
+  background-color: #2ecc71; 
+}
+
+/* Ajuste específico para Dark Mode */
+body.dark-mode input:checked + .slider {
+  background-color: #ffffff; 
+}
+
+body.dark-mode input:checked + .slider:before {
+  background-color: #000000;
+}
+
+input:checked + .slider:before {
+  transform: translateX(24px);
+}
+
+/* 7. FORMULARIOS Y INPUTS */
+.datos-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--text-main);
+}
+
+input[type="text"], 
+input[type="email"], 
+input[type="password"] {
+  background-color: var(--input-bg) !important;
+  color: var(--text-main) !important;
+  border: 1px solid var(--border-color) !important;
+  padding: 12px 15px !important;
+  border-radius: 10px !important;
+  outline: none;
+  transition: var(--transition);
+}
+
+input:focus {
+  border-color: var(--accent-color) !important;
+}
+
+.disabled-input {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* 8. SECCIÓN BENEFICIOS (Ivano Points Especial) */
+.points-container {
+  background: var(--accent-color) !important;
+  color: var(--bg-page) !important;
+  padding: 25px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+body.dark-mode .points-container {
+  background: #222 !important;
+  border: 1px solid #333 !important;
+  color: #fff !important;
+}
+
+.points-value {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin: 0;
+}
+
+.points-value small {
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+/* 9. BOTONES DE ACCIÓN */
+.btn-save-pro {
+  background-color: var(--accent-color);
+  color: var(--bg-page);
+  border: none;
+  padding: 15px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-save-pro:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.2);
+}
+
+.btn-logout-mobile {
+  margin-top: auto; /* Empuja el botón al final de la sidebar */
+  color: #ff4444 !important;
+}
+
+.btn-logout-mobile:hover {
+  background-color: #fff0f0 !important;
+}
+
+/* ============================================================
+   APARTADO: MIS DIRECCIONES (Miguel's Delivery Grid)
+   ============================================================ */
+
+.address-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  margin-top: 25px;
+}
+
+.address-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 24px !important;
+}
+
+/* Etiqueta (Casa, Trabajo, etc.) */
+.address-card .tag {
+  display: inline-block;
+  align-self: flex-start;
+  background-color: var(--accent-color);
+  color: var(--bg-page);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.address-card h3 {
+  font-size: 1.1rem;
+  margin-bottom: 5px !important;
+}
+
+.address-card p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Acciones de la tarjeta */
+.address-actions {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+  border-top: 1px solid var(--border-color);
+  padding-top: 15px;
+}
+
+.btn-text {
+  background: none;
+  border: none;
+  color: var(--accent-color);
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  padding: 0;
+  transition: var(--transition);
+}
+
+.btn-text:hover {
+  text-decoration: underline;
+  opacity: 0.8;
+}
+
+.btn-text.delete {
+  color: #ff4444;
+}
+
+/* Tarjeta para agregar nueva dirección */
+.address-card.add-new {
+  border: 2px dashed var(--border-color) !important;
+  background-color: transparent !important;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  min-height: 180px;
+}
+
+.address-card.add-new:hover {
+  border-color: var(--accent-color) !important;
+  background-color: var(--accent-soft) !important;
+}
+
+.add-icon {
+  font-size: 2.5rem;
+  color: var(--border-color);
+  margin-bottom: 10px;
+  transition: var(--transition);
+}
+
+.address-card.add-new:hover .add-icon {
+  color: var(--accent-color);
+  transform: scale(1.1);
+}
+
+.address-card.add-new p {
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+/* ============================================================
+   APARTADO: CUPONES (Ticket Design Style)
+   ============================================================ */
+
+.coupons-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.coupon-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--bg-card) !important;
+  border: 2px solid var(--border-color) !important;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  padding: 0 !important; /* Quitamos el padding para controlar las zonas */
+  transition: var(--transition);
+}
+
+/* Efecto de "muesca" de ticket en los laterales */
+.coupon-item::before,
+.coupon-item::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: var(--bg-page);
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 2px solid var(--border-color);
+  z-index: 1;
+}
+
+.coupon-item::before { left: -12px; }
+.coupon-item::after { right: -12px; }
+
+.coupon-main {
+  padding: 20px 30px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  border-right: 2px dashed var(--border-color); /* Línea divisoria de ticket */
+}
+
+.coupon-amount {
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: var(--accent-color);
+  letter-spacing: -1px;
+}
+
+.coupon-main p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.coupon-code {
+  font-family: 'Courier New', Courier, monospace; /* Toque de código/ticket */
+  font-weight: 700;
+  background: var(--accent-soft);
+  color: var(--text-main);
+  padding: 4px 8px;
+  border-radius: 4px;
+  display: inline-block;
+  margin-top: 5px;
+  font-size: 0.9rem;
+}
+
+/* Zona del botón */
+.coupon-actions {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 120px;
+}
+
+.btn-copy {
+  background-color: var(--accent-color) !important;
+  color: var(--bg-page) !important;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.8rem;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: var(--transition);
+}
+
+.btn-copy:hover {
+  transform: scale(1.05);
+  filter: brightness(1.2);
+}
+
+/* Ajuste para que el texto no choque con las muescas */
+@media (max-width: 480px) {
+  .coupon-item {
+    flex-direction: column;
+  }
+  .coupon-main {
+    border-right: none;
+    border-bottom: 2px dashed var(--border-color);
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+/* --- 1. CONTENEDOR PRINCIPAL (EL QUE CENTRA) --- */
+.nueva-direccion-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7); /* Fondo oscuro */
+  backdrop-filter: blur(5px);    /* Efecto blur pro */
+  display: flex;
+  justify-content: center;       /* Centrado horizontal */
+  align-items: center;           /* Centrado vertical */
+  z-index: 99999;                /* Por encima de TODO */
+}
+
+/* --- 2. LA CAJA DEL MODAL --- */
+.modal-content {
+  background: #fff;
+  width: 90%;
+  max-width: 500px;
+  border-radius: 20px;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+  overflow: hidden;
+  position: relative;
+  animation: modalScale 0.3s ease-out; /* Animación de entrada */
+}
+
+@keyframes modalScale {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* --- 3. CABECERA, CUERPO Y PIE --- */
+.modal-header {
+  padding: 20px 25px;
+  background: #f8f9fa;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h2 { margin: 0; font-size: 1.2rem; font-weight: 700; color: #000; }
+
+.close-btn {
+  background: none; border: none; font-size: 1.8rem; cursor: pointer; color: #888;
+}
+
+.modal-body { 
+  padding: 25px; 
+}
+
+/* --- 4. FORMULARIOS --- */
+.form-group { margin-bottom: 15px; }
+
+.form-group label { 
+  display: block; 
+  font-size: 0.85rem; 
+  font-weight: 600; 
+  margin-bottom: 6px; 
+  color: #444; 
+}
+
+.form-group input, 
+.form-group select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 14px;
+  box-sizing: border-box; /* Crucial para que no se desborde */
+}
+
+/* Grid de Ubigeo */
+.ubigeo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+/* --- 5. BOTONES (ACCIONES) --- */
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.btn-cancelar { 
+  flex: 1;
+  background: #eee; 
+  border: none; 
+  padding: 12px; 
+  border-radius: 10px; 
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-guardar { 
+  flex: 1.5;
+  background: #000; 
+  color: #fff; 
+  border: none; 
+  padding: 12px; 
+  border-radius: 10px; 
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-guardar:disabled { background: #ccc; cursor: not-allowed; }
+
+/* --- 6. MODO OSCURO (OPCIONAL) --- */
+.dark-mode .modal-content { background: #1a1a1a; color: #fff; }
+.dark-mode .modal-header { background: #222; border-color: #333; }
+.dark-mode .modal-header h2 { color: #fff; }
+.dark-mode .form-group input, 
+.dark-mode .form-group select { background: #2a2a2a; color: #fff; border-color: #444; }
+
+/* FUERZA EL CENTRADO TOTAL */
+.nueva-direccion-modal-overlay {
+    position: fixed !important; /* Fixed para que use toda la pantalla del navegador */
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important; /* 100% del ancho de la ventana */
+    height: 100vh !important; /* 100% del alto de la ventana */
+    background-color: rgba(0, 0, 0, 0.6) !important;
+    z-index: 99999 !important; /* Para que nada se le ponga encima */
+    
+    /* ESTO ES LO QUE LO CLAVA AL CENTRO */
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+.modal-content {
+    background-color: white !important;
+    padding: 30px !important;
+    border-radius: 12px !important;
+    width: 450px !important; /* Ancho fijo para que no se deforme */
+    max-width: 90% !important; 
+    margin: 0 !important; /* Quita márgenes que lo empujen a los lados */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important;
+    position: relative !important;
+}
+
+/* Esto rompe la jerarquía del grid y lo manda al medio de la pantalla */
+.nueva-direccion-modal-overlay {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background: rgba(0, 0, 0, 0.7) !important;
+    z-index: 99999 !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    backdrop-filter: blur(4px);
+}
+
+/* Evita que el modal herede estilos de las address-cards */
+.modal-content {
+    background: white !important;
+    width: 95% !important;
+    max-width: 500px !important;
+    border-radius: 15px !important;
+    padding: 30px !important;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.4) !important;
+    position: relative !important;
+    /* Reseteamos flex/grid que pueda venir del padre */
+    display: block !important; 
+    transform: none !important;
+}
+
+/* Arreglo rápido para el formulario dentro del modal */
+.modal-body form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* --- ELIMINA EL CUADRO DE LA IZQUIERDA Y MÁNDALO AL MEDIO --- */
+.nueva-direccion-modal-overlay {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  background: rgba(0, 0, 0, 0.75) !important;
+  display: flex !important;
+  align-items: center !important; /* Centrado vertical */
+  justify-content: center !important; /* Centrado horizontal */
+  z-index: 999999 !important; /* Por encima de cualquier mrd */
+  backdrop-filter: blur(4px) !important;
+}
+
+/* --- ESTILO DE LA CAJA BLANCA --- */
+.modal-content {
+  background: #ffffff !important;
+  width: 90% !important;
+  max-width: 480px !important;
+  margin: 0 auto !important; /* Anula cualquier empuje lateral */
+  padding: 30px !important;
+  border-radius: 16px !important;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5) !important;
+  position: relative !important;
+  transform: none !important; /* Quita traslaciones raras */
+  display: block !important;
+}
+
+/* --- FIX PARA EL FORMULARIO --- */
+.form-group {
+  width: 100% !important;
+  margin-bottom: 15px !important;
+}
+
+.ubigeo-grid {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr 1fr !important;
+  gap: 10px !important;
+  width: 100% !important;
+}
+
+/* --- POSICIONAMIENTO DEL MODAL (CENTRADO TOTAL) --- */
+.nueva-direccion-modal-overlay {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  background: rgba(0, 0, 0, 0.7) !important; /* Fondo oscuro */
+  display: flex !important;
+  align-items: center !important;    /* Centrado vertical */
+  justify-content: center !important; /* Centrado horizontal */
+  z-index: 99999 !important;         /* Por encima de todo */
+  backdrop-filter: blur(4px);        /* Efecto blur pro */
+}
+
+/* --- CUERPO DEL MODAL --- */
+.modal-content {
+  background: #fff !important;
+  width: 90% !important;
+  max-width: 500px !important;
+  border-radius: 16px !important;
+  padding: 0 !important; /* El padding lo manejamos interno */
+  overflow: hidden !important;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.3) !important;
+  position: relative !important;
+  margin: 0 !important;
+  animation: modalScale 0.3s ease-out;
+}
+
+@keyframes modalScale {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* --- ESTILOS INTERNOS PARA QUE SE VEA BIEN --- */
+.modal-header {
+  padding: 20px 25px;
+  background: #f8f9fa;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h2 { margin: 0; font-size: 1.25rem; font-weight: 700; color: #000; }
+
+.close-btn {
+  background: none; border: none; font-size: 1.8rem; cursor: pointer; color: #888;
+}
+
+form { padding: 25px; }
+
+.form-group { margin-bottom: 18px; }
+
+.form-group label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #555;
+  text-transform: uppercase;
+}
+
+.form-group input, 
+.form-group select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 14px;
+  box-sizing: border-box; /* Evita que se salgan del cuadro */
+}
+
+/* Grid de los selectores (DEP, PROV, DIST) */
+.ubigeo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+/* --- BOTONES --- */
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 25px;
+}
+
+.btn-cancelar {
+  flex: 1;
+  background: #eee;
+  border: none;
+  padding: 14px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-guardar {
+  flex: 1.5;
+  background: #000;
+  color: #fff;
+  border: none;
+  padding: 14px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.btn-guardar:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+/* --- EL TRUCO DEFINITIVO PARA EL CENTRADO --- */
+.nueva-direccion-modal-overlay {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  background: rgba(0, 0, 0, 0.6) !important; /* Fondo oscuro semi-transparente */
+  display: flex !important;
+  align-items: center !important;    /* Centra verticalmente */
+  justify-content: center !important; /* Centra horizontalmente */
+  z-index: 99999 !important;         /* Para que esté por encima de la sidebar y el video */
+  backdrop-filter: blur(5px);        /* Efecto de desenfoque al fondo */
+}
+
+.modal-content {
+  position: relative !important;
+  background: white !important;
+  width: 95% !important;
+  max-width: 500px !important;
+  margin: 0 auto !important; /* Elimina cualquier margen lateral heredado */
+  padding: 2rem !important;
+  border-radius: 20px !important;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4) !important;
+  color: black !important;
+  display: block !important;
+}
+
+/* Estilo para los campos para que no se vean pegados */
+.form-group {
+  margin-bottom: 1.2rem !important;
+  text-align: left !important;
+}
+
+.form-group label {
+  display: block !important;
+  font-weight: bold !important;
+  margin-bottom: 5px !important;
+  font-size: 0.85rem !important;
+}
+
+.ubigeo-grid {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr 1fr !important;
+  gap: 10px !important;
+  margin-bottom: 1.2rem !important;
+}
+
+.ubigeo-grid select {
+  width: 100% !important;
+  padding: 8px !important;
+  border-radius: 8px !important;
+  border: 1px solid #ccc !important;
+}
+
+/* Botones finales */
+.modal-actions {
+  display: flex !important;
+  gap: 15px !important;
+  margin-top: 20px !important;
+}
+
+.btn-cancelar, .btn-guardar {
+  flex: 1 !important;
+  padding: 12px !important;
+  border-radius: 10px !important;
+  font-weight: bold !important;
+  cursor: pointer !important;
+  border: none !important;
+}
+
+.btn-guardar {
+  background: #000 !important;
+  color: #fff !important;
+}
+
+.btn-guardar:disabled {
+  background: #444 !important;
+  opacity: 0.6;
+}
+

@@ -1,0 +1,213 @@
+/* --- CONFIGURACIÓN BASE DEL FOOTER --- */
+.main-footer {
+  background-color: #000;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  width: 100%;
+}
+
+/* --- 1. SECCIÓN SUPERIOR: VALORES Y COMUNIDAD --- */
+.brand-community-section {
+  border-bottom: 1px solid #222;
+  padding: 40px 5%;
+}
+
+.container-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 30px;
+}
+
+/* Bloque de Calidad y Envíos */
+.brand-values-block {
+  display: flex;
+  gap: 40px;
+  flex: 1;
+}
+
+.value-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.value-item i {
+  font-size: 1.8rem;
+  color: #d4ff31; /* Verde neón para resaltar iconos */
+}
+
+.value-text h4 {
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+  letter-spacing: 1px;
+}
+
+.value-text p {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+/* Divisor Vertical */
+.vertical-divider {
+  width: 1px;
+  height: 80px;
+  background-color: #333;
+}
+
+/* Bloque de Redes Sociales (TikTok/IG) */
+.social-proof-block {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.social-text h3 {
+  font-size: 1.2rem;
+  font-weight: 900;
+  margin-bottom: 5px;
+}
+
+.social-text p {
+  font-size: 0.85rem;
+  color: #888;
+}
+
+.social-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.btn-social {
+  text-decoration: none;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 8px 15px;
+  border-radius: 4px;
+  color: #fff;
+  border: 1px solid #333;
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-social:hover {
+  background: #fff;
+  color: #000;
+}
+
+/* --- 2. GRID DE LINKS --- */
+.footer-links-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  padding: 60px 5%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-column h4 {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  margin-bottom: 25px;
+  color: #fff;
+  font-weight: 800;
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-column li {
+  margin-bottom: 12px;
+}
+
+.footer-column a {
+  color: #777;
+  text-decoration: none;
+  font-size: 0.85rem;
+  transition: 0.3s;
+}
+
+.footer-column a:hover {
+  color: #d4ff31;
+}
+
+/* Estilo para el Libro de Reclamaciones */
+.reclamaciones-book img {
+  width: 100px;
+  margin-top: 15px;
+  filter: brightness(0) invert(1); /* Lo vuelve blanco para el fondo negro */
+}
+
+/* --- 3. COLUMNA "ÚNETE AL EQUIPO" --- */
+.join-team p {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: #ccc;
+  margin-bottom: 20px;
+}
+
+.btn-yellow {
+  background-color: #d4ff31; /* Color neón */
+  color: #000;
+  border: none;
+  padding: 12px 20px;
+  font-weight: 900;
+  font-size: 0.75rem;
+  width: 100%;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-yellow:hover {
+  background-color: #fff;
+  transform: translateY(-2px);
+}
+
+.social-links {
+  margin-top: 30px;
+}
+
+.social-links .icons {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.social-links .icons a {
+  color: #fff;
+  font-size: 1.2rem;
+  transition: 0.3s;
+}
+
+.social-links .icons a:hover {
+  color: #007bff;
+}
+
+/* --- 4. FOOTER BOTTOM --- */
+.footer-bottom {
+  text-align: center;
+  padding: 30px 0;
+  border-top: 1px solid #111;
+  color: #444;
+  font-size: 0.75rem;
+}
+
+/* --- RESPONSIVO PARA MÓVILES --- */
+@media (max-width: 992px) {
+  .container-wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .vertical-divider { display: none; }
+  .footer-links-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

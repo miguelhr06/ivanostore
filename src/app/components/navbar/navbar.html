@@ -1,0 +1,83 @@
+<nav class="navbar">
+  <div class="nav-logo">
+    <a href="#">
+      <div class="logo-animation-wrapper">
+        <span class="part-ivano">IVANO</span>
+        <span class="part-store">STORE</span>
+      </div>
+    </a>
+  </div>
+
+  <ul class="nav-links">
+    <li><a routerLink="/caballero" routerLinkActive="active">CABALLEROS</a></li>
+    <li><a routerLink="/dama" routerLinkActive="active">DAMAS</a></li>
+    <li><a routerLink="/ninos" routerLinkActive="active">NIÑOS</a></li>
+    <li><a routerLink="/accesorios" routerLinkActive="active">ACCESORIOS</a></li>
+    <li><a routerLink="/nosotros" routerLinkActive="active">NOSOTROS</a></li>
+  </ul>
+
+  <div class="nav-actions">
+    <!-- El input original ahora abre el buscador inteligente -->
+    <div class="search-box">
+      <input 
+        type="text" 
+        placeholder="¿Qué calzado buscas hoy?"
+        (focus)="abrirBuscador()">
+      <button class="search-btn" (click)="abrirBuscador()">🔍</button>
+    </div>
+
+    <!-- Mantenemos tu lógica de login intacta -->
+    <button *ngIf="!isLogged" class="btn-login" routerLink="/login">
+      Ingresar
+    </button>
+
+    <div *ngIf="isLogged" class="user-authenticated-menu">
+      <a routerLink="/mi-perfil" class="nav-user-item">MI PERFIL</a>
+      <button (click)="cerrarSesion()" class="btn-logout-nav">CERRAR SESIÓN</button>
+    </div>
+
+    <div class="cart-wrapper" (click)="toggleCarrito()" style="cursor: pointer;">
+      <span class="cart-icon">🛒</span>
+      <span class="cart-count" *ngIf="cantidadItems > 0">{{ cantidadItems }}</span>
+    </div>
+  </div>
+</nav>
+
+<!-- NUEVO BUSCADOR SMART (Overlay Full Screen) -->
+<div class="search-overlay" *ngIf="mostrarBuscador">
+  <div class="search-container">
+    <div class="search-header">
+      <input 
+        type="text" 
+        placeholder="Escribe color, modelo, precio o género..." 
+        (input)="onSearch($event)" 
+        #searchInput
+        autofocus>
+      <button class="close-btn" (click)="cerrarBuscador()">✕</button>
+    </div>
+
+    <!-- Grilla de Resultados Inteligente -->
+    <div class="results-grid" *ngIf="resultados.length > 0">
+      <div *ngFor="let producto of resultados" 
+           class="product-card" 
+           [routerLink]="['/producto', producto.id]"
+           (click)="cerrarBuscador()">
+        <div class="img-wrapper">
+          <img [src]="producto.imagen_url" 
+     onerror="this.src='assets/img/placeholder.png'" 
+     alt="Producto Ivano">
+        </div>
+        <div class="info">
+          <h3>{{ producto.nombre_zapatilla || producto.modelo }}</h3>
+          <p class="category">{{ producto.categoria }} - {{ producto.color }}</p>
+          <span class="price">S/ {{ producto.precio }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Estado vacío -->
+    <div class="no-results" *ngIf="resultados.length === 0 && ultimoTermino.length > 2">
+      No encontramos coincidencias para "{{ ultimoTermino }}". Prueba con "Verde", "Barato" o un modelo específico.
+    </div>
+  </div>
+</div>

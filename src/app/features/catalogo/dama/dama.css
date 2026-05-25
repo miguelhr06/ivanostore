@@ -1,0 +1,1052 @@
+/* --- BASE DEL CATÁLOGO --- */
+.ivano-catalog {
+  background: #000;
+  padding: 80px 4%;
+  min-height: 100vh;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+}
+
+.header-container { margin-bottom: 60px; text-align: left; }
+.eyebrow { color: #ff3e3e; letter-spacing: 4px; font-weight: 700; font-size: 0.8rem; }
+.main-title { font-size: 4rem; font-weight: 900; margin: 10px 0; line-height: 0.9; }
+.outline { -webkit-text-stroke: 1px #555; color: transparent; }
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 40px;
+}
+
+/* --- TARJETA DE PRODUCTO --- */
+.product-card {
+  background: #0a0a0a;
+  border: 1px solid #1a1a1a;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.image-box { 
+  width: 100%; 
+  aspect-ratio: 1/1; 
+  background: #111; 
+  overflow: hidden; 
+  position: relative; 
+}
+
+.main-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.product-card:hover .main-img {
+  transform: scale(1.1); 
+}
+
+.top-badges {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  display: flex;
+  gap: 8px;
+  z-index: 5;
+}
+
+.badge {
+  padding: 5px 12px;
+  font-size: 0.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.badge.sigla { background: #ff3e3e; color: #fff; }
+
+.badge.category {
+  background: rgba(0, 0, 0, 0.7); 
+  color: #fff;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.card-overlay {
+  position: absolute; inset: 0; background: rgba(0,0,0,0.5);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transition: 0.3s;
+}
+
+.product-card:hover .card-overlay { opacity: 1; }
+
+.btn-action {
+  background: transparent;
+  color: #fff;
+  border: 1px solid #fff;
+  padding: 12px 24px;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-action:hover {
+  background: #fff;
+  color: #000;
+  transform: translateY(-3px);
+}
+
+.product-info { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; }
+.main-details { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+.product-name { font-size: 1.1rem; font-weight: 800; text-transform: uppercase; max-width: 70%; line-height: 1.2; }
+.product-price { font-size: 1.3rem; font-weight: 900; color: #ff3e3e; letter-spacing: -0.5px; }
+.product-subtext { color: #666; font-size: 0.75rem; margin-bottom: 15px; text-transform: uppercase; }
+
+.tallas-wrapper { margin-bottom: 15px; }
+.tallas-label { font-size: 0.65rem; color: #444; text-transform: uppercase; font-weight: 700; margin-bottom: 8px; }
+.tallas-list { display: flex; flex-wrap: wrap; gap: 6px; }
+
+.talla-box {
+  background: #111;
+  color: #eee;
+  padding: 4px 10px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  border: 1px solid #222;
+  transition: 0.2s;
+}
+
+.gender-tag {
+  margin-top: auto; 
+  padding-top: 15px;
+  border-top: 1px solid #1a1a1a;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #888;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.gender-tag::before { content: ''; width: 6px; height: 6px; background: #ff3e3e; border-radius: 50%; }
+
+/* --- MODAL --- */
+.modal-overlay {
+  position: fixed; top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.9);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 2000;
+  backdrop-filter: blur(8px);
+}
+
+.modal-content {
+  background: #fff;
+  width: 95%;
+  max-width: 1100px;
+  height: 85vh;
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+  color: #000;
+}
+
+.modal-body { display: flex; height: 100%; width: 100%; }
+.gallery-container { flex: 1.2; background: #f5f5f5; display: flex; flex-direction: column; padding: 20px; }
+.main-photo-view { flex: 1; display: flex; align-items: center; justify-content: center; }
+.main-photo-view img { max-width: 100%; max-height: 450px; object-fit: contain; }
+.thumbnails-grid { display: flex; gap: 10px; justify-content: center; padding: 20px 0; }
+
+.thumb {
+  width: 70px; height: 70px;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  object-fit: cover;
+  transition: all 0.2s ease;
+  opacity: 0.7;
+}
+
+.thumb:hover { opacity: 1; border-color: #ff3e3e; transform: translateY(-2px); }
+
+.info-container { flex: 0.8; padding: 50px; display: flex; flex-direction: column; overflow-y: auto; }
+.modal-sigla { color: #ff3e3e; font-weight: 800; font-size: 0.9rem; letter-spacing: 2px; }
+.modal-title { font-size: 2.2rem; font-weight: 900; margin: 10px 0; line-height: 1.1; text-transform: uppercase; }
+.modal-price { font-size: 2rem; font-weight: 800; margin: 20px 0; color: #1a1a1a; }
+.btn-order { margin-top: auto; background: #000; color: #fff; border: none; padding: 20px; font-weight: 800; cursor: pointer; }
+.btn-order:hover { background: #ff3e3e; }
+.btn-close { position: absolute; top: 20px; right: 20px; background: none; border: none; font-size: 2rem; cursor: pointer; z-index: 10; }
+
+.loading-state { grid-column: 1 / -1; display: flex; flex-direction: column; align-items: center; padding: 100px; }
+.spinner { width: 50px; height: 50px; border: 3px solid rgba(255,62,62,0.1); border-top-color: #ff3e3e; border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 20px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.section-divider {
+  font-size: 1.5rem;
+  font-weight: 800;
+  border-left: 4px solid #ff3e3e;
+  padding-left: 15px;
+  margin: 40px 0 20px 0;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.talla-unica-tag {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #ff3e3e;
+  border: 1px solid #ff3e3e;
+  display: inline-block;
+  padding: 2px 8px;
+  margin-top: 10px;
+}
+
+/* Estilo base del cuadrito de talla */
+.talla-box {
+  display: inline-block;
+  padding: 5px 10px;
+  margin: 0 4px;
+  background: #1a1a1a; /* Fondo oscuro como tu tienda */
+  color: white;
+  border: 1px solid #444; /* Borde gris suave por defecto */
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease; /* Para que el cambio a rojo sea suave */
+}
+
+/* EL EFECTO ROJO AL PASAR EL MOUSE */
+.talla-box:hover {
+  border-color: #e62117; /* El rojo oficial de Ivano Store */
+  color: #e62117;
+  transform: translateY(-2px); /* Un pequeño brinco para que se vea pro */
+}
+
+/* SIGLA ROJA */
+.badge-sigla-rojo {
+  background-color: #e62117 !important;
+  color: white !important;
+  font-weight: bold;
+  padding: 4px 8px;
+  min-width: 28px;
+  text-align: center;
+}
+
+/* CONTENEDOR DEL GÉNERO */
+.gender-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+/* PUNTO ROJO ANIMADO */
+.red-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #e62117;
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 0 5px #e62117;
+}
+
+.gender-text {
+  color: #999;
+  font-size: 0.8rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.card-divider {
+  border: 0;
+  border-top: 1px solid #222;
+  margin: 15px 0 10px 0;
+}
+
+/* EFECTO HOVER EN TALLAS */
+.talla-box:hover {
+  border-color: #e62117;
+  color: #e62117;
+}
+
+/* Botón de talla base */
+.talla-box {
+  background: #1a1a1a;
+  color: white;
+  border: 1px solid #444;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+/* Efecto hover (puntera del mouse) */
+.talla-box:hover {
+  border-color: #e62117;
+  color: #e62117;
+  transform: scale(1.05); /* Ligero aumento visual */
+}
+
+/* Estado SELECCIONADO (cuando das click) */
+.talla-box.active {
+  border-color: #e62117 !important;
+  color: #e62117 !important;
+  background: #250505; /* Un fondo sutilmente rojizo para notar la selección */
+}
+
+/* Estilo para el punto rojo y sección Hombre */
+.gender-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 15px;
+}
+
+.red-dot {
+  width: 7px;
+  height: 7px;
+  background-color: #e62117;
+  border-radius: 50%;
+  box-shadow: 0 0 5px #e62117;
+}
+
+/* CONTENEDOR DE TALLAS */
+.tallas-list {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+/* ESTILO BASE DEL CUADRITO (Foto 2 sin estilos) */
+.talla-box {
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid #333; /* Borde oscuro sutil */
+  color: white;
+  padding: 6px 12px;
+  font-size: 14px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  min-width: 45px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* EFECTO HOVER: SE PONE ROJO AL PASAR EL MOUSE */
+.talla-box:hover {
+  border-color: #e62117;
+  color: #e62117;
+}
+
+/* ESTADO ACTIVO: COMO LA 3RA IMAGEN */
+.talla-box.active {
+  border-color: #e62117 !important;
+  color: #e62117 !important;
+  background: rgba(230, 33, 23, 0.1); /* Un ligero fondo rojizo para que resalte */
+}
+
+/* ESTILO PARA TALLA ÚNICA */
+.talla-unica-btn {
+  /* Mismos estilos que talla-box para mantener uniformidad */
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid #333;
+  color: white;
+  padding: 8px 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+/* PUNTO ROJO Y TEXTO HOMBRE */
+.gender-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 15px;
+}
+
+.red-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #e62117;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.gender-text {
+  color: #888;
+  font-size: 12px;
+  letter-spacing: 1px;
+  font-weight: bold;
+}
+
+/* BADGE DE SIGLA ROJA */
+.badge-sigla-rojo {
+  background-color: #e62117 !important;
+  color: white;
+  padding: 4px 8px;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+/* 1. TÍTULO DE SECCIÓN EN EL MODAL */
+.modal-tallas-block h4 {
+  font-family: 'Arial', sans-serif; /* O la que uses en el catálogo */
+  font-size: 14px;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+/* 2. GRID DE BOTONES (Como la imagen 4c50d6) */
+.tallas-btn-grid {
+  display: flex;
+  gap: 10px; /* Espaciado entre cuadritos */
+  flex-wrap: wrap;
+}
+
+/* 3. EL CUADRITO BLANCO CON BORDE GRIS */
+.talla-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;       /* Ancho fijo para que se vea ordenado */
+  height: 45px;      /* Altura según tu captura */
+  background-color: #ffffff;
+  border: 1px solid #d3d3d3; /* Borde gris claro de la imagen */
+  color: #000000;
+  font-weight: bold;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+/* 4. ESTADO SELECCIONADO (MARCADO) */
+.talla-btn.active {
+  border: 2px solid #e62117 !important; /* Borde rojo más grueso */
+  color: #e62117 !important;
+}
+
+/* 5. EFECTO HOVER */
+.talla-btn:hover {
+  border-color: #000; /* Se oscurece el borde al pasar el mouse */
+  background-color: #f9f9f9;
+}
+
+/* SIGLA ROJA ARRIBA DEL TÍTULO */
+.sigla-producto {
+  color: #ff4d4d; /* Rojo vibrante */
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: block;
+  text-transform: uppercase;
+}
+
+/* CONTENEDOR DE LA IMAGEN PRINCIPAL */
+.product-image-container {
+  width: 100%;
+  height: auto;
+  overflow: hidden; /* Importante para que el zoom no se desborde */
+  border-radius: 4px;
+  background-color: #f4f4f4;
+}
+
+/* LA IMAGEN EN SÍ */
+.product-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Transición suave */
+  cursor: zoom-in;
+}
+
+/* EFECTO AL PASAR EL CURSOR (HOVER) */
+.product-image-container:hover img {
+  transform: scale(1.5); /* Aumenta el tamaño al 150% */
+  transform-origin: center center; /* Puedes ajustar esto con JS si quieres que siga al mouse */
+}
+
+.product-image-container {
+  overflow: hidden; /* Esto es obligatorio para que el zoom no tape el texto */
+  cursor: zoom-in;
+  position: relative;
+}
+
+.product-image-container img {
+  transition: transform 0.1s ease-out; /* Transición rápida para que no se sienta pesado */
+  display: block;
+  width: 100%;
+}
+
+.caballero-page { padding: 40px 5%; }
+
+.titulo-seccion {
+  font-family: 'Arial Black', sans-serif;
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.filter-group, .sub-filter-group {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+/* Botones principales (Negros/Blancos) */
+.chip-main {
+  background: #f4f4f4;
+  border: 2px solid transparent;
+  padding: 10px 25px;
+  font-weight: 900;
+  cursor: pointer;
+  border-radius: 4px;
+  text-transform: uppercase;
+  transition: 0.3s;
+}
+
+.chip-main.active {
+  background: #000;
+  color: #fff;
+}
+
+/* Botones secundarios (El azul de tu marca) */
+.chip-sub {
+  background: #fff;
+  border: 2px solid #007bff;
+  color: #007bff;
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-weight: 800;
+  font-size: 12px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.chip-sub.active {
+  background: #007bff;
+  color: #fff;
+}
+
+/* Animación de entrada suave */
+.fade-in {
+  animation: fadeIn 0.4s ease-in;
+  display: flex;
+  gap: 10px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.grid-productos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.sub-filter-group {
+  display: flex;
+  flex-wrap: wrap; /* Importante para que no se salgan de la pantalla */
+  justify-content: center;
+  gap: 10px;
+  max-width: 1000px; /* Limita el ancho para que no se vea tan estirado */
+  margin: 0 auto;
+}
+
+.sub-filter-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 0 15px;
+}
+
+.chip-sub {
+  white-space: nowrap; /* Evita que el texto de los botones se corte */
+  margin-bottom: 5px;
+}
+
+.sub-filter-group {
+  display: flex;
+  flex-wrap: wrap; /* Para que bajen a la siguiente línea */
+  justify-content: center;
+  gap: 10px;
+  padding: 20px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.chip-sub {
+  transition: transform 0.2s ease;
+}
+
+.chip-sub:active {
+  transform: scale(0.95); /* Efecto de click senior */
+}
+
+.btn-order:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  filter: grayscale(0.5); /* Le da un toque apagado muy bueno */
+}
+
+/* Contenedor de los botones dentro del modal */
+.actions-container {
+  display: flex;
+  flex-direction: column; /* Uno sobre otro */
+  gap: 12px;             /* Espacio entre ellos */
+  margin-top: 20px;
+  width: 100%;           /* Que ocupen todo el ancho disponible */
+}
+
+.btn-order {
+  width: 100%;           /* Botones parejos */
+  padding: 15px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+/* 1. CONTENEDOR GENERAL */
+.ivano-catalog {
+  background-color: #000;
+  color: #fff;
+  padding: 40px 5%;
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+}
+
+/* 2. HEADER Y FILTROS */
+.header-container { text-align: center; margin-bottom: 40px; }
+.main-title { font-size: 3rem; font-weight: 900; text-transform: uppercase; }
+.outline { color: transparent; -webkit-text-stroke: 1px #555; }
+
+.filter-group { 
+  display: flex; 
+  flex-wrap: wrap; 
+  justify-content: center; 
+  gap: 10px; 
+  margin-top: 20px; 
+}
+
+/* Chips de filtros */
+.chip-main, .chip-sub {
+  background: #1a1a1a;
+  color: #fff;
+  border: 1px solid #333;
+  padding: 8px 18px;
+  border-radius: 4px; /* Cuadrados como en tu referencia */
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.chip-main.active, .chip-sub.active {
+  background: #fff;
+  color: #000;
+}
+
+/* 3. GRID DE PRODUCTOS */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 25px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.product-card {
+  background: #0a0a0a;
+  border: 1px solid #1a1a1a;
+  padding: 15px;
+  transition: 0.3s;
+}
+
+.image-box {
+  background: #fff;
+  aspect-ratio: 1/1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.main-img { width: 90%; object-fit: contain; }
+
+/* 4. PAGINACIÓN - EL FOCO DEL PROBLEMA */
+.pagination-container {
+  display: flex;
+  justify-content: center; /* CENTRADO TOTAL */
+  align-items: center;
+  gap: 25px;
+  margin-top: 60px;
+  padding: 30px 0;
+  width: 100%;
+}
+
+.nav-btn {
+  background-color: #ffffff; /* Blanco como la captura de referencia */
+  color: #000000;
+  border: none;
+  padding: 12px 24px;
+  font-size: 13px;
+  font-weight: 900;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+.nav-btn:hover:not(:disabled) {
+  opacity: 0.8;
+}
+
+.nav-btn:disabled {
+  background-color: #333;
+  color: #666;
+  cursor: not-allowed;
+}
+
+.page-counter {
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.pagination-wrapper {
+  display: flex;
+  justify-content: center; /* Esto es lo que lo centra */
+  align-items: center;
+  width: 100%;
+  margin-top: 50px;
+  padding-bottom: 50px;
+}
+
+.pagination-controls {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.page-indicator {
+  color: #fff;
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+.nav-btn {
+  background: #fff;
+  color: #000;
+  border: none;
+  padding: 10px 20px;
+  font-weight: 900;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.nav-btn:disabled {
+  background: #333;
+  color: #666;
+  cursor: not-allowed;
+}
+
+/* Centrado Total del Bloque */
+.pagination-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 60px 0;
+  padding-bottom: 40px;
+}
+
+/* Alineación en una sola fila */
+.pagination-controls {
+  display: flex;
+  align-items: center;
+  gap: 30px; /* Espacio premium entre botones */
+}
+
+/* Botones Estilo Ivano (Blancos y Cuadrados) */
+.nav-btn {
+  background-color: #ffffff;
+  color: #000000;
+  border: none;
+  padding: 12px 25px;
+  font-size: 13px;
+  font-weight: 900;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.nav-btn:hover:not(:disabled) {
+  background-color: #e62117; /* El rojo de tu marca al pasar el mouse */
+  color: #fff;
+}
+
+.nav-btn:disabled {
+  background-color: #222;
+  color: #555;
+  cursor: not-allowed;
+}
+
+/* Texto de la Página */
+.page-indicator {
+  color: #ffffff;
+  font-weight: 800;
+  letter-spacing: 1px;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   AGREGAR AL FINAL DE TU CSS: PARCHE PARA EL CORAZÓN FLOTANTE
+   ========================================================================== */
+
+/* 1. Forzamos a que la tarjeta o el contenedor de la imagen sea el punto de referencia */
+.product-card, .image-box {
+  position: relative !important;
+}
+
+/* 2. Estilos del botón flotante para posicionarlo arriba a la derecha */
+.btn-card-heart-v2 {
+  position: absolute !important;
+  top: 15px !important;
+  right: 15px !important;
+  background: rgba(255, 255, 255, 0.85) !important; /* Fondo circular semi-transparente */
+  border: none !important;
+  width: 34px !important;
+  height: 34px !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  z-index: 10 !important; /* Lo antepone a cualquier overlay negro de detalles */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3) !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  transition: transform 0.2s ease, background-color 0.2s ease !important;
+}
+
+/* Efecto de agrandado sutil al pasar el mouse por encima */
+.btn-card-heart-v2:hover {
+  transform: scale(1.1) !important;
+  background: #ffffff !important;
+}
+
+/* 3. Estilos del icono del corazón dentro del botón */
+.heart-icon-v2 {
+  color: #b0b0b0 !important; /* Plomo por defecto cuando no está seleccionado */
+  font-size: 18px !important;
+  font-family: Arial, sans-serif !important;
+  line-height: 1 !important;
+  display: block !important;
+  transition: color 0.2s ease !important;
+}
+
+/* 4. Estado Activo (Cuando el usuario inició sesión y es favorito en Supabase) */
+.btn-card-heart-v2.active .heart-icon-v2 {
+  color: #e62117 !important; /* Rojo vivo de tu paleta IVANO */
+  animation: heartBeatAnimation 0.3s ease-out !important;
+}
+
+/* Animación de latido cuando cambia a activo */
+@keyframes heartBeatAnimation {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
+
+/* ==========================================================================
+   VERSION PREMIUM: BOTÓN DE FAVORITOS (MÁS GRANDE Y PROFESIONAL)
+   ========================================================================== */
+.product-card, .image-box {
+  position: relative !important;
+}
+
+/* Contenedor circular del botón */
+.btn-card-heart-v2 {
+  position: absolute !important;
+  top: 14px !important;
+  right: 14px !important;
+  background: rgba(255, 255, 255, 0.9) !important;
+  border: none !important;
+  width: 40px !important;  /* Más grande y cómodo para dar click */
+  height: 40px !important; /* Más grande */
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  z-index: 10 !important;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25) !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.2s ease !important;
+}
+
+/* Efecto hover elegante */
+.btn-card-heart-v2:hover {
+  transform: scale(1.12) !important;
+  background: #ffffff !important;
+}
+
+/* Icono del corazón interno */
+.heart-icon-v2 {
+  color: #b0b0b0 !important; /* Gris fino cuando no es favorito */
+  font-size: 22px !important;  /* Corazón visible y estilizado */
+  font-family: Arial, sans-serif !important;
+  line-height: 1 !important;
+  display: block !important;
+  transition: color 0.25s ease, transform 0.25s ease !important;
+  user-select: none !important;
+}
+
+/* Estado Activo (Cuando ya está guardado en Supabase) */
+.btn-card-heart-v2.active .heart-icon-v2 {
+  color: #e62117 !important; /* El rojo vivo de la identidad de IVANO STORE */
+  animation: heartPop 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+}
+
+/* Animación de latido expansivo al activarse */
+@keyframes heartPop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.35); }
+  100% { transform: scale(1); }
+}
+
+/* ==========================================================================
+   AGREGAR AL FINAL DE TU CSS: PARCHE PARA EL CORAZÓN FLOTANTE
+   ========================================================================== */
+
+/* 1. Forzamos a que la tarjeta o el contenedor de la imagen sea el punto de referencia */
+.product-card, .image-box {
+  position: relative !important;
+}
+
+/* 2. Estilos del botón flotante para posicionarlo arriba a la derecha */
+.btn-card-heart-v2 {
+  position: absolute !important;
+  top: 15px !important;
+  right: 15px !important;
+  background: rgba(255, 255, 255, 0.85) !important; /* Fondo circular semi-transparente */
+  border: none !important;
+  width: 34px !important;
+  height: 34px !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  z-index: 10 !important; /* Lo antepone a cualquier overlay negro de detalles */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3) !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  transition: transform 0.2s ease, background-color 0.2s ease !important;
+}
+
+/* Efecto de agrandado sutil al pasar el mouse por encima */
+.btn-card-heart-v2:hover {
+  transform: scale(1.1) !important;
+  background: #ffffff !important;
+}
+
+/* 3. Estilos del icono del corazón dentro del botón */
+.heart-icon-v2 {
+  color: #b0b0b0 !important; /* Plomo por defecto cuando no está seleccionado */
+  font-size: 18px !important;
+  font-family: Arial, sans-serif !important;
+  line-height: 1 !important;
+  display: block !important;
+  transition: color 0.2s ease !important;
+}
+
+/* 4. Estado Activo (Cuando el usuario inició sesión y es favorito en Supabase) */
+.btn-card-heart-v2.active .heart-icon-v2 {
+  color: #e62117 !important; /* Rojo vivo de tu paleta IVANO */
+  animation: heartBeatAnimation 0.3s ease-out !important;
+}
+
+/* Animación de latido cuando cambia a activo */
+@keyframes heartBeatAnimation {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
+
+/* ==========================================================================
+   VERSION PREMIUM: BOTÓN DE FAVORITOS (MÁS GRANDE Y PROFESIONAL)
+   ========================================================================== */
+.product-card, .image-box {
+  position: relative !important;
+}
+
+/* Contenedor circular del botón */
+.btn-card-heart-v2 {
+  position: absolute !important;
+  top: 14px !important;
+  right: 14px !important;
+  background: rgba(255, 255, 255, 0.9) !important;
+  border: none !important;
+  width: 40px !important;  /* Más grande y cómodo para dar click */
+  height: 40px !important; /* Más grande */
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  z-index: 10 !important;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25) !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.2s ease !important;
+}
+
+/* Efecto hover elegante */
+.btn-card-heart-v2:hover {
+  transform: scale(1.12) !important;
+  background: #ffffff !important;
+}
+
+/* Icono del corazón interno */
+.heart-icon-v2 {
+  color: #b0b0b0 !important; /* Gris fino cuando no es favorito */
+  font-size: 22px !important;  /* Corazón visible y estilizado */
+  font-family: Arial, sans-serif !important;
+  line-height: 1 !important;
+  display: block !important;
+  transition: color 0.25s ease, transform 0.25s ease !important;
+  user-select: none !important;
+}
+
+/* Estado Activo (Cuando ya está guardado en Supabase) */
+.btn-card-heart-v2.active .heart-icon-v2 {
+  color: #e62117 !important; /* El rojo vivo de la identidad de IVANO STORE */
+  animation: heartPop 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+}
+
+/* Animación de latido expansivo al activarse */
+@keyframes heartPop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.35); }
+  100% { transform: scale(1); }
+}

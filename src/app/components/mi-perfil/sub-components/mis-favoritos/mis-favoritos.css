@@ -1,0 +1,240 @@
+/* --- CONTENEDOR GENERAL --- */
+.ivano-favoritos-section {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 40px;
+  border: 1px solid #eaeaea;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.02);
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.section-header {
+  margin-bottom: 36px;
+  border-bottom: 1px solid #f5f5f5;
+  padding-bottom: 24px;
+}
+
+.section-header h2 {
+  font-family: 'Helvetica Neue', 'Inter', system-ui, sans-serif;
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #000000;
+  letter-spacing: -1px;
+  margin: 0 0 8px 0;
+}
+
+.section-header .subtitle {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.95rem;
+  color: #666666;
+  margin: 0;
+}
+
+/* --- REJILLA DE PRODUCTOS FAVORITOS --- */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 30px;
+}
+
+.product-card {
+  background: #ffffff;
+  border: 1px solid #f0f0f0;
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.06);
+  border-color: #e0e0e0;
+}
+
+/* --- IMAGEN Y CORAZÓN FLOTANTE --- */
+.image-wrapper {
+  position: relative;
+  background: #fafafa;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.product-card:hover .image-wrapper img {
+  transform: scale(1.04);
+}
+
+/* El botón del corazón flotante arriba a la derecha */
+.btn-heart-active {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: #ffffff;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  z-index: 2;
+}
+
+.btn-heart-active:hover {
+  transform: scale(1.15);
+  background: #fff5f5;
+}
+
+/* --- INFORMACIÓN DEL PRODUCTO --- */
+.product-info {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.prod-category {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #999999;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+
+.product-info h3 {
+  font-family: 'Helvetica Neue', 'Inter', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #111111;
+  margin: 0 0 8px 0;
+  line-height: 1.4;
+  height: 42px; /* Limita a dos líneas para orden */
+  overflow: hidden;
+}
+
+.prod-price {
+  font-family: 'Helvetica Neue', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #000000;
+  margin: 0 0 16px 0;
+}
+
+.btn-add-cart {
+  width: 100%;
+  padding: 12px;
+  background: #000000;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: auto;
+  transition: background-color 0.2s ease;
+}
+
+.btn-add-cart:hover {
+  background: #222222;
+}
+
+/* --- ESTILOS DE PANTALLA VACÍA --- */
+.empty-favorites {
+  text-align: center;
+  padding: 60px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.heart-icon-container {
+  margin-bottom: 24px;
+}
+
+.heart-icon-bg {
+  font-size: 3.5rem;
+  background: #fff0f2;
+  width: 90px;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  animation: pulseHeart 2s infinite ease-in-out;
+}
+
+.empty-favorites h3 {
+  font-family: 'Helvetica Neue', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #111111;
+  margin: 0 0 10px 0;
+}
+
+.empty-favorites p {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  color: #666666;
+  max-width: 380px;
+  margin: 0 0 32px 0;
+  line-height: 1.5;
+}
+
+.btn-explore {
+  padding: 14px 32px;
+  background: #000000;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-explore:hover {
+  background: #222222;
+  transform: scale(1.02);
+}
+
+.loading-box {
+  text-align: center;
+  padding: 40px;
+  font-family: 'Inter', sans-serif;
+  color: #888888;
+}
+
+/* --- ANIMACIONES --- */
+@keyframes pulseHeart {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.06); box-shadow: 0 0 20px rgba(255, 192, 203, 0.4); }
+  100% { transform: scale(1); }
+}
+@keyframes smoothShow {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}

@@ -1,0 +1,82 @@
+<section class="trends-section">
+  <div class="promo-header">
+    <h2 class="promo-title">¿DESEAS GANARTE UNAS 'IVANO'?</h2>
+    <p class="promo-subtitle">Mira nuestras dinámicas, sigue los pasos en redes y participa.</p>
+  </div>
+
+  <div class="trends-grid">
+    <div class="trend-item" *ngFor="let item of todasLasDinamicas" (click)="abrirModal(item)">
+      
+      <div class="social-video-card border-negro">
+        
+        <div class="network-badge-container">
+          <div class="network-badge-mini" *ngFor="let red of item.redes" [ngClass]="'bg-' + red.tipo">
+            <i class="bi" [ngClass]="red.icono"></i>
+          </div>
+        </div>
+
+        <div class="trend-video-wrapper">
+          <video [src]="item.video" 
+                 class="trend-video-player" 
+                 autoplay 
+                 [muted]="true" 
+                 loop 
+                 playsinline></video>
+          <div class="trend-overlay"><span>PARTICIPAR</span></div>
+        </div>
+      </div>
+
+      <div class="trend-label">{{ item.titulo }}</div>
+    </div>
+  </div>
+</section>
+
+<div class="modal-overlay" *ngIf="mostrarModal" (click)="cerrarModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <button class="btn-cerrar" (click)="cerrarModal()">✕</button>
+    <div class="modal-body">
+      
+      <div class="video-inmersivo-container">
+        <video *ngIf="videoSeleccionado" 
+               [src]="videoSeleccionado.video" 
+               autoplay 
+               muted 
+               loop 
+               playsinline 
+               class="video-foreground"
+               controlsList="nodownload noplaybackrate noremoteplayback">
+        </video>
+        
+        <video *ngIf="videoSeleccionado" 
+               [src]="videoSeleccionado.video" 
+               autoplay 
+               muted 
+               loop 
+               playsinline 
+               class="video-blur-bg">
+        </video>
+      </div>
+      
+      <div class="modal-info">
+        <h3 style="font-weight: 900; text-transform: uppercase;">{{ videoSeleccionado?.titulo }}</h3>
+        <p style="font-weight: 700;">Calidad 100% Cuero Nacional. Mira el detalle en nuestras redes.</p>
+        
+        <div class="modal-actions">
+          <button *ngIf="videoSeleccionado?.url_tiktok" class="btn-action-social bg-tiktok" (click)="redigirDinamica(videoSeleccionado.url_tiktok)">
+            <i class="bi bi-tiktok"></i> VER EN TIKTOK
+          </button>
+
+          <button *ngIf="videoSeleccionado?.url_instagram" class="btn-action-social bg-instagram" (click)="redigirDinamica(videoSeleccionado.url_instagram)">
+            <i class="bi bi-instagram"></i> VER EN INSTAGRAM
+          </button>
+
+          <button *ngIf="videoSeleccionado?.url_facebook" class="btn-action-social bg-facebook" (click)="redigirDinamica(videoSeleccionado.url_facebook)">
+            <i class="bi bi-facebook"></i> VER EN FACEBOOK
+          </button>
+
+          <button class="btn-comprar" (click)="cerrarModal()">CERRAR</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

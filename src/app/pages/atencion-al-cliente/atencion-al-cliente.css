@@ -1,0 +1,82 @@
+.atencion-container {
+  background-color: #000;
+  padding: 40px 20px;
+  text-align: center;
+  min-height: 100vh;
+}
+
+.titulo-seccion {
+  color: #fff;
+  font-size: 2rem;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+}
+
+.subtitulo {
+  color: #888;
+  margin-bottom: 40px;
+}
+
+.social-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.social-item {
+  display: flex;
+  align-items: center;
+  background: #111;
+  border: 1px solid #222;
+  padding: 15px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.social-item:hover {
+  border-color: #ccff00; /* El verde neón de Ivano */
+  transform: translateX(10px);
+}
+
+.icon {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  font-weight: bold;
+  margin-right: 20px;
+  background: #222;
+  color: #ccff00;
+}
+
+.social-text {
+  text-align: left;
+}
+
+.social-text strong {
+  display: block;
+  color: #fff;
+  font-size: 1.1rem;
+}
+
+.social-text span {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* Colores de marca para los iconos */
+.icon.wa { background: #25D366; color: white; }
+.icon.ig { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); color: white; }
+.icon.fb { background: #1877F2; color: white; }
+.icon.tk { background: #000000; color: #ff0050; border: 1px solid #00f2ea; }
+.icon.gm { background: #EA4335; color: white; }
+
+.social-item:hover .icon {
+  transform: scale(1.1);
+  transition: 0.2s;
+}
