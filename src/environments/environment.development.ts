@@ -1,11 +1,17 @@
 export const environment = {
   production: false,
-  supabaseUrl: 'https://tu-proyecto.supabase.co', 
-  supabaseKey: 'TU_CLAVE_AQUI',
+
+  // Configuración de Supabase (Base de Datos)
+  supabaseUrl: 'http://127.0.0.1:54321', 
+  supabaseKey: 'sb_publishable_ACJWlzQHlZjBrEguHvfOxg_3BJgxAaH',
+  
+  // Configuración de Culqi (Pagos)
   culqiPK: 'pk_test_ed899b8069502758', 
   culqiPKLive: '',
+
+  // Configuración de Firebase (SMS y Auth)
   firebase: {
-    apiKey: "AIzaSy_VALOR_AQUI",
+    apiKey: "AIzaSyAHA8PVGBkxgjpgP0-QFsU7mSlZpTACrSY",
     authDomain: "ivanostore.firebaseapp.com",
     projectId: "ivanostore",
     storageBucket: "ivanostore.firebasestorage.app",
