@@ -51,7 +51,7 @@ export class AccesoriosComponent implements OnInit {
 
   usuarioId: string | null = null;
 
-  public readonly BUCKET_BASE_URL = 'http://127.0.0.1:54321/storage/v1/object/public/productos/';
+  public readonly BUCKET_BASE_URL = 'https://sknhnzavjsfqraxhyhht.supabase.co/storage/v1/object/public/productos/';
 
   constructor(
     private supabaseService: SupabaseService, 
@@ -80,7 +80,7 @@ export class AccesoriosComponent implements OnInit {
     if (!nombreArchivo || nombreArchivo.trim() === '') return '';
     let carpetaCategoria = item.categoria;
     if (carpetaCategoria === 'NECESER') carpetaCategoria = 'NECESERS';
-    const rutaBase = `ACCESORIO/${carpetaCategoria}/${item.modelo}/${item.sigla}/${nombreArchivo}`;
+    const rutaBase = `ACCESORIOS/${carpetaCategoria}/${item.modelo}/${item.sigla}/${nombreArchivo}`;
     return `${this.BUCKET_BASE_URL}${rutaBase}`;
   }
 

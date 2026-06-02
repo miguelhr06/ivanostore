@@ -51,7 +51,7 @@ export class MisComprasComponent implements OnInit, OnChanges {
           const sigla = partes.length > 1 ? partes[1] : '';
           
           let path = producto.tamano === 'ACCESORIO' 
-            ? `ACCESORIO/${producto.categoria}/${producto.modelo}/${sigla}/${producto.imagen_url}`
+            ? `ACCESORIOS/${producto.categoria}/${producto.modelo}/${sigla}/${producto.imagen_url}`
             : `${producto.tamano?.toLowerCase()}/${producto.modelo}/${sigla}/${producto.imagen_url}`;
 
           const { data: urlData } = this.supabase.client.storage.from('productos').getPublicUrl(path);

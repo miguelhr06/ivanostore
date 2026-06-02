@@ -7,8 +7,8 @@ export class SupabaseService {
 
   constructor() {
     this.client = createClient(
-      'http://127.0.0.1:54321', 
-      'sb_publishable_ACJWlzQHlZjBrEguHvfOxg_3BJgxAaH', 
+      'https://sknhnzavjsfqraxhyhht.supabase.co', 
+      'sb_publishable_h_Tlkw-pI8d6MIXKnq9WKg__FSkYGfL', 
       {
         auth: {
           persistSession: true,

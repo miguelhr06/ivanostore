@@ -55,7 +55,7 @@ export class CaballeroComponent implements OnInit {
   // Diccionario para tallas
   tallaSeleccionada: { [key: number]: string } = {};
 
-  public readonly BUCKET_BASE_URL = 'http://127.0.0.1:54321/storage/v1/object/public/productos/';
+  public readonly BUCKET_BASE_URL = 'https://sknhnzavjsfqraxhyhht.supabase.co/storage/v1/object/public/productos/';
 
   constructor(
     private supabaseService: SupabaseService, 
@@ -88,7 +88,7 @@ export class CaballeroComponent implements OnInit {
     if (tamanoLower === 'accesorio') {
       let carpetaCategoria = item.categoria;
       if (carpetaCategoria === 'NECESER') carpetaCategoria = 'NECESERS';
-      rutaBase = `ACCESORIO/${carpetaCategoria}/${item.modelo}/${item.sigla}/${nombreArchivo}`;
+      rutaBase = `ACCESORIOS/${carpetaCategoria}/${item.modelo}/${item.sigla}/${nombreArchivo}`;
     } else {
       rutaBase = `${tamanoLower}/${item.modelo}/${item.sigla}/${nombreArchivo}`;
     }
