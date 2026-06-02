@@ -15,7 +15,7 @@ export class MisFavoritosComponent implements OnInit, OnChanges {
   
   favoritos: any[] = []; 
   loading: boolean = false;
-  public readonly BUCKET_BASE_URL = 'http://127.0.0.1:54321/storage/v1/object/public/productos/';
+  public readonly BUCKET_BASE_URL = 'https://sknhnzavjsfqraxhyhht.supabase.co/storage/v1/object/public/productos/';
 
   // 2. IMPORTANTE: Agregamos private router: Router aquí
   constructor(
@@ -84,7 +84,7 @@ export class MisFavoritosComponent implements OnInit, OnChanges {
     if (tamanoModulo === 'accesorio') {
       let carpetaCategoria = item.categoria;
       if (carpetaCategoria === 'NECESER') carpetaCategoria = 'NECESERS';
-      rutaBase = `ACCESORIO/${carpetaCategoria}/${item.modelo}/${item.sigla}/${nombreArchivo}`;
+      rutaBase = `ACCESORIOS/${carpetaCategoria}/${item.modelo}/${item.sigla}/${nombreArchivo}`;
     } else {
       let carpetaTamano = 'grande'; 
       if (tamanoModulo === 'grande' || tamanoModulo === 'caballero' || tamanoModulo === 'hombre') {

@@ -2,11 +2,11 @@ export const environment = {
   production: false,
 
   // Configuración de Supabase (Base de Datos)
-  supabaseUrl: 'http://127.0.0.1:54321', 
-  supabaseKey: 'sb_publishable_ACJWlzQHlZjBrEguHvfOxg_3BJgxAaH',
+  supabaseUrl: 'https://sknhnzavjsfqraxhyhht.supabase.co', 
+  supabaseKey: 'sb_publishable_h_Tlkw-pI8d6MIXKnq9WKg__FSkYGfL',
   
   // Configuración de Culqi (Pagos)
-  culqiPK: 'pk_test_ed899b8069502758', 
+  culqiPK: 'pk_test_SBEbuY1yx6xOQn9W', 
   culqiPKLive: '',
 
   // Configuración de Firebase (SMS y Auth)
