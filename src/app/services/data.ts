@@ -15,8 +15,8 @@ export class DataService {
   constructor(private http: HttpClient) {
     // Configuración de Supabase local para IVANO Store
     this.supabase = createClient(
-      'http://127.0.0.1:54321', 
-      'sb_publishable_ACJWlzQHlZjBrEguHvfOxg_3BJgxAaH' 
+      'https://sknhnzavjsfqraxhyhht.supabase.co', 
+      'sb_publishable_h_Tlkw-pI8d6MIXKnq9WKg__FSkYGfL' 
     );
   }
 
@@ -99,7 +99,7 @@ async buscarProductos(termino: string) {
 
     if (item.tamano === 'ACCESORIO') {
       // Los accesorios SI llevan la categoría en la ruta
-      fullPath = `ACCESORIO/${item.categoria}/${item.modelo}/${sigla}/${item.imagen_url}`;
+      fullPath = `ACCESORIOS/${item.categoria}/${item.modelo}/${sigla}/${item.imagen_url}`;
     } else {
       // Las zapatillas NO llevan la categoría, van directo: tamaño/modelo/sigla
       // Ejemplo: grande/F0008/E/F0008-E-1.jpg

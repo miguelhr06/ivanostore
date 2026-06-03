@@ -2,91 +2,82 @@
   <span>🛍️ ¡Gran Lanzamiento Ivano Store! Envíos a todo el Perú por la compra del Modelo 120.</span>
 </div>
 
-<section class="hero-slider">
-  <div class="video-container">
-    <video #heroVideo autoplay loop playsinline class="hero-video" [muted]="isMuted">
-      <source src="PORTADA_IVANO.mp4" type="video/mp4">
-    </video>
-    <div class="overlay"></div>
-
-    <div class="video-controls">
-      <button (click)="toggleMute()" class="btn-control">
-        {{ isMuted ? '🔇' : '🔊' }}
-      </button>
-      <button (click)="togglePlay(heroVideo)" class="btn-control">
-        {{ isPlaying ? '⏸' : '▶' }}
-      </button>
+<section class="hero-banner-grid">
+  <div class="banner-item">
+    <img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&q=80&w=1200" alt="Colección">
+    <div class="banner-content">
+      <h2 class="banner-title">COLECCIÓN<br>PRIMAVERA-VERANO</h2>
+      <p class="banner-subtitle">Descubre el estilo.</p>
+      <button class="btn btn-white" routerLink="/caballero">VER AHORA</button>
     </div>
   </div>
-
-  <div class="hero-content">
-    <h2 class="hero-title">120</h2>
-    <p class="hero-subtitle">Domina cada superficie.</p>
-    <div class="hero-buttons">
-      <button class="btn btn-white">Comprar ahora</button>
-      <button class="btn btn-outline">Ver modelo</button>
+  <div class="banner-item">
+    <img src="https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&q=80&w=1200" alt="Imprescindibles">
+    <div class="banner-content">
+      <h2 class="banner-title">LOS<br>IMPRESCINDIBLES</h2>
+      <p class="banner-subtitle">Detalles que definen.</p>
+      <button class="btn btn-outline" routerLink="/tienda">EXPLORAR</button>
     </div>
   </div>
 </section>
 
-<section class="catalog-section">
-  <div class="catalog-wrapper">
-    <button class="nav-arrow prev" (click)="carousel.scrollLeft = carousel.scrollLeft - 400">❮</button>
+<div class="main-layout-container">
 
-    <div class="product-carousel" #carousel 
-          (mousedown)="startDragging($event, carousel)" 
-          (mouseup)="stopDragging(carousel)" 
-          (mouseleave)="stopDragging(carousel)" 
-          (mousemove)="moveEvent($event, carousel)">
-      
-      <div class="product-item" *ngFor="let modelo of modelosTendencia">
-        <div class="img-box">
-          <span class="tag-nuevo">NUEVO</span>
-          <img [src]="modelo.img" [alt]="modelo.nombre">
-        </div>
-        <div class="product-details">
-          <p class="p-price">S/{{modelo.precio}}</p>
-          <p class="p-name">{{modelo.nombre}}</p>
-          <p class="p-variants">4 Colores</p>
-        </div>
-      </div>
-    </div>
-
-    <button class="nav-arrow next" (click)="carousel.scrollLeft = carousel.scrollLeft + 400">❯</button>
-  </div>
-</section>
-
-<section class="trends-section">
-  <div class="promo-header">
-    <h2 class="promo-title">TENDENCIAS ACTUALES</h2>
-    <p class="promo-subtitle">Mira nuestras dinámicas, sigue los pasos en redes y participa.</p>
-  </div>
-
-  <div class="trends-grid">
-    <div class="trend-item" *ngFor="let item of dinamicasInicio">
-      <div class="social-video-card border-negro" (click)="abrirModal(item)">
+  <section class="catalog-section">
+    <div class="catalog-wrapper">
+      <button class="nav-arrow prev" (click)="carousel.scrollLeft = carousel.scrollLeft - 400">❮</button>
+      <div class="product-carousel" #carousel 
+           (mousedown)="startDragging($event, carousel)" 
+           (mouseup)="stopDragging(carousel)" 
+           (mouseleave)="stopDragging(carousel)" 
+           (mousemove)="moveEvent($event, carousel)">
         
-        <div class="network-badge-container">
-          <div class="network-badge-mini" *ngFor="let red of item.redes" [ngClass]="'bg-' + red.tipo">
-            <i class="bi" [ngClass]="red.icono"></i>
+        <div class="product-item" *ngFor="let modelo of modelosTendencia">
+          <div class="img-box">
+            <span class="tag-nuevo">NUEVO</span>
+            <img [src]="modelo.img" [alt]="modelo.nombre">
+          </div>
+          <div class="product-details">
+            <p class="p-price">S/{{modelo.precio}}</p>
+            <p class="p-name">{{modelo.nombre}}</p>
+            <p class="p-variants">4 Colores</p>
           </div>
         </div>
-
-        <div class="trend-video-wrapper">
-          <video autoplay [muted]="true" loop playsinline class="trend-video-player" [src]="item.video"></video>
-          <div class="trend-overlay"><span>PARTICIPAR</span></div>
-        </div>
       </div>
-      <p class="trend-label">{{ item.titulo }}</p>
+      <button class="nav-arrow next" (click)="carousel.scrollLeft = carousel.scrollLeft + 400">❯</button>
     </div>
-  </div>
+  </section>
 
-  <div style="text-align: center; margin-top: 40px;">
-    <button class="btn-comprar" style="padding: 15px 40px; border: 2px solid black; background: white; cursor: pointer; font-weight: 900;" routerLink="/dinamicas-footer">
-      VER MÁS DINÁMICAS
-    </button>
-  </div>
-</section>
+  <section class="trends-section">
+    <div class="promo-header">
+      <h2 class="promo-title">TENDENCIAS ACTUALES</h2>
+      <p class="promo-subtitle">Mira nuestras dinámicas, sigue los pasos en redes y participa.</p>
+    </div>
+
+    <div class="trends-grid">
+      <div class="trend-item" *ngFor="let item of dinamicasInicio">
+        <div class="social-video-card border-negro" (click)="abrirModal(item)">
+          <div class="network-badge-container">
+            <div class="network-badge-mini" *ngFor="let red of item.redes" [ngClass]="'bg-' + red.tipo">
+              <i class="bi" [ngClass]="red.icono"></i>
+            </div>
+          </div>
+          <div class="trend-video-wrapper">
+            <video autoplay [muted]="true" loop playsinline class="trend-video-player" [src]="item.video"></video>
+            <div class="trend-overlay"><span>PARTICIPAR</span></div>
+          </div>
+        </div>
+        <p class="trend-label">{{ item.titulo }}</p>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 40px;">
+      <button class="btn-comprar" style="padding: 15px 40px; border: 2px solid black; background: white; cursor: pointer; font-weight: 900;" routerLink="/dinamicas-footer">
+        VER MÁS DINÁMICAS
+      </button>
+    </div>
+  </section>
+</div>
 
 <div class="modal-overlay" *ngIf="mostrarModal" (click)="cerrarModal()">
   <div class="modal-content" (click)="$event.stopPropagation()">
@@ -112,15 +103,12 @@
           <button *ngIf="videoSeleccionado?.url_tiktok" class="btn-tiktok" (click)="redigirDinamica(videoSeleccionado.url_tiktok)">
             <i class="bi bi-tiktok"></i> VER EN TIKTOK
           </button>
-
           <button *ngIf="videoSeleccionado?.url_instagram" class="btn-instagram" (click)="redigirDinamica(videoSeleccionado.url_instagram)">
             <i class="bi bi-instagram"></i> VER EN INSTAGRAM
           </button>
-
           <button *ngIf="videoSeleccionado?.url_facebook" class="btn-facebook" (click)="redigirDinamica(videoSeleccionado.url_facebook)">
             <i class="bi bi-facebook"></i> VER EN FACEBOOK
           </button>
-
           <button class="btn-comprar" (click)="cerrarModal()">CERRAR</button>
         </div>
       </div>

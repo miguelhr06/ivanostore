@@ -85,14 +85,14 @@ const routes: Routes = [
   // 1. Calzado Caballeros (Ej: /caballero/grande/F0008/zapatillas-para-hombre-modelo-bridge-plomo)
   { path: 'caballero/:tamano/:modelo/:slug', component: CaballeroComponent },
 
-  // 2. Accesorios desde Caballeros (Ej: /ACCESORIO/caballero/billeteras/A0001/billetera-cuero-premium)
-  { path: 'ACCESORIO/caballero/:categoria/:modelo/:slug', component: CaballeroComponent },
+  // 2. Accesorios desde Caballeros (Ej: /ACCESORIOS/caballero/billeteras/A0001/billetera-cuero-premium)
+  { path: 'ACCESORIOS/caballero/:categoria/:modelo/:slug', component: CaballeroComponent },
 
   // 3. Calzado Damas (Repites la misma lógica apuntando a DamaComponent)
   { path: 'dama/:tamano/:modelo/:slug', component: DamaComponent },
 
   // 4. Accesorios desde Damas
-  { path: 'ACCESORIO/dama/:categoria/:modelo/:slug', component: DamaComponent },
+  { path: 'ACCESORIOS/dama/:categoria/:modelo/:slug', component: DamaComponent },
 
   // PRODUCTOS (Asegúrate que el nombre coincida con tu link en el Navbar)
   { path: 'grandes', component: GrandeComponent },

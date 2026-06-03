@@ -35,15 +35,15 @@ export class MochilasComponent implements OnInit {
   fotoGaleriaActual: string = '';
 
   // Usamos la URL de tu entorno local según tus capturas
-  public readonly BUCKET_BASE_URL = 'http://127.0.0.1:54321/storage/v1/object/public/productos/';
+  public readonly BUCKET_BASE_URL = 'https://sknhnzavjsfqraxhyhht.supabase.co/storage/v1/object/public/productos/';
 
   constructor(private supabaseService: SupabaseService, private cdr: ChangeDetectorRef) {}
 
   public construirRutaImagen(item: any, nombreArchivo: string | undefined): string {
     if (!nombreArchivo) return '';
     
-    // RUTA EXACTA según tu captura de Supabase: ACCESORIO/MORRALES/MODELO/SIGLA/ARCHIVO
-    const carpetaBase = 'ACCESORIO/MOCHILAS/'; //
+    // RUTA EXACTA según tu captura de Supabase: ACCESORIOS/MORRALES/MODELO/SIGLA/ARCHIVO
+    const carpetaBase = 'ACCESORIOS/MOCHILAS/'; //
     const mod = item.modelo ? `${item.modelo}/` : ''; // Ej: A0072/
     const sig = item.sigla ? `${item.sigla}/` : '';   // Ej: G/
     

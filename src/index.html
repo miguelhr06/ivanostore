@@ -7,15 +7,39 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 
+  <script src="https://checkout.culqi.com/js/v4"></script>
+
+  <script>
+    // Inicializamos con tu llave pública
+    window.addEventListener("load", function() {
+      if (window.Culqi) {
+        window.Culqi.publicKey = 'pk_test_SBEbuY1yx6xOQn9W';
+      }
+    });
+
+    // Listener para capturar el token cuando el usuario paga
+    window.addEventListener("message", function(event) {
+      if (event.origin === "https://checkout.culqi.com") {
+        const { eventType, data } = event.data;
+        if (eventType === "token_created") {
+          console.log("Token obtenido:", data.id);
+          // Aquí alertamos el éxito; esta es la señal que tu backend necesita
+          alert("¡Pago procesado exitosamente! Token: " + data.id);
+          
+          // Opcional: Cerrar el modal automáticamente al recibir el token
+          if (window.Culqi) window.Culqi.close();
+        } else if (eventType === "error") {
+          console.error("Error en Culqi:", data);
+          alert("Error al procesar el pago: " + (data.user_message || "Intenta de nuevo"));
+        }
+      }
+    });
+  </script>
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  
   <app-root></app-root>
-
-  <script src="https://checkout.culqi.com/js/v4"></script>
-
 </body>
 </html>

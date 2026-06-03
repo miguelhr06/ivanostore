@@ -51,7 +51,7 @@ export class NinosComponent implements OnInit {
   usuarioId: string | null = null;
   favoritosIds: Set<number> = new Set();
 
-  public readonly BUCKET_BASE_URL = 'http://127.0.0.1:54321/storage/v1/object/public/productos/';
+  public readonly BUCKET_BASE_URL = 'https://sknhnzavjsfqraxhyhht.supabase.co/storage/v1/object/public/productos/';
 
   constructor(
     private supabaseService: SupabaseService, 

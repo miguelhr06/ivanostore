@@ -20,8 +20,8 @@ export class Contacto {
 
  constructor() {
   // Ponemos las credenciales directamente aquí para saltarnos el error del archivo vacío
-  const url = 'http://127.0.0.1:54321';
-  const key = 'sb_publishable_ACJWlzQHlZjBrEguHvfOxg_3BJgxAaH';
+  const url = 'https://sknhnzavjsfqraxhyhht.supabase.co';
+  const key = 'sb_publishable_h_Tlkw-pI8d6MIXKnq9WKg__FSkYGfL';
   
 
   console.log('Iniciando Supabase con llaves directas...');
