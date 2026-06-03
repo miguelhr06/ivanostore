@@ -16,7 +16,7 @@ declare var Culqi: any;
   styleUrls: ['./pago.css']
 })
 export class PagoComponent implements OnInit {
-  metodoSeleccionado: string = 'culqi'; 
+  metodoSeleccionado: string = 'culqi';
   aceptaTerminos: boolean = false;
   totalFinal: number = 0;
 
@@ -31,17 +31,43 @@ export class PagoComponent implements OnInit {
   ngOnInit(): void {
     this.totalFinal = this.carritoSvc.totalParaPagar;
     if (this.totalFinal <= 0) { this.router.navigate(['/checkout']); return; }
-    
-    // Configuración base de Culqi
+
+    this.inicializarCulqi();
+  }
+
+  inicializarCulqi() {
     const win = window as any;
     if (win.Culqi) {
-      win.Culqi.publicKey = environment.culqiPK;
+      // Selector automático: usa la llave live si detecta que es producción
+      const esProduccion = environment.production || false; 
+      win.Culqi.publicKey = esProduccion ? environment.culqiPKLive : environment.culqiPK;
+      
       win.Culqi.settings({
         title: 'IvanoStore',
         currency: 'PEN',
         amount: Math.round(this.totalFinal * 100)
       });
+
+      win.Culqi.options({
+        lang: 'auto',
+        modal: true,
+        installments: true
+      });
+
+      // Escuchar el evento de respuesta de Culqi
+      document.addEventListener('culqi', (event: any) => {
+        if (event.detail && event.detail.data) {
+          const token = event.detail.data;
+          this.procesarPagoEnServidor(token); // Aquí llamarás a tu backend
+        }
+      });
     }
+  }
+
+  procesarPagoEnServidor(token: any) {
+    console.log('Token recibido, listo para enviar al servidor:', token);
+    // Aquí es donde enviarás este token a tu función de Vercel
+    // usando la SK_LIVE configurada en tus variables de entorno del servidor.
   }
 
   procesarPedido() {
@@ -53,15 +79,9 @@ export class PagoComponent implements OnInit {
     if (this.metodoSeleccionado === 'transferencia') {
       this.confirmarTransferenciaManual();
     } else {
-      // Abrimos el modal nativo de Culqi V4
       const win = window as any;
       if (win.Culqi) {
-        win.Culqi.settings({
-          title: 'IvanoStore',
-          currency: 'PEN',
-          amount: Math.round(this.totalFinal * 100)
-        });
-        win.Culqi.open();
+        win.Culqi.open(); // Abrir formulario
       }
     }
   }

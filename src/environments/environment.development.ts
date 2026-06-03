@@ -7,7 +7,7 @@ export const environment = {
   
   // Configuración de Culqi (Pagos)
   culqiPK: 'pk_test_SBEbuY1yx6xOQn9W', 
-  culqiPKLive: '',
+  culqiPKLive: 'pk_live_aa1zBgEvT9uc36Lh',
 
   // Configuración de Firebase (SMS y Auth)
   firebase: {
