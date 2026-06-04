@@ -714,3 +714,13 @@
     color: var(--primary-gold);
     text-decoration: none;
 }
+
+.btn-checkout {
+  cursor: pointer;
+}
+
+.btn-checkout:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  /* NO pongas pointer-events: none; aquí */
+}

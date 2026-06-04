@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -26,55 +26,47 @@ export class PagoComponent implements OnInit {
     { banco: 'BBVA', nro: '001103600100059833', cci: '011 360 000100059833 52', titular: 'CORPORACION IVANO S.A.C.' }
   ];
 
-  constructor(private carritoSvc: CarritoService, private router: Router) {}
+  constructor(
+    private carritoSvc: CarritoService, 
+    private router: Router,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     this.totalFinal = this.carritoSvc.totalParaPagar;
     if (this.totalFinal <= 0) { this.router.navigate(['/checkout']); return; }
-    
-    // Configuración base de Culqi
-    const win = window as any;
-    if (win.Culqi) {
-      win.Culqi.publicKey = environment.culqiPK;
-      win.Culqi.settings({
-        title: 'IvanoStore',
-        currency: 'PEN',
-        amount: Math.round(this.totalFinal * 100)
-      });
+  }
+
+  procesarPedido() {
+    if (!this.aceptaTerminos) {
+      Swal.fire('¡Atención!', 'Acepta los términos primero.', 'warning');
+      return;
+    }
+
+    if (this.metodoSeleccionado === 'transferencia' || this.metodoSeleccionado === 'billeteras') {
+      this.confirmarTransferenciaManual();
+    } else {
+      const win = window as any;
+      if (win.Culqi) {
+        win.Culqi.settings({
+          title: 'IvanoStore',
+          currency: 'PEN',
+          amount: Math.round(this.totalFinal * 100)
+        });
+        win.Culqi.open();
+      } else {
+        Swal.fire('Error', 'La pasarela de pagos no ha cargado. Recarga la página.', 'error');
+      }
     }
   }
 
-procesarPedido() {
-  if (!this.aceptaTerminos) {
-    Swal.fire('¡Atención!', 'Acepta los términos primero.', 'warning');
-    return;
+  toggleTerminos() {
+    this.aceptaTerminos = !this.aceptaTerminos;
+    this.cdr.detectChanges();
   }
 
-  if (this.metodoSeleccionado === 'transferencia' || this.metodoSeleccionado === 'billeteras') {
-    this.confirmarTransferenciaManual();
-  } else {
-    const win = window as any;
-    if (win.Culqi) {
-      win.Culqi.settings({
-        title: 'IvanoStore',
-        currency: 'PEN',
-        amount: Math.round(this.totalFinal * 100),
-        // IMPORTANTE: Aquí vinculas la función que definimos en index.html
-        options: {
-          style: {
-            logo: 'https://tu-url-de-logo.com/logo.png'
-          }
-        }
-      });
-      win.Culqi.open();
-    }
-  }
-}
-  seleccionarMetodo(metodo: string) { this.metodoSeleccionado = metodo; }
-
-  copiarTexto(texto: string) {
-    navigator.clipboard.writeText(texto);
-    Swal.fire({ toast: true, position: 'top-end', icon: 'success', title: 'Copiado', showConfirmButton: false, timer: 1000 });
+  seleccionarMetodo(metodo: string) { 
+    this.metodoSeleccionado = metodo; 
   }
 
   confirmarTransferenciaManual() {
