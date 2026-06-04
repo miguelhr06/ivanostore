@@ -1,35 +1,21 @@
-<div class="pago-container">
-  <div class="pago-main-card">
-    <div class="pago-sidebar">
-      <div class="metodo-item" [class.active]="metodoSeleccionado === 'culqi'" (click)="seleccionarMetodo('culqi')">
-        <i class="fas fa-credit-card"></i> <span>Tarjeta / Cuotéalo</span>
-      </div>
-      <div class="metodo-item" [class.active]="metodoSeleccionado === 'billeteras'" (click)="seleccionarMetodo('billeteras')">
-        <i class="fas fa-mobile-alt"></i> <span>Yape / Plin</span>
-      </div>
-      <div class="metodo-item" [class.active]="metodoSeleccionado === 'transferencia'" (click)="seleccionarMetodo('transferencia')">
-        <i class="fas fa-university"></i> <span>Transferencia</span>
-      </div>
+<div class="pago-detail">
+  <div [ngSwitch]="metodoSeleccionado">
+    <!-- Caso Culqi -->
+    <div *ngSwitchCase="'culqi'" class="view-center">
+      <img src="assets/culqi-full.png" class="logo-pasarela" alt="Culqi">
+      <p>Haz clic en "PAGAR AHORA" para abrir el formulario seguro de Culqi.</p>
     </div>
-
-    <div class="pago-detail">
-      <div [ngSwitch]="metodoSeleccionado">
-        <div *ngSwitchCase="'culqi'" class="view-center">
-          <img src="assets/culqi-full.png" class="logo-pasarela" alt="Culqi">
-          <p>Haz clic en "PAGAR AHORA" para abrir el formulario seguro de Culqi.</p>
-        </div>
-        </div>
+    <!-- Caso Billeteras -->
+    <div *ngSwitchCase="'billeteras'" class="view-center">
+      <h3>Yape / Plin</h3>
+      <p>Escanea el QR o envía al número: <b>910 527 690</b></p>
+    </div>
+    <!-- Caso Transferencia -->
+    <div *ngSwitchCase="'transferencia'" class="view-center">
+      <h3>Transferencia Bancaria</h3>
+      <div *ngFor="let c of cuentasBancarias" class="bank-card">
+        <p><b>{{c.banco}}</b>: {{c.nro}} (CCI: {{c.cci}})</p>
+      </div>
     </div>
   </div>
-
-  <aside class="pago-summary">
-    <div class="summary-box">
-      <h3>Resumen de Orden</h3>
-      <div class="total-line"><span>Total:</span> <strong>S/ {{ totalFinal | number:'1.2-2' }}</strong></div>
-      <label><input type="checkbox" [(ngModel)]="aceptaTerminos"> Acepto términos</label>
-      <button class="btn-checkout" [disabled]="!aceptaTerminos" (click)="procesarPedido()">
-        {{ metodoSeleccionado === 'transferencia' ? 'CONFIRMAR PEDIDO' : 'PAGAR AHORA' }}
-      </button>
-    </div>
-  </aside>
 </div>

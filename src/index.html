@@ -10,31 +10,34 @@
   <script src="https://checkout.culqi.com/js/v4"></script>
 
   <script>
-    // Inicializamos con tu llave pública
-    window.addEventListener("load", function() {
-      if (window.Culqi) {
-        window.Culqi.publicKey = 'pk_test_SBEbuY1yx6xOQn9W';
-      }
-    });
+  window.addEventListener("load", function() {
+    if (window.Culqi) {
+      window.Culqi.publicKey = 'pk_test_SBEbuY1yx6xOQn9W';
+      
+      // Listener oficial de Culqi V4 para capturar el token
+      window.Culqi.options({
+        lang: 'es',
+        modal: true
+      });
+    }
+  });
 
-    // Listener para capturar el token cuando el usuario paga
-    window.addEventListener("message", function(event) {
-      if (event.origin === "https://checkout.culqi.com") {
-        const { eventType, data } = event.data;
-        if (eventType === "token_created") {
-          console.log("Token obtenido:", data.id);
-          // Aquí alertamos el éxito; esta es la señal que tu backend necesita
-          alert("¡Pago procesado exitosamente! Token: " + data.id);
-          
-          // Opcional: Cerrar el modal automáticamente al recibir el token
-          if (window.Culqi) window.Culqi.close();
-        } else if (eventType === "error") {
-          console.error("Error en Culqi:", data);
-          alert("Error al procesar el pago: " + (data.user_message || "Intenta de nuevo"));
-        }
-      }
-    });
-  </script>
+  // Listener nativo de Culqi V4
+  function culqi() {
+    if (window.Culqi.token) {
+      const token = window.Culqi.token.id;
+      console.log('Token creado:', token);
+      alert('Pago exitoso. Token: ' + token);
+      // Aquí llamarías a tu servicio para enviar el token al backend
+    } else if (window.Culqi.order) {
+      const order = window.Culqi.order.id;
+      console.log('Orden creada:', order);
+    } else {
+      console.log('Error:', window.Culqi.error);
+      alert('Error: ' + window.Culqi.error.user_message);
+    }
+  }
+</script>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">

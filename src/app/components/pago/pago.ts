@@ -44,28 +44,32 @@ export class PagoComponent implements OnInit {
     }
   }
 
-  procesarPedido() {
-    if (!this.aceptaTerminos) {
-      Swal.fire('¡Atención!', 'Acepta los términos primero.', 'warning');
-      return;
-    }
-
-    if (this.metodoSeleccionado === 'transferencia') {
-      this.confirmarTransferenciaManual();
-    } else {
-      // Abrimos el modal nativo de Culqi V4
-      const win = window as any;
-      if (win.Culqi) {
-        win.Culqi.settings({
-          title: 'IvanoStore',
-          currency: 'PEN',
-          amount: Math.round(this.totalFinal * 100)
-        });
-        win.Culqi.open();
-      }
-    }
+procesarPedido() {
+  if (!this.aceptaTerminos) {
+    Swal.fire('¡Atención!', 'Acepta los términos primero.', 'warning');
+    return;
   }
 
+  if (this.metodoSeleccionado === 'transferencia' || this.metodoSeleccionado === 'billeteras') {
+    this.confirmarTransferenciaManual();
+  } else {
+    const win = window as any;
+    if (win.Culqi) {
+      win.Culqi.settings({
+        title: 'IvanoStore',
+        currency: 'PEN',
+        amount: Math.round(this.totalFinal * 100),
+        // IMPORTANTE: Aquí vinculas la función que definimos en index.html
+        options: {
+          style: {
+            logo: 'https://tu-url-de-logo.com/logo.png'
+          }
+        }
+      });
+      win.Culqi.open();
+    }
+  }
+}
   seleccionarMetodo(metodo: string) { this.metodoSeleccionado = metodo; }
 
   copiarTexto(texto: string) {
