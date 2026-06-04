@@ -3,7 +3,6 @@ export const environment = {
   supabaseUrl: '',
   supabaseKey: '',
   culqiPK: '',
-  culqiPKLive: '',
   firebase: {
     apiKey: "",
     authDomain: "ivanostore.firebaseapp.com",
