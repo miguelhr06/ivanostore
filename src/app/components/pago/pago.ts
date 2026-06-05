@@ -47,25 +47,25 @@ procesarPedido() {
 
   const win = window as any;
   if (win.Culqi) {
-    // 1. Configuración de llave
+    // 1. Configura la llave pública de pruebas que mostraste en tu imagen
     win.Culqi.publicKey = 'pk_test_V9QG8cow9raGIsIB'; 
     
-    // 2. Definición explícita de opciones (sin funciones extra)
-    win.Culqi.options({
-      modal: true
-    });
-
-    // 3. Settings
+    // 2. Configura los ajustes básicos
     win.Culqi.settings({
       title: 'IvanoStore',
       currency: 'PEN',
       amount: Math.round(this.totalFinal * 100)
     });
 
-    // 4. Abrir
+    // 3. Opciones sin referencias a imágenes inexistentes
+    win.Culqi.options({
+      modal: true
+    });
+
+    // 4. Abrir el modal
     win.Culqi.open();
   } else {
-    Swal.fire('Error', 'La pasarela no ha cargado, intenta recargar.', 'error');
+    Swal.fire('Error', 'La pasarela de pago no ha cargado. Recarga la página.', 'error');
   }
 }
 

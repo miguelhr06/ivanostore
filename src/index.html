@@ -7,21 +7,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 
-  <script src="https://checkout.culqi.com/js/v4"></script>
+<script src="https://checkout.culqi.com/js/v4"></script>
 <script>
-  // Escucha el evento de Culqi cuando el token se crea o hay error
   window.addEventListener('message', function(event) {
+    // Solo escucha mensajes provenientes de Culqi
     if (event.origin === 'https://checkout.culqi.com') {
       const { eventType, data } = event.data;
       if (eventType === 'token_created') {
-        console.log('Token creado:', data.id);
-        alert('Pago exitoso. Token: ' + data.id);
-        // Aquí deberías llamar a tu servicio backend para procesar el cargo
-      } else if (eventType === 'close_modal') {
-        console.log('El usuario cerró el modal');
+        console.log('Token creado exitosamente:', data.id);
+        // Aquí deberías enviar este token a tu backend
       } else if (eventType === 'error') {
-        console.log('Error:', data);
-        alert('Error: ' + data.user_message);
+        console.error('Error en el pago:', data);
       }
     }
   });
