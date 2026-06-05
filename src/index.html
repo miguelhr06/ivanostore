@@ -8,6 +8,24 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 
   <script src="https://checkout.culqi.com/js/v4"></script>
+<script>
+  // Escucha el evento de Culqi cuando el token se crea o hay error
+  window.addEventListener('message', function(event) {
+    if (event.origin === 'https://checkout.culqi.com') {
+      const { eventType, data } = event.data;
+      if (eventType === 'token_created') {
+        console.log('Token creado:', data.id);
+        alert('Pago exitoso. Token: ' + data.id);
+        // Aquí deberías llamar a tu servicio backend para procesar el cargo
+      } else if (eventType === 'close_modal') {
+        console.log('El usuario cerró el modal');
+      } else if (eventType === 'error') {
+        console.log('Error:', data);
+        alert('Error: ' + data.user_message);
+      }
+    }
+  });
+</script>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">

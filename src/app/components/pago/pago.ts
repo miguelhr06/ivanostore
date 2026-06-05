@@ -44,24 +44,27 @@ procesarPedido() {
     return;
   }
 
-  if (this.metodoSeleccionado === 'culqi') {
-    const win = window as any;
-    if (win.Culqi) {
-      // AQUÍ ESTÁ EL CAMBIO: Configuramos la llave y los settings justo antes de abrir
-      win.Culqi.publicKey = 'pk_test_V9QG8cow9raGIsIB'; 
-      win.Culqi.settings({
-        title: 'IvanoStore',
-        currency: 'PEN',
-        amount: Math.round(this.totalFinal * 100)
-      });
-      // En tu procesarPedido, antes de win.Culqi.open() añade esto:
-win.Culqi.options({
-  modal: true
-});
-      win.Culqi.open();
-    }
+  const win = window as any;
+  if (win.Culqi) {
+    win.Culqi.publicKey = 'pk_test_V9QG8cow9raGIsIB'; 
+    win.Culqi.settings({
+      title: 'IvanoStore',
+      currency: 'PEN',
+      amount: Math.round(this.totalFinal * 100)
+    });
+    
+    // Esto es vital: configurar el listener para que el SDK avise al index.html
+    win.Culqi.options({
+      modal: true,
+      // Se recomienda añadir esto para asegurar la comunicación
+      style: {
+        logo: 'https://tu-logo-url.png' // Opcional
+      }
+    });
+
+    win.Culqi.open();
   } else {
-    this.confirmarTransferenciaManual();
+    Swal.fire('Error', 'La pasarela no ha cargado, intenta recargar.', 'error');
   }
 }
 
