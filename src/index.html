@@ -9,36 +9,6 @@
 
   <script src="https://checkout.culqi.com/js/v4"></script>
 
-  <script>
-  window.addEventListener("load", function() {
-    if (window.Culqi) {
-      window.Culqi.publicKey = 'pk_test_SBEbuY1yx6xOQn9W';
-      
-      // Listener oficial de Culqi V4 para capturar el token
-      window.Culqi.options({
-        lang: 'es',
-        modal: true
-      });
-    }
-  });
-
-  // Listener nativo de Culqi V4
-  function culqi() {
-    if (window.Culqi.token) {
-      const token = window.Culqi.token.id;
-      console.log('Token creado:', token);
-      alert('Pago exitoso. Token: ' + token);
-      // Aquí llamarías a tu servicio para enviar el token al backend
-    } else if (window.Culqi.order) {
-      const order = window.Culqi.order.id;
-      console.log('Orden creada:', order);
-    } else {
-      console.log('Error:', window.Culqi.error);
-      alert('Error: ' + window.Culqi.error.user_message);
-    }
-  }
-</script>
-
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>

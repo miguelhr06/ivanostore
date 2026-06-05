@@ -37,28 +37,33 @@ export class PagoComponent implements OnInit {
     if (this.totalFinal <= 0) { this.router.navigate(['/checkout']); return; }
   }
 
-  procesarPedido() {
-    if (!this.aceptaTerminos) {
-      Swal.fire('¡Atención!', 'Acepta los términos primero.', 'warning');
-      return;
-    }
-
-    if (this.metodoSeleccionado === 'transferencia' || this.metodoSeleccionado === 'billeteras') {
-      this.confirmarTransferenciaManual();
-    } else {
-      const win = window as any;
-      if (win.Culqi) {
-        win.Culqi.settings({
-          title: 'IvanoStore',
-          currency: 'PEN',
-          amount: Math.round(this.totalFinal * 100)
-        });
-        win.Culqi.open();
-      } else {
-        Swal.fire('Error', 'La pasarela de pagos no ha cargado. Recarga la página.', 'error');
-      }
-    }
+  // En procesarPedido(), ajusta esta parte:
+procesarPedido() {
+  if (!this.aceptaTerminos) {
+    Swal.fire('¡Atención!', 'Acepta los términos primero.', 'warning');
+    return;
   }
+
+  if (this.metodoSeleccionado === 'culqi') {
+    const win = window as any;
+    if (win.Culqi) {
+      // AQUÍ ESTÁ EL CAMBIO: Configuramos la llave y los settings justo antes de abrir
+      win.Culqi.publicKey = 'pk_test_SBEbuY1yx6xOQn9W'; 
+      win.Culqi.settings({
+        title: 'IvanoStore',
+        currency: 'PEN',
+        amount: Math.round(this.totalFinal * 100)
+      });
+      // En tu procesarPedido, antes de win.Culqi.open() añade esto:
+win.Culqi.options({
+  modal: true
+});
+      win.Culqi.open();
+    }
+  } else {
+    this.confirmarTransferenciaManual();
+  }
+}
 
   toggleTerminos() {
     this.aceptaTerminos = !this.aceptaTerminos;
