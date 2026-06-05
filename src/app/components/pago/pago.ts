@@ -38,6 +38,7 @@ export class PagoComponent implements OnInit {
   }
 
   // En procesarPedido(), ajusta esta parte:
+// En src/app/components/pago/pago.ts
 procesarPedido() {
   if (!this.aceptaTerminos) {
     Swal.fire('¡Atención!', 'Acepta los términos primero.', 'warning');
@@ -46,22 +47,22 @@ procesarPedido() {
 
   const win = window as any;
   if (win.Culqi) {
+    // 1. Configuración de llave
     win.Culqi.publicKey = 'pk_test_V9QG8cow9raGIsIB'; 
+    
+    // 2. Definición explícita de opciones (sin funciones extra)
+    win.Culqi.options({
+      modal: true
+    });
+
+    // 3. Settings
     win.Culqi.settings({
       title: 'IvanoStore',
       currency: 'PEN',
       amount: Math.round(this.totalFinal * 100)
     });
-    
-    // Esto es vital: configurar el listener para que el SDK avise al index.html
-    win.Culqi.options({
-      modal: true,
-      // Se recomienda añadir esto para asegurar la comunicación
-      style: {
-        logo: 'https://tu-logo-url.png' // Opcional
-      }
-    });
 
+    // 4. Abrir
     win.Culqi.open();
   } else {
     Swal.fire('Error', 'La pasarela no ha cargado, intenta recargar.', 'error');
