@@ -48,7 +48,7 @@ procesarPedido() {
     const win = window as any;
     if (win.Culqi) {
       // AQUÍ ESTÁ EL CAMBIO: Configuramos la llave y los settings justo antes de abrir
-      win.Culqi.publicKey = 'pk_test_SBEbuY1yx6xOQn9W'; 
+      win.Culqi.publicKey = 'pk_test_V9QG8cow9raGIsIB'; 
       win.Culqi.settings({
         title: 'IvanoStore',
         currency: 'PEN',
