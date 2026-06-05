@@ -46,7 +46,7 @@ procesarPedido() {
 
   const win = window as any;
   if (win.Culqi) {
-    // 1. Asignamos la llave pública explícitamente
+    // 1. Asignamos la llave
     win.Culqi.publicKey = 'pk_test_V9QG8cow9raGIsIB'; 
 
     // 2. Configuramos ajustes
@@ -56,8 +56,14 @@ procesarPedido() {
       amount: Math.round(this.totalFinal * 100)
     });
 
-    // 3. Abrimos el modal
+    // 3. ¡ESTO ES LO QUE FALTABA! 
+    // En V4 debes llamar a init() para que el objeto sepa que está configurado
+    win.Culqi.init(); 
+
+    // 4. Abrimos el modal
     win.Culqi.open();
+  } else {
+    Swal.fire('Error', 'La pasarela no ha cargado.', 'error');
   }
 }
 
