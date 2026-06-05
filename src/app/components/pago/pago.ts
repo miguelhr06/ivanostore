@@ -37,13 +37,12 @@ export class PagoComponent implements OnInit {
 
   // En procesarPedido(), ajusta esta parte:
 // En src/app/components/pago/pago.ts
+// Tu procesarPedido() está bien estructurado
 procesarPedido() {
   if (!this.aceptaTerminos) {
     Swal.fire('¡Atención!', 'Acepta los términos primero.', 'warning');
     return;
   }
-
-  // Acceso directo a window.Culqi
   const win = window as any;
   if (win.Culqi) {
     win.Culqi.publicKey = 'pk_test_V9QG8cow9raGIsIB'; 
