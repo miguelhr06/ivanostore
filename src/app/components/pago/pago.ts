@@ -6,8 +6,6 @@ import Swal from 'sweetalert2';
 import { environment } from '../../../environments/environment';
 import { CarritoService } from '../../services/carrito';
 
-declare var Culqi: any;
-
 @Component({
   selector: 'app-pago',
   standalone: true,
@@ -45,27 +43,19 @@ procesarPedido() {
     return;
   }
 
+  // Acceso directo a window.Culqi
   const win = window as any;
   if (win.Culqi) {
-    // 1. Configura la llave pública de pruebas que mostraste en tu imagen
     win.Culqi.publicKey = 'pk_test_V9QG8cow9raGIsIB'; 
-    
-    // 2. Configura los ajustes básicos
     win.Culqi.settings({
       title: 'IvanoStore',
       currency: 'PEN',
       amount: Math.round(this.totalFinal * 100)
     });
-
-    // 3. Opciones sin referencias a imágenes inexistentes
-    win.Culqi.options({
-      modal: true
-    });
-
-    // 4. Abrir el modal
+    win.Culqi.options({ modal: true });
     win.Culqi.open();
   } else {
-    Swal.fire('Error', 'La pasarela de pago no ha cargado. Recarga la página.', 'error');
+    Swal.fire('Error', 'La pasarela no ha cargado.', 'error');
   }
 }
 
