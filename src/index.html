@@ -14,23 +14,15 @@
       const { eventType, data } = event.data;
       
       if (eventType === 'token_created') {
-        // AQUÍ ESTÁ EL CAMBIO:
-        console.log('Token creado:', data.id);
+        console.log('Token generado exitosamente:', data.id);
         
-        // 1. Cierra el modal manualmente si es necesario
-        // 2. ENVÍA EL TOKEN A TU BACKEND PARA FINALIZAR EL PAGO
-        // Debes llamar a tu servicio de carrito o backend aquí:
-        alert('Pago exitoso, token: ' + data.id);
-        
-        // Ejemplo de lo que deberías hacer:
-        // fetch('TU_URL_DE_BACKEND/procesar-pago', { 
-        //    method: 'POST', 
-        //    body: JSON.stringify({ token: data.id }) 
-        // });
+        // ¡IMPORTANTE! Envía este token a tu backend para terminar el cargo
+        // Cuando tu backend responda "OK", puedes cerrar el modal así:
+        window.Culqi.close(); 
+        alert('Pago procesado correctamente');
       } 
       else if (eventType === 'error') {
-        console.error('Error reportado por Culqi:', data);
-        alert('Error: ' + data.user_message);
+        console.error('Error reportado:', data);
       }
     }
   });
