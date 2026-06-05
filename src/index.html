@@ -10,14 +10,27 @@
 <script src="https://checkout.culqi.com/js/v4"></script>
 <script>
   window.addEventListener('message', function(event) {
-    // Solo escucha mensajes provenientes de Culqi
     if (event.origin === 'https://checkout.culqi.com') {
       const { eventType, data } = event.data;
+      
       if (eventType === 'token_created') {
-        console.log('Token creado exitosamente:', data.id);
-        // Aquí deberías enviar este token a tu backend
-      } else if (eventType === 'error') {
-        console.error('Error en el pago:', data);
+        // AQUÍ ESTÁ EL CAMBIO:
+        console.log('Token creado:', data.id);
+        
+        // 1. Cierra el modal manualmente si es necesario
+        // 2. ENVÍA EL TOKEN A TU BACKEND PARA FINALIZAR EL PAGO
+        // Debes llamar a tu servicio de carrito o backend aquí:
+        alert('Pago exitoso, token: ' + data.id);
+        
+        // Ejemplo de lo que deberías hacer:
+        // fetch('TU_URL_DE_BACKEND/procesar-pago', { 
+        //    method: 'POST', 
+        //    body: JSON.stringify({ token: data.id }) 
+        // });
+      } 
+      else if (eventType === 'error') {
+        console.error('Error reportado por Culqi:', data);
+        alert('Error: ' + data.user_message);
       }
     }
   });

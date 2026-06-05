@@ -43,18 +43,21 @@ procesarPedido() {
     Swal.fire('¡Atención!', 'Acepta los términos primero.', 'warning');
     return;
   }
+
   const win = window as any;
   if (win.Culqi) {
+    // 1. Asignamos la llave pública explícitamente
     win.Culqi.publicKey = 'pk_test_V9QG8cow9raGIsIB'; 
+
+    // 2. Configuramos ajustes
     win.Culqi.settings({
       title: 'IvanoStore',
       currency: 'PEN',
       amount: Math.round(this.totalFinal * 100)
     });
-    win.Culqi.options({ modal: true });
+
+    // 3. Abrimos el modal
     win.Culqi.open();
-  } else {
-    Swal.fire('Error', 'La pasarela no ha cargado.', 'error');
   }
 }
 
