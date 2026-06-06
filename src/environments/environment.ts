@@ -2,7 +2,7 @@ export const environment = {
   production: false,
   supabaseUrl: '',
   supabaseKey: '',
-  culqiPK: '',
+  CulqiPK: '',
   firebase: {
     apiKey: "",
     authDomain: "ivanostore.firebaseapp.com",
@@ -11,4 +11,4 @@ export const environment = {
     messagingSenderId: "334537530555",
     appId: "1:334537530555:web:2006790d9afbbc9954dd9e"
   }
-};
+}; 

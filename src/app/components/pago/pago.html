@@ -1,7 +1,7 @@
 <div class="pago-container">
   <div class="pago-main-card">
     <div class="pago-sidebar">
-      <div class="metodo-item" [class.active]="metodoSeleccionado === 'culqi'" (click)="seleccionarMetodo('culqi')">
+      <div class="metodo-item" [class.active]="metodoSeleccionado === 'Culqi'" (click)="seleccionarMetodo('Culqi')">
         <i class="fas fa-credit-card"></i> <span>Tarjeta / Cuotéalo</span>
       </div>
       <div class="metodo-item" [class.active]="metodoSeleccionado === 'billeteras'" (click)="seleccionarMetodo('billeteras')">
@@ -14,8 +14,8 @@
 
     <div class="pago-detail">
       <div [ngSwitch]="metodoSeleccionado">
-        <div *ngSwitchCase="'culqi'" class="view-center">
-          <img src="assets/culqi-full.png" class="logo-pasarela" alt="Culqi" style="max-width: 150px;">
+        <div *ngSwitchCase="'Culqi'" class="view-center">
+          <img src="assets/Culqi-full.png" class="logo-pasarela" alt="Culqi" style="max-width: 150px;">
           <p>Haz clic en "PAGAR AHORA" para abrir el formulario seguro de Culqi.</p>
         </div>
         <div *ngSwitchCase="'billeteras'" class="view-center">

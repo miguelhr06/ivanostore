@@ -14,7 +14,7 @@ import { CarritoService } from '../../services/carrito';
   styleUrls: ['./pago.css']
 })
 export class PagoComponent implements OnInit {
-  metodoSeleccionado: string = 'culqi'; 
+  metodoSeleccionado: string = 'Culqi'; 
   aceptaTerminos: boolean = false;
   totalFinal: number = 0;
 
@@ -36,7 +36,7 @@ export class PagoComponent implements OnInit {
   }
 
 // En tu pago.ts, agrega esta variable fuera de la clase o como propiedad:
-private culqiScriptCargado = false;
+private CulqiScriptCargado = false;
 
 procesarPedido() {
   if (!this.aceptaTerminos) {

@@ -7,7 +7,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 
-<script src="https://checkout.culqi.com/js/v4"></script>
 <script>
   // Esta función será llamada desde tu Angular
   function abrirCulqi(amount, email) {
@@ -26,7 +25,7 @@
 
   // Escuchar el evento de token creado
   window.addEventListener("message", function(e) {
-    if (e.origin === "https://checkout.culqi.com") {
+    if (e.origin === "https://checkout.Culqi.com") {
       const { eventType, data } = e.data;
       if (eventType === "token_created") {
         console.log("Token:", data.id);

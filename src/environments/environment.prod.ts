@@ -2,7 +2,7 @@ export const environment = {
   production: true,
   supabaseUrl: '',
   supabaseKey: '',
-  culqiPK: '',
+  CulqiPK: '',
   firebase: {
     apiKey: '',
     authDomain: '',
