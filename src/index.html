@@ -15,14 +15,14 @@
       
       if (eventType === 'token_created') {
         console.log('Token generado exitosamente:', data.id);
-        
-        // ¡IMPORTANTE! Envía este token a tu backend para terminar el cargo
-        // Cuando tu backend responda "OK", puedes cerrar el modal así:
-        window.Culqi.close(); 
+        // Aquí debes llamar a tu backend. Por ahora, forzamos el cierre:
+        if (window.Culqi) window.Culqi.close(); 
         alert('Pago procesado correctamente');
       } 
       else if (eventType === 'error') {
         console.error('Error reportado:', data);
+        // Cerramos el modal ante cualquier error para evitar el "Ups!"
+        if (window.Culqi) window.Culqi.close();
       }
     }
   });

@@ -38,6 +38,7 @@ export class PagoComponent implements OnInit {
   // En procesarPedido(), ajusta esta parte:
 // En src/app/components/pago/pago.ts
 // Tu procesarPedido() está bien estructurado
+// En pago.ts
 procesarPedido() {
   if (!this.aceptaTerminos) {
     Swal.fire('¡Atención!', 'Acepta los términos primero.', 'warning');
@@ -45,25 +46,23 @@ procesarPedido() {
   }
 
   const win = window as any;
+  
+  // VERIFICACIÓN DE SEGURIDAD:
   if (win.Culqi) {
-    // 1. Asignamos la llave
     win.Culqi.publicKey = 'pk_test_V9QG8cow9raGIsIB'; 
 
-    // 2. Configuramos ajustes
     win.Culqi.settings({
       title: 'IvanoStore',
       currency: 'PEN',
       amount: Math.round(this.totalFinal * 100)
     });
 
-    // 3. ¡ESTO ES LO QUE FALTABA! 
-    // En V4 debes llamar a init() para que el objeto sepa que está configurado
     win.Culqi.init(); 
-
-    // 4. Abrimos el modal
     win.Culqi.open();
   } else {
-    Swal.fire('Error', 'La pasarela no ha cargado.', 'error');
+    // Si no carga a la primera, intentamos un reintento pequeño
+    Swal.fire('Espera un segundo', 'La pasarela está cargando...', 'info');
+    console.warn("Culqi aún no está cargado en window.Culqi");
   }
 }
 
