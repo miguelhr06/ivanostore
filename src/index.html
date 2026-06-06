@@ -7,33 +7,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 
+<script src="https://checkout.culqi.com/js/v4"></script>
 <script>
-  // Esta función será llamada desde tu Angular
   function abrirCulqi(amount, email) {
-    Culqi.publicKey = 'pk_test_V9QG8cow9raGIsIB';
-    Culqi.settings({
-      title: 'IvanoStore',
-      currency: 'PEN',
-      amount: amount
-    });
-    Culqi.options({
-      lang: "auto"
-    });
-    // ¡La documentación v4 indica que basta con esto!
-    Culqi.open();
-  }
-
-  // Escuchar el evento de token creado
-  window.addEventListener("message", function(e) {
-    if (e.origin === "https://checkout.Culqi.com") {
-      const { eventType, data } = e.data;
-      if (eventType === "token_created") {
-        console.log("Token:", data.id);
-        // AQUÍ ES DONDE DEBES ENVIAR EL TOKEN A TU BACKEND
-        alert("Token generado: " + data.id);
-      }
+    // Verificamos si Culqi existe antes de intentar usarlo
+    if (typeof Culqi !== 'undefined') {
+      Culqi.publicKey = 'pk_test_V9QG8cow9raGIsIB';
+      Culqi.settings({
+        title: 'IvanoStore',
+        currency: 'PEN',
+        amount: amount
+      });
+      Culqi.options({ lang: "auto" });
+      Culqi.open();
+    } else {
+      console.error("El SDK de Culqi no ha cargado aún.");
+      alert("La pasarela de pago no está lista. Por favor, espera un segundo y vuelve a intentar.");
+      // Opcional: intentar recargar el script dinámicamente si falla
     }
-  });
+  }
 </script>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
