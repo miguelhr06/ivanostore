@@ -9,23 +9,26 @@
 
 <script src="https://checkout.culqi.com/js/v4"></script>
 <script>
-  function abrirCulqi(amount, email) {
-    // Verificamos si Culqi existe antes de intentar usarlo
-    if (typeof Culqi !== 'undefined') {
-      Culqi.publicKey = 'pk_test_V9QG8cow9raGIsIB';
-      Culqi.settings({
-        title: 'IvanoStore',
-        currency: 'PEN',
-        amount: amount
-      });
-      Culqi.options({ lang: "auto" });
-      Culqi.open();
-    } else {
-      console.error("El SDK de Culqi no ha cargado aún.");
-      alert("La pasarela de pago no está lista. Por favor, espera un segundo y vuelve a intentar.");
-      // Opcional: intentar recargar el script dinámicamente si falla
-    }
+function abrirCulqi(amount, email) {
+  // Verificamos si Culqi existe
+  if (typeof Culqi !== 'undefined') {
+    // Si existe, configuramos y abrimos
+    Culqi.publicKey = 'pk_test_V9QG8cow9raGIsIB';
+    Culqi.settings({
+      title: 'IvanoStore',
+      currency: 'PEN',
+      amount: amount
+    });
+    Culqi.options({ lang: "auto" });
+    Culqi.open();
+  } else {
+    // Si no existe, avisamos en consola y reintentamos en 500ms
+    console.warn("Culqi no listo todavía, reintentando...");
+    setTimeout(function() {
+      abrirCulqi(amount, email);
+    }, 500);
   }
+}
 </script>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
