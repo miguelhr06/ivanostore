@@ -45,24 +45,30 @@ procesarPedido() {
     return;
   }
 
-  const win = window as any;
-  
-  // VERIFICACIÓN DE SEGURIDAD:
-  if (win.Culqi) {
-    win.Culqi.publicKey = 'pk_test_V9QG8cow9raGIsIB'; 
+  // Definimos una función de inicialización
+  const iniciarCulqi = () => {
+    const win = window as any;
+    if (win.Culqi) {
+      win.Culqi.publicKey = 'pk_test_V9QG8cow9raGIsIB';
+      win.Culqi.settings({
+        title: 'IvanoStore',
+        currency: 'PEN',
+        amount: Math.round(this.totalFinal * 100)
+      });
+      win.Culqi.init();
+      win.Culqi.open();
+    } else {
+      Swal.fire('Error', 'La pasarela no cargó correctamente. Intenta recargar la página.', 'error');
+    }
+  };
 
-    win.Culqi.settings({
-      title: 'IvanoStore',
-      currency: 'PEN',
-      amount: Math.round(this.totalFinal * 100)
-    });
-
-    win.Culqi.init(); 
-    win.Culqi.open();
+  // Verificamos si Culqi ya está disponible
+  if ((window as any).Culqi) {
+    iniciarCulqi();
   } else {
-    // Si no carga a la primera, intentamos un reintento pequeño
-    Swal.fire('Espera un segundo', 'La pasarela está cargando...', 'info');
-    console.warn("Culqi aún no está cargado en window.Culqi");
+    // Si no está, intentamos forzar la carga y esperamos 500ms
+    console.log("Esperando a Culqi...");
+    setTimeout(iniciarCulqi, 500);
   }
 }
 
