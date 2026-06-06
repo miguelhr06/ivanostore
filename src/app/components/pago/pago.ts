@@ -45,35 +45,11 @@ procesarPedido() {
   }
 
   const win = window as any;
-
-  // Función interna para abrir el modal
-  const abrirCulqi = () => {
-    win.Culqi.publicKey = 'pk_test_V9QG8cow9raGIsIB';
-    win.Culqi.settings({
-      title: 'IvanoStore',
-      currency: 'PEN',
-      amount: Math.round(this.totalFinal * 100)
-    });
-    win.Culqi.init();
-    win.Culqi.open();
-  };
-
-  // Si ya está cargado, abrir directo
-  if (win.Culqi) {
-    abrirCulqi();
+  if (win.abrirCulqi) {
+    // Solo le pasamos el monto al archivo de configuración
+    win.abrirCulqi(Math.round(this.totalFinal * 100), 'cliente@ejemplo.com');
   } else {
-    // Si no está, inyectamos el script de forma robusta
-    const script = document.createElement('script');
-    script.src = 'https://checkout.culqi.com/js/v4';
-    script.async = true;
-    script.onload = () => {
-      console.log("Script de Culqi cargado.");
-      abrirCulqi();
-    };
-    script.onerror = () => {
-      Swal.fire('Error', 'No se pudo conectar con la pasarela de pagos.', 'error');
-    };
-    document.body.appendChild(script);
+    Swal.fire('Error', 'La pasarela no se ha inicializado.', 'error');
   }
 }
 
