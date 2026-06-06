@@ -35,40 +35,45 @@ export class PagoComponent implements OnInit {
     if (this.totalFinal <= 0) { this.router.navigate(['/checkout']); return; }
   }
 
-  // En procesarPedido(), ajusta esta parte:
-// En src/app/components/pago/pago.ts
-// Tu procesarPedido() está bien estructurado
-// En pago.ts
+// En tu pago.ts, agrega esta variable fuera de la clase o como propiedad:
+private culqiScriptCargado = false;
+
 procesarPedido() {
   if (!this.aceptaTerminos) {
     Swal.fire('¡Atención!', 'Acepta los términos primero.', 'warning');
     return;
   }
 
-  // Definimos una función de inicialización
-  const iniciarCulqi = () => {
-    const win = window as any;
-    if (win.Culqi) {
-      win.Culqi.publicKey = 'pk_test_V9QG8cow9raGIsIB';
-      win.Culqi.settings({
-        title: 'IvanoStore',
-        currency: 'PEN',
-        amount: Math.round(this.totalFinal * 100)
-      });
-      win.Culqi.init();
-      win.Culqi.open();
-    } else {
-      Swal.fire('Error', 'La pasarela no cargó correctamente. Intenta recargar la página.', 'error');
-    }
+  const win = window as any;
+
+  // Función interna para abrir el modal
+  const abrirCulqi = () => {
+    win.Culqi.publicKey = 'pk_test_V9QG8cow9raGIsIB';
+    win.Culqi.settings({
+      title: 'IvanoStore',
+      currency: 'PEN',
+      amount: Math.round(this.totalFinal * 100)
+    });
+    win.Culqi.init();
+    win.Culqi.open();
   };
 
-  // Verificamos si Culqi ya está disponible
-  if ((window as any).Culqi) {
-    iniciarCulqi();
+  // Si ya está cargado, abrir directo
+  if (win.Culqi) {
+    abrirCulqi();
   } else {
-    // Si no está, intentamos forzar la carga y esperamos 500ms
-    console.log("Esperando a Culqi...");
-    setTimeout(iniciarCulqi, 500);
+    // Si no está, inyectamos el script de forma robusta
+    const script = document.createElement('script');
+    script.src = 'https://checkout.culqi.com/js/v4';
+    script.async = true;
+    script.onload = () => {
+      console.log("Script de Culqi cargado.");
+      abrirCulqi();
+    };
+    script.onerror = () => {
+      Swal.fire('Error', 'No se pudo conectar con la pasarela de pagos.', 'error');
+    };
+    document.body.appendChild(script);
   }
 }
 
