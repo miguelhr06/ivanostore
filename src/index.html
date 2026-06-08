@@ -7,10 +7,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 
+<!-- En tu index.html -->
 <script src="https://checkout.culqi.com/js/v4"></script>
 <script>
   window.Culqi = window.Culqi || {};
-  Culqi.publicKey = 'pk_test_V9QG8cow9raGIsIB'; // Tu llave pública
+  Culqi.publicKey = 'pk_test_V9QG8cow9raGIsIB';
+
+  // ESTA ES LA FUNCIÓN QUE TE FALTA Y QUE TU PAGO.TS ESTÁ BUSCANDO
+  window.abrirCulqi = function(amount, email) {
+    Culqi.settings({
+      title: 'IvanoStore',
+      currency: 'PEN',
+      amount: amount
+    });
+    Culqi.open();
+  };
 </script>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
