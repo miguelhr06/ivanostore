@@ -30,27 +30,34 @@ export class PagoComponent implements OnInit {
     private cdr: ChangeDetectorRef
   ) {}
 
-  ngOnInit(): void {
-    this.totalFinal = this.carritoSvc.totalParaPagar;
-    if (this.totalFinal <= 0) { this.router.navigate(['/checkout']); return; }
-  }
 
 // En tu pago.ts, agrega esta variable fuera de la clase o como propiedad:
 private CulqiScriptCargado = false;
 
+// En tu método de pago
 procesarPedido() {
-  if (!this.aceptaTerminos) {
-    Swal.fire('¡Atención!', 'Acepta los términos primero.', 'warning');
-    return;
-  }
-
   const win = window as any;
-  if (win.abrirCulqi) {
-    // Solo le pasamos el monto al archivo de configuración
-    win.abrirCulqi(Math.round(this.totalFinal * 100), 'cliente@ejemplo.com');
-  } else {
-    Swal.fire('Error', 'La pasarela no se ha inicializado.', 'error');
+  if (win.Culqi) {
+    win.Culqi.settings({
+      title: 'IvanoStore',
+      currency: 'PEN',
+      amount: Math.round(this.totalFinal * 100)
+    });
+    win.Culqi.open(); // Ahora sí, aquí debería funcionar sin errores si el script cargó
   }
+}
+
+// Fuera de la clase o en ngOnInit, escucha al Checkout
+ngOnInit() {
+  window.addEventListener("message", (event) => {
+    if (event.origin === "https://checkout.culqi.com") {
+      const { eventType, data } = event.data;
+      if (eventType === "token_created") {
+        console.log("Token recibido:", data.id);
+        // AQUÍ ENVIAS EL TOKEN A TU BACKEND PARA FINALIZAR EL PAGO
+      }
+    }
+  });
 }
 
   toggleTerminos() {
