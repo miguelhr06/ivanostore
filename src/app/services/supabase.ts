@@ -130,4 +130,43 @@ export class SupabaseService {
       return item.esFavorito; // Mantiene el estado previo si algo falla
     }
   }
+
+  // ==========================================================================
+  // LOGICA PARA REGISTRO DE PEDIDOS (CHECKOUT)
+  // ==========================================================================
+  
+ // NUEVO MÉTODO PARA GUARDAR PEDIDO Y DETALLES EN CADENA
+async guardarPedidoCompleto(pedido: any, productos: any[]) {
+  // 1. Guardar SOLO la cabecera (sin enviar la columna 'productos')
+  const { data: pedidoGuardado, error: errorPedido } = await this.client
+    .from('pedidos')
+    .insert([pedido]) // Aquí 'pedido' ya no debe contener la propiedad 'productos'
+    .select('id')
+    .single();
+
+  if (errorPedido) {
+    console.error("Error al guardar pedido:", errorPedido);
+    throw errorPedido;
+  }
+
+  // 2. Guardar los detalles en la tabla 'detalle_pedido'
+  const detalles = productos.map(p => ({
+    pedido_id: pedidoGuardado.id,
+    nombre: p.nombre_zapatilla,
+    talla: p.tallaElegida,
+    cantidad: p.cantidad,
+    precio_unitario: p.precio
+  }));
+
+  const { error: errorDetalle } = await this.client
+    .from('detalle_pedido')
+    .insert(detalles);
+
+  if (errorDetalle) {
+    console.error("Error al guardar detalles:", errorDetalle);
+    throw errorDetalle;
+  }
+  
+  return pedidoGuardado;
+}
 }

@@ -14,20 +14,28 @@
 
     <div class="pago-detail">
       <div [ngSwitch]="metodoSeleccionado">
+        
         <div *ngSwitchCase="'Culqi'" class="view-center">
-          <img src="assets/Culqi-full.png" class="logo-pasarela" alt="Culqi" style="max-width: 150px;">
-          <p>Haz clic en "PAGAR AHORA" para abrir el formulario seguro de Culqi.</p>
+          <h3>Pago Seguro con Culqi</h3>
+          <p>Al hacer clic en <b>PAGAR AHORA</b>, se abrirá el formulario seguro para ingresar los datos de tu tarjeta.</p>
         </div>
+        
         <div *ngSwitchCase="'billeteras'" class="view-center">
           <h3>Yape / Plin</h3>
-          <p>Escanea el QR o realiza la transferencia al número: <b>910 527 690</b></p>
+          <p>Realiza el pago al número: <b>910 527 690</b></p>
+          <p>Titular: CORPORACION IVANO S.A.C.</p>
+          <p style="font-size: 0.85em; color: #666;">* Recuerda guardar tu comprobante.</p>
         </div>
+        
         <div *ngSwitchCase="'transferencia'" class="view-center">
           <h3>Cuentas Bancarias</h3>
-          <div *ngFor="let c of cuentasBancarias" class="bank-card" style="margin-bottom: 10px;">
-            <p><b>{{c.banco}}</b>: {{c.nro}}</p>
+          <div *ngFor="let c of cuentasBancarias" class="bank-card" style="margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px;">
+            <p style="margin: 0;"><b>{{c.banco}}</b></p>
+            <p style="margin: 0; font-size: 0.9em;">Cuenta: {{c.nro}}</p>
+            <p style="margin: 0; font-size: 0.9em;">CCI: {{c.cci}}</p>
           </div>
         </div>
+
       </div>
     </div>
   </div>
@@ -35,11 +43,18 @@
   <aside class="pago-summary">
     <div class="summary-box">
       <h3>Resumen de Orden</h3>
-      <div class="total-line"><span>Total:</span> <strong>S/ {{ totalFinal | number:'1.2-2' }}</strong></div>
-      <label style="cursor: pointer; display: block; margin: 15px 0;">
+      <div class="total-line">
+        <span>Total:</span> <strong>S/ {{ totalFinal | number:'1.2-2' }}</strong>
+      </div>
+      
+      <label style="cursor: pointer; display: block; margin: 15px 0; font-size: 0.9em;">
         <input type="checkbox" [checked]="aceptaTerminos" (change)="toggleTerminos()"> Acepto términos y condiciones
       </label>
-      <button class="btn-checkout" [disabled]="!aceptaTerminos" (click)="procesarPedido()" style="width: 100%; padding: 12px;">
+
+      <button class="btn-checkout" 
+              [disabled]="!aceptaTerminos" 
+              (click)="metodoSeleccionado === 'Culqi' ? procesarPedido() : confirmarTransferenciaManual()" 
+              style="width: 100%; padding: 15px; cursor: pointer; border-radius: 5px; border: none; background: #000; color: #fff; font-weight: bold;">
         {{ metodoSeleccionado === 'transferencia' || metodoSeleccionado === 'billeteras' ? 'CONFIRMAR PEDIDO' : 'PAGAR AHORA' }}
       </button>
     </div>

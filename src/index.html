@@ -5,27 +5,21 @@
   <title>IvanoStore | Checkout</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-
-<!-- En tu index.html -->
-<script src="https://checkout.culqi.com/js/v4"></script>
-<script>
-  window.Culqi = window.Culqi || {};
-  Culqi.publicKey = 'pk_test_V9QG8cow9raGIsIB';
-
-  // ESTA ES LA FUNCIÓN QUE TE FALTA Y QUE TU PAGO.TS ESTÁ BUSCANDO
-  window.abrirCulqi = function(amount, email) {
-    Culqi.settings({
-      title: 'IvanoStore',
-      currency: 'PEN',
-      amount: amount
-    });
-    Culqi.open();
-  };
+  <script src="https://checkout.culqi.com/js/v4" async></script>
+  <script>
+  function culqi() {
+    if (Culqi.token) {
+      // Disparamos un evento que Angular escuchará en PagoComponent
+      window.dispatchEvent(new CustomEvent('culqi-pago-exitoso', { 
+        detail: { token: Culqi.token.id, email: Culqi.token.email } 
+      }));
+      Culqi.close();
+    } else {
+      console.log("Error Culqi:", Culqi.error);
+    }
+  }
 </script>
-
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <app-root></app-root>

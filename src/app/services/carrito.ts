@@ -12,7 +12,19 @@ export class CarritoService {
   private mostrarCarrito = new BehaviorSubject<boolean>(false);
   mostrarCarrito$ = this.mostrarCarrito.asObservable();
 
-  
+  // --- AGREGAMOS ESTA PROPIEDAD PARA GUARDAR LOS DATOS DEL CHECKOUT ---
+  public datosCheckout: any = {
+  nombre: '',
+  dni: '', // <--- Agrégalo aquí para inicializarlo correctamente
+  telefono: '',
+  direccion: '',
+  referencia: '',
+  distrito: '',
+  provincia: '',
+  departamento: '',
+  tipo: 'delivery'
+};
+
   constructor() {
     // AL INICIAR EL SERVICIO: Recuperamos los datos del disco
     const datosGuardados = localStorage.getItem('carrito_ivano');
@@ -96,26 +108,31 @@ export class CarritoService {
   }
 
   // En carrito.ts
-private costoEnvio = new BehaviorSubject<number>(0);
-costoEnvio$ = this.costoEnvio.asObservable();
+  private costoEnvio = new BehaviorSubject<number>(0);
+  costoEnvio$ = this.costoEnvio.asObservable();
 
-actualizarEnvio(monto: number) {
-  this.costoEnvio.next(monto);
-}
+  actualizarEnvio(monto: number) {
+    this.costoEnvio.next(monto);
+  }
 
-// 2. Función para limpiar todo el carrito de golpe
+  // 2. Función para limpiar todo el carrito de golpe
   vaciarCarrito() {
-  // Emitimos un array vacío al Subject
-  this.carritoSubject.next([]);
-  
-  // Limpiamos el localStorage con tu método de persistencia
-  this.actualizarPersistencia([]);
-  
-  console.log('Carrito Ivano vaciado con éxito');
-}
-public totalParaPagar: number = 0;
+    // Emitimos un array vacío al Subject
+    this.carritoSubject.next([]);
+    
+    // Limpiamos el localStorage con tu método de persistencia
+    this.actualizarPersistencia([]);
+    
+    console.log('Carrito Ivano vaciado con éxito');
+  }
 
-actualizarTotal(nuevoTotal: number) {
-  this.totalParaPagar = nuevoTotal;
-}
+  public totalParaPagar: number = 0;
+
+  actualizarTotal(nuevoTotal: number) {
+    this.totalParaPagar = nuevoTotal;
+  }
+
+  obtenerProductosActuales() {
+    return this.carritoSubject.value;
+  }
 }

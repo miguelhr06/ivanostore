@@ -285,13 +285,21 @@ export class CheckoutComponent implements OnInit {
   // En checkout.ts, dentro de irAPagar()
 irAPagar() {
   if (this.validarFormulario()) {
-    this.carritoSvc.actualizarTotal(this.totalFinal); // <--- GUARDA EL MONTO AQUÍ
+    this.carritoSvc.actualizarTotal(this.totalFinal);
+    
+    // Aquí estamos pasando toda la información necesaria
+    this.carritoSvc.datosCheckout = {
+      nombre: this.formData.nombre,
+      dni: this.formData.dni, // <--- ¡AQUÍ ESTABA EL ERROR! Faltaba esta línea.
+      telefono: this.formData.celular,
+      direccion: this.formData.direccion,
+      referencia: this.formData.referencia, // <--- NUEVO
+      distrito: this.ubicacionSeleccionada.distrito, // <--- NUEVO
+      provincia: this.ubicacionSeleccionada.provincia, // <--- NUEVO
+      departamento: this.ubicacionSeleccionada.departamento, // <--- NUEVO
+      tipo: this.tipoEnvio
+    };
     this.router.navigate(['/pago']); 
   }
 }
-
-  pagarOnline() {
-    if (!this.validarFormulario()) return;
-    this.router.navigate(['/pago']);
-  }
 }

@@ -724,3 +724,11 @@
   opacity: 0.5;
   /* NO pongas pointer-events: none; aquí */
 }
+
+.pago-input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box; /* Importante para que no se desborde */
+}
